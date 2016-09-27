@@ -1,2 +1,2 @@
 # TimeSeries.OBeu
-Rpackage-Time Series Analysis-OBEU
+R package-Time Series Analysis-OBEU
