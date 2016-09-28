@@ -19,7 +19,6 @@
 #' @seealso add
 #' 
 #' @examples
-#' ts.seasonal.obeu(Athens_draft_ts)
 #'
 #' @rdname ts.obeu
 #' 
@@ -31,8 +30,9 @@
 #' @export
 ############################################################################
 ts.seasonal.obeu<-function(tsdata){
+  options(warn=-1)
 
-tsdata.stl <- forecast::stlm(nottem, s.window="periodic", robust=FALSE, method="arima",
+tsdata.stl <- forecast::stlm(tsdata, s.window="periodic", robust=FALSE, method="arima",
                              modelfunction=forecast::auto.arima,allow.multiplicative.trend=TRUE)
 # Components   
 trend <- tsdata.stl$stl$time.series[,"trend"]

@@ -17,8 +17,6 @@
 #' @seealso add
 #' 
 #' @examples
-#' ts.non.seas.model(Athens_draft_ts)
-#' ts.non.seas.model(Athens_revised_ts)
 #' 
 #' @rdname ts.non.seas.model
 #' 
@@ -28,13 +26,14 @@
 ############################################################################
 
 ts.non.seas.model<-function(tsdata){
+  options(warn=-1)
 
 #arima obeu
 arima.obeu = function(tsdata,x) {
   tryCatch(forecast::Arima(tsdata,order=c(x,1,1)),
            warning = function(w) {print(paste("next order", x)); 
              "x"},
-           error = function(e) {print(paste("non-numeric argument", x)); 
+           error = function(e) {print(paste("next order", x)); 
              "x"} ) 
 }
 
@@ -48,7 +47,7 @@ arima.obeu = function(tsdata,x) {
     modelss[[i]]<-arima.obeu(tsdata,i)
     aiccc[[i]]<-c(aic=modelss[[i]]$aic,order=c(i,1,1))
   }
-  df<-tsdata.frame(matrix(unlist(aiccc),ncol=4,byrow = T))
+  df<-data.frame(matrix(unlist(aiccc),ncol=4,byrow = T))
   colnames(df)=c("aic","ar","diff","ma")
   mindf<-df[df$aic==min(df$aic),]
   x<-c(mindf$ar,mindf$diff,mindf$ma)
