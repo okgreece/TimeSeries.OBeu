@@ -2,7 +2,7 @@
 #' ... 
 #' @description
 #' ...
-#' @usage ts.non.seas.decomp(tsdata, prediction_steps)
+#' @usage ts.non.seas.decomp(tsdata)
 #' 
 #' @param tsdata The input univariate time series data
 #' 
@@ -23,6 +23,7 @@
 #'
 #' @export
 ############################################################################
+
 ts.non.seas.decomp<-function(tsdata){
     
     options(warn=-1)
@@ -66,9 +67,8 @@ ts.non.seas.decomp<-function(tsdata){
 							loess.tracehat = loess.model$trace.hat,
 							loess.divisor = loess.model$divisor,
 							loess.robust = loess.model$robust,
-							loess.parameters = loess.model$pars,
-							loess.kd = loess.model$kd,
-							loess.terms=loess.model$terms,
+							#loess.parameters = loess.model$pars,
+							#loess.kd = loess.model$kd,
 							loess.weights = loess.model$weights)
 
 	parameters<-list(data=data,season=season,loess.trend=loess.trend,loess.comparison=loess.comparison)

@@ -55,33 +55,35 @@ arima.obeu = function(tsdata,x) {
   #Fit the appropriate model
   ts_model<-forecast::Arima(tsdata,order=x)
   
+  model.summary = ts_model
+  
   model=list(			#model
-						ts_model=ts_model,
-						model.summary = ts_model$model,
-						arima.order = ts_model$arma,
-						arima.coef = ts_model$coef,
-						arima.coef.se = round(sqrt(diag(ts_model$var.coef)),digits=4))
-						
+    ts_model=ts_model$model,
+    arima.order = ts_model$arma,
+    arima.coef = ts_model$coef,
+    arima.coef.se = round(sqrt(diag(ts_model$var.coef)),digits=4))
+  
   residuals=list(		#residuals
-						residuals = ts_model$residuals)
-	residuals.other=list(
-						resid.variance = ts_model$sigma2,
-						covariance.coef = ts_model$var.coef)
-						
+    residuals = ts_model$residuals)
+  residuals.other=list(
+    resid.variance = ts_model$sigma2,
+    covariance.coef = ts_model$var.coef)
+  
   used.notused.observations=list(	#used-notused observations
-									not.used.obs = ts_model$n.cond,
-									used.obs = ts_model$nobs)
-						
+    not.used.obs = ts_model$n.cond,
+    used.obs = ts_model$nobs)
+  
   comparison=list(		#Comparison
-						loglik = ts_model$loglik,
-						aic = ts_model$aic,
-						bic = ts_model$bic,
-						aicc = ts_model$aicc)
-
+    loglik = ts_model$loglik,
+    aic = ts_model$aic,
+    bic = ts_model$bic,
+    aicc = ts_model$aicc)
+  
   data=list(				#time series data
-						tsdata = ts_model$x,
-						ts.name = ts_model$series)
-  model.details<-list(model=model,residuals=residuals,residuals.other=residuals.other,used.notused.observations=used.notused.observations,comparison=comparison,data=data)
-					
+    tsdata = ts_model$x,
+    ts.name = ts_model$series)
+  
+  model.details<-list(model.summary=model.summary, model=model,residuals=residuals,residuals.other=residuals.other,used.notused.observations=used.notused.observations,comparison=comparison,data=data)
+  
   return(model.details)
 }

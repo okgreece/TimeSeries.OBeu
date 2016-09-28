@@ -54,8 +54,8 @@ tsa.obeu<-function(tsdata,h=1){
   if( is.nan(h)==T | is.na(h)==T |
       is.character(h)==T | is.numeric(as.numeric(as.character(h)))==F){
     stop("Please give an integer input as 'h', e.g. h= 3.")}
-	
-	
+  
+  
   # Extract the time series name
   ts_name<-deparse(substitute(tsdata))
   
@@ -63,68 +63,72 @@ tsa.obeu<-function(tsdata,h=1){
   check_stat=stationary.test(tsdata)
   
   
+  
   ## If TS is <20 and non seasonal 
-  if ( length(tsdata)<=20 && stats::frequency(tsdata)<2) {
-	
-	#decomposition
-	decomposition=ts.non.seas.decomp(tsdata)
-
-	#model
-    model<-ts.non.seas.model(tsdata)
-	ts_model<-model$ts_model
-	param<-list(decomposition,model,ts_model)
-	
-	## If TS is <20 and seasonal 
-	 }else if ( length(tsdata)<=20 && stats::frequency(tsdata)>=2) {
-	
-	#decomposition
-	decomposition=stats::stl(tsdata)
-
-	#model
-    model<-ts.non.seas.model
-	ts_model<-model$ts_model
-	param<-list(decomposition,model,ts_model)
-	## If TS is >20 and non seasonal
-  }else if(length(tsdata)>20 && stats::frequency(tsdata)<2) {
-	
-	#decomposition
-	decomposition=ts.non.seas.decomp(tsdata)
+  if ( length(tsdata)<=20 && stats::frequency(tsdata)<=2) {
     
-	# Stationary 
-    if(check_stat=="Stationary") {
+    #decomposition
+    decomposition=ts.non.seas.decomp(tsdata)
 
-    ts_model<-forecast::auto.arima(tsdata,trace=F)
-      
-    # ΝΟΝ Stationary 
-    }else if(check_stat=="Non-Stationary") {
-	
-	#log transform
-    tsr<-log(tsdata+0.000000001)
     #model
-	ts_model<-forecast::auto.arima(tsr,trace=F)
-	
+    model<-ts.non.seas.model(tsdata)
+    ts_model=model$model.summary
+    residuals=model$residuals
+    param<-list(decomposition,model[-1])
+    
+    ## If TS is <20 and seasonal 
+  }else if ( length(tsdata)<=20 && stats::frequency(tsdata)>2) {
+    
+    #decomposition
+    decomposition=stats::stl(tsdata)
+    
+    #model
+    model<-ts.non.seas.model
+    ts_model<-model$ts_model
+    param<-list(decomposition,model,ts_model)
+    ## If TS is >20 and non seasonal
+  }else if(length(tsdata)>20 && stats::frequency(tsdata)<2) {
+    
+    #decomposition
+    decomposition=ts.non.seas.decomp(tsdata)
+    
+    # Stationary 
+    if(check_stat=="Stationary") {
+      
+      ts_model<-forecast::auto.arima(tsdata,trace=F)
+      
+      # ΝΟΝ Stationary 
+    }else if(check_stat=="Non-Stationary") {
+      
+      #log transform
+      tsr<-log(tsdata+0.000000001)
+      #model
+      ts_model<-forecast::auto.arima(tsr,trace=F)
+      
     }
-	param<-list(decomposition,model,ts_model)
-	## If TS is >20 and seasonal
-    }else if(length(tsdata)>20 && stats::frequency(tsdata)>2) {
-	#Model and decomposition
-	tsmodel=ts.seasonal.obeu(tsdata)
-	ts_model=tsmodel$ts_model$model.summary
-	param<-list(tsmodel)
-}	
-	
-	#ACF and PACF extraction before and after model fit
-	acf.param<-ts.acf.obeu(tsdata,ts_model$residuals, a=0.95)
+    param<-list(decomposition,model,ts_model)
+    ## If TS is >20 and seasonal
+  }else if(length(tsdata)>20 && stats::frequency(tsdata)>2) {
+    #Model and decomposition
+    tsmodel=ts.seasonal.obeu(tsdata)
+    ts_model=tsmodel$ts_model
+    residuals=tsmodel$residuals
+    
+    param<-tsmodel[-1]
+  }	
+  
+  #ACF and PACF extraction before and after model fit
+  acf.param<-ts.acf.obeu(tsdata,residuals, a=0.95)
   
   ## Forecasts
-  forecasts<-  forecast.ts.obeu(ts_model,h = 1)
+  forecasts<-  forecast.ts.obeu(ts_model,h)
   
   ##  Parameter Extraction
   par<-list(ts_name,param,forecasts)
   
   ##  to JSON
   
-  parameters<-jsonlite::toJSON(par)
+  parameters<-jsonlite::toJSON(par)#,force=T)
   
   ##  Return
   

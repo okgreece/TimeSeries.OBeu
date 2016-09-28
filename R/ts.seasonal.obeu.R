@@ -29,6 +29,7 @@
 #'
 #' @export
 ############################################################################
+
 ts.seasonal.obeu<-function(tsdata){
   options(warn=-1)
 
@@ -50,10 +51,10 @@ stl.general=list( #stl general
                   tsdata.stl$x,##??
                   tsdata.stl$m,##??
                   fitted=tsdata.stl$fitted)
+				  
 
 model=list( 	  #model
-				  model.summary=tsdata.stl$model,
-                  arima.order=tsdata.stl$model$arma,
+				  arima.order=tsdata.stl$model$arma,
 				  arima.coef=tsdata.stl$model$coef,
                   arima.coef.se=round(sqrt(diag(tsdata.stl$model$var.coef)),digits=4))
 residuals=list(
@@ -75,7 +76,15 @@ data=list(        #time series data
                   tsdata=tsdata.stl$model$x,
                   ts.name=tsdata.stl$model$series)
 				  
-model.details<-list(stl.general=stl.general,ts_model=model,residuals=residuals,residuals.other,used.notused.observations=used.notused.observations,comparison=comparison,data=data)
+model.details<-list(
+					ts_model=tsdata.stl$model,
+					stl.general=stl.general,
+					ts_model=model,
+					residuals=residuals,
+					residuals.other,
+					used.notused.observations=used.notused.observations,
+					comparison=comparison,
+					data=data)
 
 return(model.details)
 
