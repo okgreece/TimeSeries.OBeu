@@ -4,7 +4,7 @@
 \alias{ts.non.seas.decomp}
 \title{...}
 \usage{
-ts.non.seas.decomp(tsdata, prediction_steps)
+ts.non.seas.decomp(tsdata)
 }
 \arguments{
 \item{tsdata}{The input univariate time series data}
