@@ -32,9 +32,17 @@ ts.non.seas.model<-function(tsdata){
 arima.obeu = function(tsdata,x) {
   tryCatch(forecast::Arima(tsdata,order=c(x,1,1)),
            warning = function(w) {print(paste("next order", x)); 
-             "x"},
+             NULL},
            error = function(e) {print(paste("next order", x)); 
-             "x"} ) 
+             NULL} ) 
+}
+
+aic.obeu = function(aic,x) {
+  tryCatch( c(aic=modelss[[i]]$aic,order=c(i,1,1)),
+           warning = function(w) {print(paste("next order", x)); 
+             NULL},
+           error = function(e) {print(paste("next order", x)); 
+             NULL} ) 
 }
 
 
@@ -42,11 +50,12 @@ arima.obeu = function(tsdata,x) {
   aiccc<-list()
   modelss<-list()
  
-  for(i in 1:(length(tsdata)-3)){
+  for(i in 1:9){
   
     modelss[[i]]<-arima.obeu(tsdata,i)
-    aiccc[[i]]<-c(aic=modelss[[i]]$aic,order=c(i,1,1))
+    aiccc[[i]]<-aic.obeu(modelss[[i]]$aic,i)
   }
+  
   df<-data.frame(matrix(unlist(aiccc),ncol=4,byrow = T))
   colnames(df)=c("aic","ar","diff","ma")
   mindf<-df[df$aic==min(df$aic),]

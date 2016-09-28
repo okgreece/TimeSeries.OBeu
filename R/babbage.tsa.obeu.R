@@ -66,5 +66,5 @@ babbage.tsa.obeu<-function(json_data,time,amount,prediction_steps=1){
    
   ts.result<-list(ts.result1)
 
-  return(ts.result)  
+  return(ts.result1)  
 }
