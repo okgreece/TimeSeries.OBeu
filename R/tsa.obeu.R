@@ -4,10 +4,10 @@
 #' @description
 #' Univariate time series forecasts for short and long time series data using the appropriate model.
 #' 
-#' @usage tsa.obeu(tsdata, prediction_steps)
+#' @usage tsa.obeu(tsdata, h)
 #' 
 #' @param tsdata The input univariate time series data
-#' @param prediction_steps The number of prediction steps
+#' @param h The number of prediction steps
 #' 
 #' @details 
 #' This function automatically selects the appropriate arima model that fits the input data using the auto.arima function(see forecast package). 
@@ -17,8 +17,8 @@
 #' @return A json string with the parameters:
 #' data_year The time that time series data were sampled.
 #' data The time series values.
-#' predict_time The time that defined by the prediction_steps parameter.
-#' predict_values The predicted values that defined by the prediction_steps parameter.
+#' predict_time The time that defined by the h parameter.
+#' predict_values The predicted values that defined by the h parameter.
 #' up80 The upper limit of the 80% predicted confidence interval.
 #' low80 The lower limit of the 80% predicted confidence interval.
 #' up95 The upper limit of the 95% predicted confidence interval.
@@ -31,11 +31,6 @@
 #' @seealso add
 #' 
 #' @examples
-#' tsa.obeu(Athens_draft_ts)
-#' tsa.obeu(Athens_revised_ts,2)
-#' tsa.obeu(Athens_reserved_ts,3)
-#' tsa.obeu(Athens_approved_ts,4)
-#' tsa.obeu(Athens_executed_ts,5)
 #' 
 #' @rdname tsa.obeu
 #' 
@@ -47,7 +42,7 @@
 #' @export
 ############################################################################
 
-tsa.obeu<-function(tsdata,prediction_steps=1){
+tsa.obeu<-function(tsdata,h=1){
   
   # Stop if no time series data provided
   
@@ -56,9 +51,9 @@ tsa.obeu<-function(tsdata,prediction_steps=1){
   
   # Stop if no time series data provided
   
-  if( is.nan(prediction_steps)==T | is.na(prediction_steps)==T |
-      is.character(prediction_steps)==T | is.numeric(as.numeric(as.character(prediction_steps)))==F){
-    stop("Please give an integer input as 'prediction_steps', e.g. prediction_steps= 3.")}
+  if( is.nan(h)==T | is.na(h)==T |
+      is.character(h)==T | is.numeric(as.numeric(as.character(h)))==F){
+    stop("Please give an integer input as 'h', e.g. h= 3.")}
 	
 	
   # Extract the time series name
@@ -69,7 +64,7 @@ tsa.obeu<-function(tsdata,prediction_steps=1){
   
   
   ## If TS is <20 and non seasonal 
-  if ( length(tsdata)<=20 && frequency(tsdata)<2) {
+  if ( length(tsdata)<=20 && stats::frequency(tsdata)<2) {
 	
 	#decomposition
 	decomposition=ts.non.seas.decomp(tsdata)
@@ -80,17 +75,17 @@ tsa.obeu<-function(tsdata,prediction_steps=1){
 	param<-list(decomposition,model,ts_model)
 	
 	## If TS is <20 and seasonal 
-	 }else if ( length(tsdata)<=20 && frequency(tsdata)>=2) {
+	 }else if ( length(tsdata)<=20 && stats::frequency(tsdata)>=2) {
 	
 	#decomposition
-	decomposition=stl(tsdata)
+	decomposition=stats::stl(tsdata)
 
 	#model
     model<-ts.non.seas.model
 	ts_model<-model$ts_model
 	param<-list(decomposition,model,ts_model)
 	## If TS is >20 and non seasonal
-  }else if(length(tsdata)>20 && frequency(tsdata)<2) {
+  }else if(length(tsdata)>20 && stats::frequency(tsdata)<2) {
 	
 	#decomposition
 	decomposition=ts.non.seas.decomp(tsdata)
@@ -111,7 +106,7 @@ tsa.obeu<-function(tsdata,prediction_steps=1){
     }
 	param<-list(decomposition,model,ts_model)
 	## If TS is >20 and seasonal
-    }else if(length(tsdata)>20 && frequency(tsdata)>2) {
+    }else if(length(tsdata)>20 && stats::frequency(tsdata)>2) {
 	#Model and decomposition
 	tsmodel=ts.seasonal.obeu(tsdata)
 	ts_model=tsmodel$ts_model$model.summary
