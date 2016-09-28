@@ -2,7 +2,7 @@
 #' Extract the acf and pacf parameters of time series and their model's residuals 
 #'  
 #' @description
-#' This function is included in “ts.obeu” function and aims to extract the acf and pacf details 
+#' This function is included in tsa.obeu function and aims to extract the acf and pacf details 
 #' of the input time series data and the acf and pacf of the residuals after fitting an Arima model. 
 #' 
 #' @usage ts.acf.obeu<-function(tsdata,model_residuals,a=0.95)
@@ -13,7 +13,7 @@
 #' 
 #' @details 
 #' 
-#' The output of “ts.acf.obeu” is a list with all the parameters needed for graphical purposes.
+#' The output of this function is a list with all the parameters needed for graphical purposes.
 #' 
 #' @return 
 #' A list with the parameters:
@@ -38,7 +38,7 @@
 #' 
 #' @seealso add
 #' 
-#' @example 
+#' @examples 
 #' 
 #' @rdname ts.acf.obeu
 #' 
@@ -52,14 +52,14 @@ ts.acf.obeu<-function(tsdata, model_residuals, a=0.95){
   # acf, pacf of ts 
   acff<-forecast::Acf(tsdata,plot=F)
   pacff<-forecast::Pacf(tsdata,plot=F)
-  climits.up <- qnorm((1 + a)/2)/sqrt(length(tsdata))
-  climits.low <- qnorm((1 - a)/2)/sqrt(length(tsdata))
+  climits.up <- stats::qnorm((1 + a)/2)/sqrt(length(tsdata))
+  climits.low <- stats::qnorm((1 - a)/2)/sqrt(length(tsdata))
   
   # acf, pacf of model's residuals
   acff.res<-forecast::Acf(model_residuals,plot=F)
   pacff.res<-forecast::Pacf(model_residuals,plot=F)
-  climits.res.up <- qnorm((1 + a)/2)/sqrt(length(model_residuals))
-  climits.res.low <- qnorm((1 - a)/2)/sqrt(length(model_residuals))
+  climits.res.up <- stats::qnorm((1 + a)/2)/sqrt(length(model_residuals))
+  climits.res.low <- stats::qnorm((1 - a)/2)/sqrt(length(model_residuals))
   
   
   acf.parameters=list(  
