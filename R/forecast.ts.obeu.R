@@ -39,6 +39,7 @@
 
 #' @export
 ############################################################################
+
 forecast.ts.obeu<-function(ts_model,h=1){
     options(warn=-1)
 
@@ -62,3 +63,4 @@ forecast.ts.obeu<-function(ts_model,h=1){
   ##  Result
   return(forecast.param)
 }
+
