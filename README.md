@@ -2,9 +2,9 @@
 R package-Time Series Analysis-OBEU
 
 Install:
-#Load devtools library 
-#or install it if not already 
-#install.packages("ggplot2")
+##Load devtools library 
+##or install it if not already 
+##install.packages("ggplot2")
 
 library(devtools)
 
