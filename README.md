@@ -18,7 +18,9 @@ The basic function is: tsa.obeu(tsdata,h)
 
 where tsdata: the time series data
 
-and h: the prediction steps
+and h: the prediction steps.
 
+The package includes the following time series data:
+Athens_draft_ts,Athens_revised_ts,Athens_reserved_ts,Athens_approved_ts and Athens_executed_ts.
 
 e.g. tsa.obeu(Athens_approved_ts,4)
