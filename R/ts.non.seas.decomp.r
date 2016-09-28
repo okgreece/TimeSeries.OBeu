@@ -17,8 +17,6 @@
 #' @seealso add
 #' 
 #' @examples
-#' ts.non.seas.decomp(Athens_draft_ts)
-#' ts.non.seas.decomp(Athens_revised_ts)
 #' 
 #' @rdname ts.non.seas.decomp
 #' 
@@ -27,23 +25,24 @@
 ############################################################################
 ts.non.seas.decomp<-function(tsdata){
     
-  
+    options(warn=-1)
+
   ## trend
   trend <- c()
-  loess.model <- loess(tsdata~time(tsdata)) #,  span=0.3)
-  trend<-fitted(loess.model)
+  loess.model <- stats::loess(tsdata~stats::time(tsdata)) #,  span=0.3)
+  trend<-stats::fitted(loess.model)
   seasonal <- NULL
   remainder <- tsdata - trend
 
   #Confidence Intervals
   ci = cbind(
-    trend= predict(loess.model, data.frame(x=time(tsdata))),
+    trend= stats::predict(loess.model, data.frame(x=stats::time(tsdata))),
   
-    trend.ci.up= predict(loess.model, data.frame(x=time(tsdata)))+
-      predict(loess.model, data.frame(x=time(tsdata)), se=TRUE)$se.fit*1.96,
+    trend.ci.up= stats::predict(loess.model, data.frame(x=stats::time(tsdata)))+
+      stats::predict(loess.model, data.frame(x=stats::time(tsdata)), se=TRUE)$se.fit*1.96,
   
-    trend.ci.low= predict(loess.model, data.frame(x=time(tsdata)))-
-      predict(loess.model, data.frame(x=time(tsdata)), se=TRUE)$se.fit*1.96
+    trend.ci.low= stats::predict(loess.model, data.frame(x=stats::time(tsdata)))-
+      stats::predict(loess.model, data.frame(x=stats::time(tsdata)), se=TRUE)$se.fit*1.96
   )
   
   ##
