@@ -19,8 +19,6 @@
 #' @seealso add
 #' 
 #' @examples
-#' stationary.test(Athens_draft_ts)
-#' stationary.test(Athens_revised_ts)
 #' 
 #' @rdname stationary.test
 #' 
@@ -31,6 +29,7 @@
 #' @export
 ############################################################################
 stationary.test<-function(tsdata){
+  options(warn=-1)
 
     #ACF
     acF<-forecast::Acf(tsdata,plot=F)

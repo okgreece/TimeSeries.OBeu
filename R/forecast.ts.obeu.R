@@ -31,7 +31,7 @@
 #' @seealso add
 #' 
 #' @examples
-#' #to be added
+#' 
 #' 
 #' @rdname forecast.ts.obeu
 #' 
@@ -40,7 +40,8 @@
 #' @export
 ############################################################################
 forecast.ts.obeu<-function(ts_model,h=1){
-  
+    options(warn=-1)
+
   ## Model Forecasting
   forecasts<-forecast::forecast(ts_model,h)
   

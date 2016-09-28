@@ -60,7 +60,7 @@ babbage.tsa.obeu<-function(json_data,time,amount,prediction_steps=1){
   #    is.character(data$amount)==T | is.numeric(as.numeric(as.character(data$amount)))==F){
   #  stop("Please give a numeric input as 'amount'.")}
  
-  tsdata<-ts(data$amount,start=min(data$time),end=max(data$time))
+  tsdata<-stats::ts(data$amount,start=min(data$time),end=max(data$time))
 
   ts.result1<-tsa.obeu(tsdata,prediction_steps)
    
