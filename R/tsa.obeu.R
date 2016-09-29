@@ -2,7 +2,7 @@
 #' Time series forecast results for OBEU Time series
 #'  
 #' @description
-#' Univariate time series forecasts for short and long time series data using the appropriate model.
+#' Univariate time series analysis for short and long time series data using the appropriate model.
 #' 
 #' @usage tsa.obeu(tsdata, h)
 #' 
@@ -13,8 +13,9 @@
 #' This function automatically selects the appropriate arima model that fits the input data using the auto.arima function(see forecast package). 
 #' The model selection depends on the results of some diagnostic tests (acf,pacf,pp adf and kpss).
 #' For short time series the selected arima model is among various orders of the AR part using 1st differences and MA(1), with the lower AIC.
+#' This function also decomposes both seasonal and non seasonal time series.
 #' 
-#' @return A json string with the parameters:
+#' @return A json string with the parameters (Missing some):
 #' data_year The time that time series data were sampled.
 #' data The time series values.
 #' predict_time The time that defined by the h parameter.
@@ -61,8 +62,7 @@ tsa.obeu<-function(tsdata,h=1){
   
   #Stationarity testing
   check_stat=stationary.test(tsdata)
-  
-  
+    
   
   ## If TS is <20 and non seasonal 
   if ( length(tsdata)<=20 && stats::frequency(tsdata)<=2) {
@@ -83,9 +83,10 @@ tsa.obeu<-function(tsdata,h=1){
     decomposition=stats::stl(tsdata)
     
     #model
-    model<-ts.non.seas.model
-    ts_model<-model$ts_model
-    param<-list(decomposition,model,ts_model)
+    model<-ts.non.seas.model(tsdata)
+    ts_model=model$model.summary
+    residuals=model$residuals
+    param<-list(decomposition,model[-1])
     ## If TS is >20 and non seasonal
   }else if(length(tsdata)>20 && stats::frequency(tsdata)<2) {
     
