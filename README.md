@@ -23,7 +23,15 @@ and h: the prediction steps.
 
 The package includes the following time series data:
 
-Athens_draft_ts, Athens_revised_ts, Athens_reserved_ts, Athens_approved_ts and Athens_executed_ts.
+Athens_draft_ts, 
+
+Athens_revised_ts, 
+
+Athens_reserved_ts, 
+
+Athens_approved_ts 
+
+and Athens_executed_ts.
 
 e.g. tsa.obeu(Athens_approved_ts,4)
 
@@ -60,9 +68,13 @@ Param Name: tsdata
 Param Value one of the following:
 
 Athens_draft_ts
+
 Athens_revised_ts
+
 Athens_reserved_ts
+
 Athens_approved_ts
+
 Athens_executed_ts
 
 
@@ -70,7 +82,7 @@ Athens_executed_ts
 ##Add another one parameters and set:
 Param Name: h
 
-Param Value: 4 (or another number)
+Param Value: 4 (or another number, default h=1)
 
 Ready! Click on Ajax request!
 
