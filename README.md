@@ -25,15 +25,7 @@ e.g. tsa.obeu(Athens_approved_ts,4)
 
 The package includes the following time series data:
 
-Athens_draft_ts, 
-
-Athens_revised_ts, 
-
-Athens_reserved_ts, 
-
-Athens_approved_ts 
-
-and Athens_executed_ts.
+Athens_draft_ts, Athens_revised_ts, Athens_reserved_ts, Athens_approved_ts and Athens_executed_ts.
 
 
 #OpenCPU Short Guide- TimeSeries.OBeu
