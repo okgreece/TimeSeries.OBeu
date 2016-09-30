@@ -10,7 +10,7 @@ library(devtools)
 
 and then install TimeSeries.OBeu from github
 
-install_github(TimeSeries.OBeu)
+install_github("okgreece/TimeSeries.OBeu")
 
 Use:
 
