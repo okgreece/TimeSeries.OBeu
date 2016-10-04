@@ -12,7 +12,7 @@ tsa.obeu(tsdata, h)
 \item{h}{The number of prediction steps}
 }
 \value{
-A json string with the parameters:
+A json string with the parameters (Missing some):
 data_year The time that time series data were sampled.
 data The time series values.
 predict_time The time that defined by the h parameter.
@@ -23,12 +23,13 @@ up95 The upper limit of the 95% predicted confidence interval.
 low95 The lower limit of the 95% predicted confidence interval.
 }
 \description{
-Univariate time series forecasts for short and long time series data using the appropriate model.
+Univariate time series analysis for short and long time series data using the appropriate model.
 }
 \details{
 This function automatically selects the appropriate arima model that fits the input data using the auto.arima function(see forecast package). 
 The model selection depends on the results of some diagnostic tests (acf,pacf,pp adf and kpss).
 For short time series the selected arima model is among various orders of the AR part using 1st differences and MA(1), with the lower AIC.
+This function also decomposes both seasonal and non seasonal time series.
 }
 \examples{
 

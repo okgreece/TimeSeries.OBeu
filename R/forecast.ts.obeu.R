@@ -1,5 +1,5 @@
 #' @title 
-#' Time series forecast results for OBEU Time series
+#' Time series forecast results of OBEU Time Series
 #'  
 #' @description
 #' Univariate time series forecasts for short and long time series data using the appropriate model.
@@ -10,11 +10,14 @@
 #' @param h The number of prediction steps
 #' 
 #' @details 
-#' This function automatically selects the appropriate arima model that fits the input data using the auto.arima function(see forecast package). 
+#' This function is used internally in tsa.obeu and automatically selects the appropriate arima model 
+#' that fits the input data using the auto.arima function(see forecast package). 
 #' The model selection depends on the results of some diagnostic tests (acf,pacf,pp adf and kpss).
-#' For short time series the selected arima model is among various orders of the AR part using 1st differences and MA(1), with the lower AIC.
+#' For short time series the selected arima model is among various orders of the AR part using 1st differences and MA(1), with the lower AIC value.
 #' 
-#' @return A json string with the parameters:
+#' @return A list with the parameters:
+#' ts.name a string indicating the name of the time series data
+#' ts.model a string indicating the arima orders
 #' data_year The time that time series data were sampled.
 #' data The time series values.
 #' predict_time The time that defined by the prediction_steps parameter.
@@ -26,9 +29,8 @@
 #'
 #' @author Kleanthis Koupidis
 #' 
-#' @references add
 #' 
-#' @seealso add
+#' @seealso tsa.obeu, forecast(forecast package)
 #' 
 #' @examples
 #' 

@@ -1,42 +1,53 @@
 #' @title 
-#' Extract the acf and pacf parameters of time series and their model's residuals 
+#' Extract the ACF and PACF parameters of time series and their model's residuals 
 #'  
 #' @description
-#' This function is included in tsa.obeu function and aims to extract the acf and pacf details 
-#' of the input time series data and the acf and pacf of the residuals after fitting an Arima model. 
+#' This function is included in tsa.obeu function and aims to extract the ACF and PACF details 
+#' of the input time series data and the ACF, PACF of the residuals after fitting an Arima model. 
 #' 
-#' @usage ts.acf.obeu<-function(tsdata,model_residuals,a=0.95)
+#' @usage ts.acf.obeu(tsdata,model_residuals,a=0.95)
 #' 
 #' @param tsdata The input univariate time series data
 #' @param model_residuals The model's residuals after fitting a model to the time series
-#' @param a The significant level
+#' @param a The significant level (default a=0.95)
 #' 
 #' @details 
 #' 
-#' The output of this function is a list with all the parameters needed for graphical purposes.
+#' This function is used internally in tsa.obeu function and the output is a list with grouped 
+#' ACF and PACF parameters of the input time series data, as well as the ACF and PACF parameters 
+#' of the residuals needed for the graphical purposes in OBEU.
 #' 
 #' @return 
+#'
 #' A list with the parameters:
-#' 
-#' acf The estimated acf values
-#' acf.lag The lags at which the acf is estimated
-#' pacf The estimated pacf values
-#' pacf.lag The lags at which the pacf is estimated
-#' ci.up The upper limit of the confidence interval
-#' ci.low The lower limit of the confidence interval
-#' acf.res The estimated acf values of the model’s residuals
-#' acf.res.lag The lags at which the acf is estimated of the model’s residuals
-#' pacf.res The estimated pacf values of the model’s residuals
-#' pacf.res.lag The lags at which the pacf is estimated of the model’s residuals
-#' ci.res.up The upper limit of the confidence interval
-#' ci.res.low The lower limit of the confidence interval
-#' 
+#'
+#' acf.parameters 
+#'  acf The estimated acf values of the input time series
+#'  acf.lag The lags at which the acf is estimated
+#'  confidence.interval.up The upper limit of the confidence interval
+#'  confidence.interval.low The lower limit of the confidence interval
+#'
+#' pacf.parameters 
+#'  pacf The estimated pacf values of the input time series
+#'  pacf.lag The lags at which the pacf is estimated
+#'  confidence.interval.up The upper limit of the confidence interval
+#'  confidence.interval.low The lower limit of the confidence interval
+#'
+#' acf.residuals.parameters 
+#'  acf.res The estimated acf values of the model’s residuals
+#'  acf.res.lag The lags at which the acf is estimated of the model’s residuals
+#'  confidence.interval.up The upper limit of the confidence interval
+#'  confidence.interval.low The lower limit of the confidence interval
+#'
+#' pacf.residuals.parameters 
+#'  pacf.res The estimated pacf values of the model’s residuals
+#'  pacf.res.lag The lags at which the pacf is estimated of the model’s residuals
+#'  confidence.interval.up The upper limit of the confidence interval
+#'  confidence.interval.low The lower limit of the confidence interval
 #' 
 #' @author Kleanthis Koupidis
 #' 
-#' @references add
-#' 
-#' @seealso add
+#' @seealso tsa.obeu
 #' 
 #' @examples 
 #' 

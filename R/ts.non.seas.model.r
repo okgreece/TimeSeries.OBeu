@@ -1,26 +1,46 @@
 #' @title 
-#' ... 
+#' Decomposition of non seasonal time series
+#'
 #' @description
-#' ...
-#' @usage ts.non.seas.model(tsdata)
+#' Decomposition of time series with no seasonal component
+#'
+#' @usage ts.non.seas.decomp(tsdata)
 #' 
-#' @param tsdata The input univariate time series data
+#' @param tsdata The input univariate non seasonal time series data
 #' 
 #' @details 
-#' ...
-#' @return 
-#' ...
+#' For non-seasonal time series there is no seasonal component. We use Local Polynomial Regression Fitting (LOESS)
+#' in order to extract the trend component and then we subtract the trend from the initial values to extract the irregular terms.
+#'
+#' @return A list with the following components
+#' timeseries The time series data
+#' season There is no seasonality, this parameter is set NULL
+#' loess.trend
+#'  trend The trend values
+#'  conf.interval.up The upper limit of the trend confidence interval
+#'  conf.interval.low The lower limit of the trend confidence interval
+#' loess.comparison
+#'  number.observation The time series length
+#'  loess.residuals The loess residuals
+#'  loess.enp 
+#'  loess.s 
+#'  loess.onedelta 
+#'  loess.twodelta 
+#'  loess.tracehat 
+#'  loess.divisor 
+#'  loess.robust 
+#'  loess.weights
+
 #' @author Kleanthis Koupidis
 #' 
 #' @references add
 #' 
-#' @seealso add
+#' @seealso tsa.obeu, loess, predict.loess (stats package)
 #' 
 #' @examples
 #' 
-#' @rdname ts.non.seas.model
+#' @rdname ts.non.seas.decomp
 #' 
-#' @import forecast
 #'
 #' @export
 ############################################################################

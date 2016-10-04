@@ -1,22 +1,45 @@
 #' @title 
-#' ...
+#' Stationarity testing
 #'  
 #' @description
-#' ...
+#' This functions tests the stationarity of the input time series data.
 #' 
 #' @usage stationary.test(tsdata)
 #' 
 #' @param tsdata The input univariate time series data
 #' 
 #' @details 
+#' This function tests the deterministic and stohastic trend of the input time series data. This function uses ACF and PACF functions 
+#' from forecast package, Phillips-Perron test, Augmented Dickey–Fuller (ADF) test, Kwiatkowski-Phillips-Schmidt-Shin (KPSS) test,
+#' from tseries package and Mann-Kendall test for Monotonic Trend Cox and Stuart trend test from trend package.
 #' 
+#' Phillips-Perron test tests the null hypothesis of whether a unit root is present in a time series sample, 
+#' against a stationary alternative. The truncation lag parameter is set to trunc(4*(n/100)^0.25), 
+#' where “n” the length of the input time series data.
+#'
+#' Augmented Dickey–Fuller (ADF) test, tests the null hypothesis of whether a unit root is present in a time series sample.
+#' The truncation lag parameter is set to trunc((n-1)^(1/3))), where “n” the length of the input time series data.
+#'
+#' Kwiatkowski-Phillips-Schmidt-Shin (KPSS) test, tests a null hypothesis that an observable time series is stationary
+#' around a deterministic trend (i.e. trend-stationary) against the alternative of a unit root. 
+#' The truncation lag parameter is set to trunc(3*sqrt(n)/13), where “n” the length of the input time series data.
+#'
+#' The non-parametric Mann-Kendall test is used to detect monotonic trends. The null hypothesis, H0, is that the data 
+#' come from a population with independent realizations and are identically distributed. 
+#' The alternative hypothesis, HA, is that the data follow a monotonic trend.
+#'
+#' The Cox and Stuart test is a modified sign test. The null hypothesis, H0, is that the input time series assumed to be independent
+#' against the fact that there is a time dependent trend (monotonic trend).
+#'
 #' @return 
+#' A string indicating if the time series is stationary or non stationary for internal use in tsa.obeu.
 #'
 #' @author Kleanthis Koupidis
 #' 
-#' @references add
+#' @references tseries, trend
 #' 
-#' @seealso add
+#' @seealso tsa.obeu, Acf and Pacf(forecast package),pp.test, adf.test and kpss.test (tseries)
+#' mk.test and cs.test (trend package)
 #' 
 #' @examples
 #' 
@@ -45,23 +68,15 @@ stationary.test<-function(tsdata){
     
     acf_pacf<-c(acftest,pacftest)
 	
-    ##############################
-	
-    # Phillips-Perron test for the null hypothesis that 'tsdata'
-    # has a unit root against a stationary alternative.
-    # the truncation lag parameter is set to trunc(4*(n/100)^0.25), where n=length(tsdata)
+    # Phillips-Perron test
     
     pptest<-tseries::pp.test(tsdata,alternative = "stationary")
     
     # Augmented Dickey–Fuller (ADF) test
-    # for the null that 'tsdata' has a unit root
-    # the truncation lag parameter is set to trunc((n-1)^(1/3))), where n=length(tsdata)
     
     adftest<-tseries::adf.test(tsdata,alternative = "stationary")
     
     # Kwiatkowski-Phillips-Schmidt-Shin (KPSS) test
-    # the null hypothesis that 'tsdata' is level or trend stationary.
-    # the truncation lag parameter is set to trunc(3*sqrt(n)/13), where n=length(tsdata)
     
     kpsstest<-tseries::kpss.test(tsdata)
     

@@ -1,8 +1,8 @@
 #' @title 
-#' Reading and analyze babbage time series data
+#' Read and analyze time series data from Babbage API
 #'  
 #' @description
-#' Extract and analyze the time series data from babbage api, using the tsa.obeu function.
+#' Extract and analyze time series data from babbage api, using the tsa.obeu function.
 #' 
 #' @usage babbage.tsa.obeu(json_data,time,amount,prediction_steps)
 #' 
@@ -12,13 +12,11 @@
 #' @param prediction_steps The number of prediction steps.
 #' 
 #' @details 
+#' This function extracts the time series data provided by the Babbage API.
+#' A json file  analyze it using the tsa.obeu function.
 #' 
-#' This function extracts the time series data from a json file resulted from the babbage api
-#' and then analyze it using the tsa.obeu function.
-#' 
-#' @return A json string with the resulted parameters with the time series data, trend, season, error terms 
-#' and forecasts of the input time series data using tsa.obeu and ts.decomposition.obeu functions.
-#' 
+#' @return A json string with the resulted parameters of the tsa.obeu function.
+#'
 #' @author Kleanthis Koupidis
 #' 
 #' @references add
@@ -26,7 +24,7 @@
 #' @seealso tsa.obeu
 #' 
 #' @examples
-#' #Not YET an OBeu Example
+#' 
 #' 
 #' 
 #' @rdname babbage.tsa.obeu
