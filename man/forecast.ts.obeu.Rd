@@ -13,9 +13,7 @@ forecast.tsa.obeu(ts_model, h=1)
 }
 \value{
 A list with the parameters:
-ts.name 
-
-a string indicating the name of the time series data
+ts.name a string indicating the name of the time series data
 ts.model a string indicating the arima orders
 data_year The time that time series data were sampled.
 data The time series values.
