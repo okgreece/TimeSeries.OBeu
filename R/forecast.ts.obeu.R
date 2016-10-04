@@ -16,9 +16,12 @@
 #' For short time series the selected arima model is among various orders of the AR part using 1st differences and MA(1), with the lower AIC value.
 #' 
 #' @return A list with the parameters:
-#' ts.name a string indicating the name of the time series data\\
-#' ts.model a string indicating the arima orders\\
-#' data_year The time that time series data were sampled.\\
+#' ts.name a string indicating the name of the time series data
+#'
+#' ts.model a string indicating the arima orders
+#' 
+#' data_year The time that time series data were sampled.
+#'
 #' data The time series values.
 #' predict_time The time that defined by the prediction_steps parameter.
 #' predict_values The predicted values that defined by the prediction_steps parameter.
