@@ -2,21 +2,51 @@
 % Please edit documentation in R/ts.seasonal.obeu.R
 \name{ts.seasonal.obeu}
 \alias{ts.seasonal.obeu}
-\title{...}
+\title{Decomposition of seasonal time series}
 \usage{
 ts.seasonal.obeu(tsdata)
 }
 \arguments{
-\item{tsdata}{The input univariate time series data}
+\item{tsdata}{The input univariate seasonal time series data}
 }
 \value{
-...
+ts_model Summary of the arima model
+stl.general
+ trend The estimated trend component
+ seasonal The estimated seasonal component
+ remainder The estimated remainder component
+ weights The final robust weights (if robust=F all weights are one)
+ window A vector with the spans used for the "s", "t", and "l" smoothers
+ stl.degree A vector with the polynomial degrees for these smoothers
+ lambda Box-Cox transformation parameter
+ tsdata.stl$x
+ tsdata.stl$m
+ fitted The model's fitted values 
+ts_model
+ arima.order The Arima order
+ arima.coef A vector of AR, MA and regression coefficients
+ arima.coef.se The standard error of the coefficients
+residuals The residuals of the model (fitted innovations)
+residuals.other 
+ resid.variance The MLE of the innovations variance
+ covariance.coef The matrix of the estimated variance of the coefficients
+used.notused.observations
+ not.used.obs The number of not ߀<U+009C>used߀� observations for the fitting
+ used.obs the number of ߀<U+009C>used߀� observations for the fitting
+comparison
+ loglik The maximized log-likelihood (of the differenced data), or the approximation to it used
+ aic The AIC value corresponding to the log-likelihood
+ bic The BIC value corresponding to the log-likelihood
+ aicc The second-order Akaike Information Criterion corresponding to the log-likelihood
+data The time series data
 }
 \description{
-...
+Decomposition of seasonal time series data using stlm from forecast package. 
+This function is used internally in tsa.obeu.
 }
 \details{
-...
+Decomposition of seasonal time series data is based on stlm from forecast package and
+returns a list with useful parameters for OBEU.
 }
 \examples{
 
@@ -28,6 +58,6 @@ Kleanthis Koupidis
 add
 }
 \seealso{
-add
+tsa.obeu, stlm (forecast package)
 }
 

@@ -2,7 +2,7 @@
 % Please edit documentation in R/stationary.test.R
 \name{stationary.test}
 \alias{stationary.test}
-\title{...}
+\title{Stationarity testing}
 \usage{
 stationary.test(tsdata)
 }
@@ -10,13 +10,33 @@ stationary.test(tsdata)
 \item{tsdata}{The input univariate time series data}
 }
 \value{
-
+A string indicating if the time series is stationary or non stationary for internal use in tsa.obeu.
 }
 \description{
-...
+This functions tests the stationarity of the input time series data.
 }
 \details{
+This function tests the deterministic and stohastic trend of the input time series data. This function uses ACF and PACF functions 
+from forecast package, Phillips-Perron test, Augmented DickeyﬂÄìFuller (ADF) test, Kwiatkowski-Phillips-Schmidt-Shin (KPSS) test,
+from tseries package and Mann-Kendall test for Monotonic Trend Cox and Stuart trend test from trend package.
 
+Phillips-Perron test tests the null hypothesis of whether a unit root is present in a time series sample, 
+against a stationary alternative. The truncation lag parameter is set to trunc(4*(n/100)^0.25), 
+where ﬂÄ<U+009C>nﬂÄù the length of the input time series data.
+
+Augmented DickeyﬂÄìFuller (ADF) test, tests the null hypothesis of whether a unit root is present in a time series sample.
+The truncation lag parameter is set to trunc((n-1)^(1/3))), where ﬂÄ<U+009C>nﬂÄù the length of the input time series data.
+
+Kwiatkowski-Phillips-Schmidt-Shin (KPSS) test, tests a null hypothesis that an observable time series is stationary
+around a deterministic trend (i.e. trend-stationary) against the alternative of a unit root. 
+The truncation lag parameter is set to trunc(3*sqrt(n)/13), where ﬂÄ<U+009C>nﬂÄù the length of the input time series data.
+
+The non-parametric Mann-Kendall test is used to detect monotonic trends. The null hypothesis, H0, is that the data 
+come from a population with independent realizations and are identically distributed. 
+The alternative hypothesis, HA, is that the data follow a monotonic trend.
+
+The Cox and Stuart test is a modified sign test. The null hypothesis, H0, is that the input time series assumed to be independent
+against the fact that there is a time dependent trend (monotonic trend).
 }
 \examples{
 
@@ -25,9 +45,10 @@ stationary.test(tsdata)
 Kleanthis Koupidis
 }
 \references{
-add
+tseries, trend
 }
 \seealso{
-add
+tsa.obeu, Acf and Pacf(forecast package),pp.test, adf.test and kpss.test (tseries)
+mk.test and cs.test (trend package)
 }
 
