@@ -1,5 +1,5 @@
 #' @title 
-#' Time series forecast results for OBEU Time series
+#' Time series analysis results for OBEU Time series
 #'  
 #' @description
 #' Univariate time series analysis for short and long time series data using the appropriate model.
@@ -10,21 +10,18 @@
 #' @param h The number of prediction steps
 #' 
 #' @details 
-#' This function automatically selects the appropriate arima model that fits the input data using the auto.arima function(see forecast package). 
-#' The model selection depends on the results of some diagnostic tests (acf,pacf,pp adf and kpss).
+#' This function automatically tests for stationarity of the input time series data in order to 
+#' select the appropriate arima model that fits the input data using the auto.arima function(see forecast package). 
 #' For short time series the selected arima model is among various orders of the AR part using 1st differences and MA(1), with the lower AIC.
-#' This function also decomposes both seasonal and non seasonal time series.
+#' This function also decomposes both seasonal and non seasonal time series and forecasts h steps ahead the user selected(default h=1).
+#' 
 #' 
 #' @return A json string with the parameters (Missing some):
-#' data_year The time that time series data were sampled.
-#' data The time series values.
-#' predict_time The time that defined by the h parameter.
-#' predict_values The predicted values that defined by the h parameter.
-#' up80 The upper limit of the 80% predicted confidence interval.
-#' low80 The lower limit of the 80% predicted confidence interval.
-#' up95 The upper limit of the 95% predicted confidence interval.
-#' low95 The lower limit of the 95% predicted confidence interval.
-#'
+#' ts_name
+#' param
+#' forecasts
+
+
 #' @author Kleanthis Koupidis
 #' 
 #' @references add

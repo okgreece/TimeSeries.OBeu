@@ -4,19 +4,21 @@
 #' @description
 #' Univariate time series forecasts for short and long time series data using the appropriate model.
 #' 
-#' @usage forecast.ts.obeu(ts_model, h=1)
+#' @usage forecast.tsa.obeu(ts_model, h=1)
 #' 
 #' @param ts_model The input univariate time series data
 #' @param h The number of prediction steps
 #' 
 #' @details 
-#' This function is used internally in tsa.obeu and automatically selects the appropriate arima model 
+#' This function is used internally in tsa.obeu and forecasts the model 
 #' that fits the input data using the auto.arima function(see forecast package). 
 #' The model selection depends on the results of some diagnostic tests (acf,pacf,pp adf and kpss).
 #' For short time series the selected arima model is among various orders of the AR part using 1st differences and MA(1), with the lower AIC value.
 #' 
 #' @return A list with the parameters:
-#' ts.name a string indicating the name of the time series data
+#' ts.name 
+#'
+#' a string indicating the name of the time series data
 #' ts.model a string indicating the arima orders
 #' data_year The time that time series data were sampled.
 #' data The time series values.
@@ -42,7 +44,7 @@
 #' @export
 ############################################################################
 
-forecast.ts.obeu<-function(ts_model,h=1){
+forecast.tsa.obeu<-function(ts_model,h=1){
     options(warn=-1)
 
   ## Model Forecasting
