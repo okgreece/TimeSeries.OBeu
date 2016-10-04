@@ -35,8 +35,8 @@
 #'  resid.variance The MLE of the innovations variance
 #'  covariance.coef The matrix of the estimated variance of the coefficients
 #' used.notused.observations
-#'  not.used.obs The number of not “used” observations for the fitting
-#'  used.obs the number of “used” observations for the fitting
+#'  not.used.obs The number of not used observations for the fitting
+#'  used.obs the number of used observations for the fitting
 #' comparison
 #'  loglik The maximized log-likelihood (of the differenced data), or the approximation to it used
 #'  aic The AIC value corresponding to the log-likelihood
