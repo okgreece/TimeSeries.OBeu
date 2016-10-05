@@ -20,8 +20,6 @@
 #' ts_name
 #' param
 #' forecasts
-
-
 #' @author Kleanthis Koupidis
 #' 
 #' @references add

@@ -9,29 +9,6 @@ ts.non.seas.decomp(tsdata)
 \arguments{
 \item{tsdata}{The input univariate non seasonal time series data}
 }
-\value{
-A list with the following components:
-\itemize{
-\item timeseries: The time series data
-\item season: There is no seasonality, this parameter is set NULL
-\item loess.trend:
- \itemize{
- \item trend: The trend values
- \item conf.interval.up: The upper limit of the trend confidence interval
- \item conf.interval.low: The lower limit of the trend confidence interval}
-\item loess.comparison:
- \itemize{
- \item number.observation: The time series length
- \item loess.residuals: The loess residuals
- \item loess.enp: 
- \item loess.s: 
- \item loess.onedelta:
- \item loess.twodelta: 
- \item loess.tracehat: 
- \item loess.divisor: 
- \item loess.robust: 
- \item loess.weights:}}
-}
 \description{
 Decomposition of time series with no seasonal component
 }
