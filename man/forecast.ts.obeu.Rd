@@ -11,6 +11,20 @@ forecast.tsa.obeu(ts_model, h=1)
 
 \item{h}{The number of prediction steps}
 }
+\value{
+A list with the parameters:
+\itemize {
+\item ts.name: a string indicating the name of the time series data
+\item ts.model: a string indicating the arima orders
+\item data_year: The time that time series data were sampled
+\item data: The time series values
+\item predict_time: The time that defined by the prediction_steps parameter
+\item predict_values: The predicted values that defined by the prediction_steps parameter
+\item up80: The upper limit of the 80\% predicted confidence interval
+\item low80: The lower limit of the 80\% predicted confidence interval
+\item up95: The upper limit of the 95\% predicted confidence interval
+\item low95: The lower limit of the 95\% predicted confidence interval}
+}
 \description{
 Univariate time series forecasts for short and long time series data using the appropriate model.
 }

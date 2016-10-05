@@ -36,6 +36,6 @@ Kleanthis Koupidis
 add
 }
 \seealso{
-add
+\code{\link{babbage.tsa.obeu}}
 }
 

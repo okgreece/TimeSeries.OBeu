@@ -26,7 +26,7 @@
 #' 
 #' @references add
 #' 
-#' @seealso add
+#' @seealso \code{\link{babbage.tsa.obeu}}
 #' 
 #' @examples
 #' 

@@ -10,35 +10,46 @@ ts.seasonal.obeu(tsdata)
 \item{tsdata}{The input univariate seasonal time series data}
 }
 \value{
-ts_model Summary of the arima model
-stl.general
- trend The estimated trend component
- seasonal The estimated seasonal component
- remainder The estimated remainder component
- weights The final robust weights (if robust=F all weights are one)
- window A vector with the spans used for the "s", "t", and "l" smoothers
- stl.degree A vector with the polynomial degrees for these smoothers
- lambda Box-Cox transformation parameter
- tsdata.stl$x
- tsdata.stl$m
- fitted The model's fitted values 
-ts_model
- arima.order The Arima order
- arima.coef A vector of AR, MA and regression coefficients
- arima.coef.se The standard error of the coefficients
-residuals The residuals of the model (fitted innovations)
-residuals.other 
- resid.variance The MLE of the innovations variance
- covariance.coef The matrix of the estimated variance of the coefficients
-used.notused.observations
- not.used.obs The number of not used observations for the fitting
- used.obs the number of used observations for the fitting
-comparison
- loglik The maximized log-likelihood (of the differenced data), or the approximation to it used
- aic The AIC value corresponding to the log-likelihood
- bic The BIC value corresponding to the log-likelihood
- aicc The second-order Akaike Information Criterion corresponding to the log-likelihood
-data The time series data
+\itemize{
+\item ts_model: Summary of the arima model
+\item stl.general:
+\itemize{
+ \item trend: The estimated trend component
+ \item seasonal: The estimated seasonal component
+ \item remainder: The estimated remainder component
+ \item weights: The final robust weights (if robust=F all weights are one)
+ \item window: A vector with the spans used for the "s", "t", and "l" smoothers
+ \item stl.degree: A vector with the polynomial degrees for these smoothers
+ \item lambda: Box-Cox transformation parameter
+ \item tsdata.stl$x:
+ \item tsdata.stl$m:
+ \item fitted: The model's fitted values }
+\item ts_model:
+ \itemize{
+ \item arima.order: The Arima order
+ \item arima.coef: A vector of AR, MA and regression coefficients
+ \item arima.coef.se: The standard error of the coefficients}
+ 
+\item residuals: The residuals of the model (fitted innovations)
+
+\item residuals.other: 
+ \itemize{
+ \item resid.variance: The MLE of the innovations variance
+ \item covariance.coef: The matrix of the estimated variance of the coefficients}
+ 
+\item used.notused.observations:
+ \itemize{
+ \item not.used.obs: The number of not used observations for the fitting
+ \item used.obs: the number of used observations for the fitting}
+ 
+\item comparison:
+ \itemize{
+ \item loglik: The maximized log-likelihood (of the differenced data), or the approximation to it used
+ \item aic: The AIC value corresponding to the log-likelihood
+ \item bic: The BIC value corresponding to the log-likelihood
+ \item aicc: The second-order Akaike Information Criterion corresponding to the log-likelihood}
+ 
+\item data: The time series data}
 }
 \description{
 Decomposition of seasonal time series data using stlm from forecast package. 
@@ -58,6 +69,6 @@ Kleanthis Koupidis
 add
 }
 \seealso{
-tsa.obeu, stlm (forecast package)
+\code{\link{tsa.obeu}}, stlm (forecast package)
 }
 

@@ -1,5 +1,5 @@
 #' @title 
-#' Extract the ACF and PACF parameters of time series and their model's residuals 
+#' Extract the ACF and PACF parameters of time series and their model residuals 
 #'  
 #' @description
 #' This function is included in tsa.obeu function and aims to extract the ACF and PACF details 
@@ -17,37 +17,32 @@
 #' ACF and PACF parameters of the input time series data, as well as the ACF and PACF parameters 
 #' of the residuals needed for the graphical purposes in OBEU.
 #' 
-#' @return 
-#'
-#' A list with the parameters:
+#' @return A list with the parameters:
 #'\itemize{
-#'  \item acf.parameters 
-#'  \itemize{ \item acf The estimated acf values of the input time series
-#'  \item acf.lag The lags at which the acf is estimated
-#'  \item confidence.interval.up The upper limit of the confidence interval
-#'  \item confidence.interval.low The lower limit of the confidence interval
-#'
-#'  \item pacf.parameters 
-#'  \itemize{ \item pacf The estimated pacf values of the input time series
-#'  \item pacf.lag The lags at which the pacf is estimated
-#'  \item confidence.interval.up The upper limit of the confidence interval
-#'  \item confidence.interval.low The lower limit of the confidence interval}
-#'
-#'  \item acf.residuals.parameters 
-#'  \itemize{ \item acf.res The estimated acf values of the model’s residuals
-#'  \item acf.res.lag The lags at which the acf is estimated of the model’s residuals
-#'  \item confidence.interval.up The upper limit of the confidence interval
-#'  \item confidence.interval.low The lower limit of the confidence interval}
-#'
-#'  \item pacf.residuals.parameters 
-#'  \itemize{ \item pacf.res The estimated pacf values of the model’s residuals
-#'  \item pacf.res.lag The lags at which the pacf is estimated of the model’s residuals
-#'  \item confidence.interval.up The upper limit of the confidence interval
-#'  \item confidence.interval.low The lower limit of the confidence interval}}
+#'  \item acf.parameters: 
+#'  \itemize{ \item acf: The estimated acf values of the input time series
+#'  \item acf.lag: The lags at which the acf is estimated
+#'  \item confidence.interval.up: The upper limit of the confidence interval
+#'  \item confidence.interval.low: The lower limit of the confidence interval}
+#'  \item pacf.parameters: 
+#'  \itemize{ \item pacf: The estimated pacf values of the input time series
+#'  \item pacf.lag: The lags at which the pacf is estimated
+#'  \item confidence.interval.up: The upper limit of the confidence interval
+#'  \item confidence.interval.low: The lower limit of the confidence interval}
+#'  \item acf.residuals.parameters: 
+#'  \itemize{ \item acf.res: The estimated acf values of the model residuals
+#'  \item acf.res.lag: The lags at which the acf is estimated of the model residuals
+#'  \item confidence.interval.up: The upper limit of the confidence interval
+#'  \item confidence.interval.low: The lower limit of the confidence interval}
+#'  \item pacf.residuals.parameters: 
+#'  \itemize{ \item pacf.res: The estimated pacf values of the model residuals
+#'  \item pacf.res.lag: The lags at which the pacf is estimated of the model residuals
+#'  \item confidence.interval.up: The upper limit of the confidence interval
+#'  \item confidence.interval.low: The lower limit of the confidence interval}}
 #' 
 #' @author Kleanthis Koupidis
 #' 
-#' @seealso tsa.obeu
+#' @seealso \code{\link{tsa.obeu}}
 #' 
 #' @examples 
 #' 
