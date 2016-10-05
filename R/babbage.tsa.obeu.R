@@ -21,7 +21,7 @@
 #' 
 #' @references add
 #' 
-#' @seealso tsa.obeu
+#' @seealso \code{\link{tsa.obeu}}
 #' 
 #' @examples
 #' 

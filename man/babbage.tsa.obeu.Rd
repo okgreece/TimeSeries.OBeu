@@ -37,6 +37,6 @@ Kleanthis Koupidis
 add
 }
 \seealso{
-tsa.obeu
+\code{\link{tsa.obeu}}
 }
 

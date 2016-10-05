@@ -20,30 +20,30 @@
 #' @return 
 #'
 #' A list with the parameters:
+#'\itemize{
+#'  \item acf.parameters 
+#'  \itemize{ \item acf The estimated acf values of the input time series
+#'  \item acf.lag The lags at which the acf is estimated
+#'  \item confidence.interval.up The upper limit of the confidence interval
+#'  \item confidence.interval.low The lower limit of the confidence interval
 #'
-#' acf.parameters 
-#'  acf The estimated acf values of the input time series
-#'  acf.lag The lags at which the acf is estimated
-#'  confidence.interval.up The upper limit of the confidence interval
-#'  confidence.interval.low The lower limit of the confidence interval
+#'  \item pacf.parameters 
+#'  \itemize{ \item pacf The estimated pacf values of the input time series
+#'  \item pacf.lag The lags at which the pacf is estimated
+#'  \item confidence.interval.up The upper limit of the confidence interval
+#'  \item confidence.interval.low The lower limit of the confidence interval}
 #'
-#' pacf.parameters 
-#'  pacf The estimated pacf values of the input time series
-#'  pacf.lag The lags at which the pacf is estimated
-#'  confidence.interval.up The upper limit of the confidence interval
-#'  confidence.interval.low The lower limit of the confidence interval
+#'  \item acf.residuals.parameters 
+#'  \itemize{ \item acf.res The estimated acf values of the model’s residuals
+#'  \item acf.res.lag The lags at which the acf is estimated of the model’s residuals
+#'  \item confidence.interval.up The upper limit of the confidence interval
+#'  \item confidence.interval.low The lower limit of the confidence interval}
 #'
-#' acf.residuals.parameters 
-#'  acf.res The estimated acf values of the model’s residuals
-#'  acf.res.lag The lags at which the acf is estimated of the model’s residuals
-#'  confidence.interval.up The upper limit of the confidence interval
-#'  confidence.interval.low The lower limit of the confidence interval
-#'
-#' pacf.residuals.parameters 
-#'  pacf.res The estimated pacf values of the model’s residuals
-#'  pacf.res.lag The lags at which the pacf is estimated of the model’s residuals
-#'  confidence.interval.up The upper limit of the confidence interval
-#'  confidence.interval.low The lower limit of the confidence interval
+#'  \item pacf.residuals.parameters 
+#'  \itemize{ \item pacf.res The estimated pacf values of the model’s residuals
+#'  \item pacf.res.lag The lags at which the pacf is estimated of the model’s residuals
+#'  \item confidence.interval.up The upper limit of the confidence interval
+#'  \item confidence.interval.low The lower limit of the confidence interval}}
 #' 
 #' @author Kleanthis Koupidis
 #' 

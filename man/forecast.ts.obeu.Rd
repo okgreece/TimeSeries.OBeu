@@ -11,19 +11,6 @@ forecast.tsa.obeu(ts_model, h=1)
 
 \item{h}{The number of prediction steps}
 }
-\value{
-A list with the parameters:
-ts.name a string indicating the name of the time series data
-ts.model a string indicating the arima orders
-data_year The time that time series data were sampled.
-data The time series values.
-predict_time The time that defined by the prediction_steps parameter.
-predict_values The predicted values that defined by the prediction_steps parameter.
-up80 The upper limit of the 80% predicted confidence interval.
-low80 The lower limit of the 80% predicted confidence interval.
-up95 The upper limit of the 95% predicted confidence interval.
-low95 The lower limit of the 95% predicted confidence interval.
-}
 \description{
 Univariate time series forecasts for short and long time series data using the appropriate model.
 }
@@ -41,6 +28,6 @@ For short time series the selected arima model is among various orders of the AR
 Kleanthis Koupidis
 }
 \seealso{
-tsa.obeu, forecast(forecast package)
+\code{\link{tsa.obeu}}, forecast(forecast package)
 }
 

@@ -48,7 +48,7 @@ Kleanthis Koupidis
 tseries, trend
 }
 \seealso{
-tsa.obeu, Acf and Pacf(forecast package),pp.test, adf.test and kpss.test (tseries)
+\code{\link{tsa.obeu}}, Acf and Pacf(forecast package),pp.test, adf.test and kpss.test (tseries)
 mk.test and cs.test (trend package)
 }
 
