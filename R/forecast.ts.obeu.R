@@ -46,7 +46,7 @@
 #' @export
 ############################################################################
 
-forecast.tsa.obeu<-function(ts_model,h=1){
+forecast.ts.obeu<-function(ts_model,h=1){
     options(warn=-1)
 
   ## Model Forecasting
