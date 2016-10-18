@@ -52,7 +52,7 @@
 #' @export
 ############################################################################
 
-stationary.testa<-function(tsdata){
+stationary.test<-function(tsdata){
   options(warn=-1)
 
     #ACF
