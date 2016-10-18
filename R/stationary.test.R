@@ -52,7 +52,7 @@
 #' @export
 ############################################################################
 
-stationary.test<-function(tsdata){
+stationary.testa<-function(tsdata){
   options(warn=-1)
 
     #ACF
@@ -73,8 +73,11 @@ stationary.test<-function(tsdata){
     pptest<-tseries::pp.test(tsdata,alternative = "stationary")
     
     # Augmented Dickey–Fuller (ADF) test
-    
-    adftest<-tseries::adf.test(tsdata,alternative = "stationary")
+    if (length(tsdata)<7){
+    adftest<-tseries::adf.test(tsdata,alternative = "stationary",k=0)
+    }
+    else {
+      adftest<-tseries::adf.test(tsdata,alternative = "stationary")} 
     
     # Kwiatkowski-Phillips-Schmidt-Shin (KPSS) test
     
@@ -113,4 +116,4 @@ occurences<-max(table(tests))
 check_stat<-names(which(table(tests) == occurences))
 
 return(check_stat)
-}
+} 
