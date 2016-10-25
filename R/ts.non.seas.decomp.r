@@ -77,11 +77,14 @@ ts.non.seas.decomp<-function(tsdata){
 
   season=list(seasonal) 
   
-  loess.trend=list(			#loess trend
+  trend.plot=list(			#loess trend
 							trend= ci[,"trend"],
 							conf.interval.up = ci[,"trend.ci.up"],
 							conf.interval.low = ci[,"trend.ci.low"])
-							
+  
+  remainder.plot=list(
+              remainder)
+    
   loess.comparison=list(	#general characteristics
 							number.observation= loess.model$n,
 							loess.residuals = loess.model$residuals,
@@ -97,7 +100,11 @@ ts.non.seas.decomp<-function(tsdata){
 							#loess.weights = loess.model$weights)
 
 	parameters<-list(#data=data,
-	                 season=season,loess.trend=loess.trend,loess.comparison=loess.comparison)
+	                 season=season,
+	                 trend.plot=trend.plot,
+	                 remainder.plot=remainder.plot,
+	                 loess.comparison=loess.comparison
+	                 )
   
   return(parameters)
 } 

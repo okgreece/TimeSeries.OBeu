@@ -74,7 +74,6 @@
 ############################################################################
 
 ts.seasonal.obeu<-function(tsdata){
-  options(warn=-1)
 
 tsdata.stl <- forecast::stlm(tsdata, s.window="periodic", robust=FALSE, method="arima",
                              modelfunction=forecast::auto.arima,allow.multiplicative.trend=TRUE)
@@ -83,11 +82,13 @@ trend <- tsdata.stl$stl$time.series[,"trend"]
 season <- tsdata.stl$stl$time.series[,"seasonal"]
 remainder <-  tsdata.stl$stl$time.series[,"remainder"]
 
-stl.general=list( #stl general
+stl.plot=list( #stl plot
 				  trend=trend,
 				  seasonal=season,
-				  remainder=remainder,
-				  weights=tsdata.stl$stl$weights,
+				  remainder=remainder)
+				  
+stl.general=list( #stl general
+				    weights=tsdata.stl$stl$weights,
                   window=tsdata.stl$stl$win,
                   stl.degree=tsdata.stl$stl$deg,
                   lambda=tsdata.stl$lambda,
@@ -121,6 +122,7 @@ comparison=list(  #Comparison
 				  
 model.details<-list(
 					ts_model=tsdata.stl$model,
+					stl.plot=stl.plot,
 					stl.general=stl.general,
 					ts_model=model,
 					residuals=residuals,
