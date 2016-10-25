@@ -13,7 +13,7 @@
 #' in order to extract the trend component and then we subtract the trend from the initial values to extract the irregular terms.
 #'
 #' @return A list with the following components:
-#'\
+#'
 #' @author Kleanthis Koupidis
 #' 
 #' @references add
@@ -29,7 +29,6 @@
 ############################################################################
 
 ts.non.seas.model<-function(tsdata){
-  options(warn=-1)
 
 #arima obeu
 arima.obeu = function(tsdata,x) {
@@ -39,9 +38,9 @@ arima.obeu = function(tsdata,x) {
            error = function(e) {print(paste("next order", x)); 
              NULL} ) 
 }
-
+#aic.obeu
 aic.obeu = function(aic,x) {
-  tryCatch( c(aic=modelss[[i]]$aic,order=c(i,1,1)),
+  tryCatch( c(aic=modelss[[x]]$aic,order=c(x,1,1)),
            warning = function(w) {print(paste("next order", x)); 
              NULL},
            error = function(e) {print(paste("next order", x)); 
@@ -77,9 +76,10 @@ aic.obeu = function(aic,x) {
   
   residuals=list(		#residuals
     residuals = ts_model$residuals)
-  residuals.other=list(
+  
+  other=list(
     resid.variance = ts_model$sigma2,
-    covariance.coef = ts_model$var.coef)
+    variance.coef = ts_model$var.coef)
   
   used.notused.observations=list(	#used-notused observations
     not.used.obs = ts_model$n.cond,
@@ -91,11 +91,18 @@ aic.obeu = function(aic,x) {
     bic = ts_model$bic,
     aicc = ts_model$aicc)
   
-  data=list(				#time series data
-    tsdata = ts_model$x,
-    ts.name = ts_model$series)
+  #data=list(				#time series data
+   # tsdata = ts_model$x,
+  #  ts.name = ts_model$series)
   
-  model.details<-list(model.summary=model.summary, model=model,residuals=residuals,residuals.other=residuals.other,used.notused.observations=used.notused.observations,comparison=comparison,data=data)
+  model.details<-list(model.summary=model.summary, 
+                      model=model,
+                      residuals=residuals,
+                      other=other,
+                      used.notused.observations=used.notused.observations,
+                      comparison=comparison
+                      #data=data
+                      )
   
   return(model.details)
 }

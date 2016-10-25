@@ -9,6 +9,9 @@ ts.non.seas.decomp(tsdata)
 \arguments{
 \item{tsdata}{The input univariate non seasonal time series data}
 }
+\value{
+A list with the following components:
+}
 \description{
 Decomposition of time series with no seasonal component
 }

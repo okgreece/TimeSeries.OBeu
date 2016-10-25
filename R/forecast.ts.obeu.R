@@ -4,7 +4,7 @@
 #' @description
 #' Univariate time series forecasts for short and long time series data using the appropriate model.
 #' 
-#' @usage forecast.tsa.obeu(ts_model, h=1)
+#' @usage forecast.ts.obeu(ts_model, h=1)
 #' 
 #' @param ts_model The input univariate time series data
 #' @param h The number of prediction steps
@@ -47,12 +47,11 @@
 ############################################################################
 
 forecast.ts.obeu<-function(ts_model,h=1){
-    options(warn=-1)
 
   ## Model Forecasting
   forecasts<-forecast::forecast(ts_model,h)
   
-  forecast.param<-list(ts.name= ts_model$series,
+  forecast.param<-list(#ts.name= ts_model$series,
                        ts.model=forecasts$method,
                        data_year=stats::time(ts_model$x),
                        data=ts_model$x,

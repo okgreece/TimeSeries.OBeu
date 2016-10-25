@@ -72,10 +72,10 @@ ts.non.seas.decomp<-function(tsdata){
   )
   
   ##
-  data=list(		#time series data
-                    timeseries=tsdata)
+  #data=list(		#time series data
+                   # timeseries=tsdata)
 
-  season=list(seasonal)
+  season=list(seasonal) 
   
   loess.trend=list(			#loess trend
 							trend= ci[,"trend"],
@@ -89,15 +89,16 @@ ts.non.seas.decomp<-function(tsdata){
 							loess.s = loess.model$s,
 							loess.onedelta = loess.model$one.delta,
 							loess.twodelta = loess.model$two.delta,
-							loess.tracehat = loess.model$trace.hat,
-							loess.divisor = loess.model$divisor,
-							loess.robust = loess.model$robust,
+							loess.tracehat = loess.model$trace.hat)
+							#loess.divisor = loess.model$divisor,
+							#loess.robust = loess.model$robust,
 							#loess.parameters = loess.model$pars,
 							#loess.kd = loess.model$kd,
-							loess.weights = loess.model$weights)
+							#loess.weights = loess.model$weights)
 
-	parameters<-list(data=data,season=season,loess.trend=loess.trend,loess.comparison=loess.comparison)
+	parameters<-list(#data=data,
+	                 season=season,loess.trend=loess.trend,loess.comparison=loess.comparison)
   
   return(parameters)
-}
+} 
 

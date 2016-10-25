@@ -91,8 +91,8 @@ stl.general=list( #stl general
                   window=tsdata.stl$stl$win,
                   stl.degree=tsdata.stl$stl$deg,
                   lambda=tsdata.stl$lambda,
-                  tsdata.stl$x,##??
-                  tsdata.stl$m,##??
+                  #tsdata.stl$x,##??
+                  #tsdata.stl$m,##??
                   fitted=tsdata.stl$fitted)
 				  
 
@@ -102,9 +102,9 @@ model=list( 	  #model
                   arima.coef.se=round(sqrt(diag(tsdata.stl$model$var.coef)),digits=4))
 residuals=list(
                   residuals=tsdata.stl$model$residuals)
-residuals.other=list(
+other=list(
 				  resid.variance=tsdata.stl$model$sigma2,
-                  covariance.coef=tsdata.stl$model$var.coef)
+				  variance.coef=tsdata.stl$model$var.coef)
 				  
 used.notused.observations= list(#used-notused observations
                   not.used.obs=tsdata.stl$model$n.cond,
@@ -115,19 +115,20 @@ comparison=list(  #Comparison
                   bic=tsdata.stl$model$bic,
                   aicc=tsdata.stl$model$aicc)
 				  
-data=list(        #time series data
-                  tsdata=tsdata.stl$model$x,
-                  ts.name=tsdata.stl$model$series)
+#data=list(        #time series data
+                  #tsdata=tsdata.stl$model$x,
+                  #ts.name=tsdata.stl$model$series)
 				  
 model.details<-list(
 					ts_model=tsdata.stl$model,
 					stl.general=stl.general,
 					ts_model=model,
 					residuals=residuals,
-					residuals.other,
+					other,
 					used.notused.observations=used.notused.observations,
-					comparison=comparison,
-					data=data)
+					comparison=comparison
+					#data=data
+					)
 
 return(model.details)
 

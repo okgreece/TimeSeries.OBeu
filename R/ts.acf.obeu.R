@@ -54,7 +54,7 @@
 ###################################################################################
 
 ts.acf.obeu<-function(tsdata, model_residuals=NULL, a=0.95){
-  model_residuals=as.numeric(unlist(model_residuals))
+  
   # acf, pacf of ts 
   acff<-forecast::Acf(tsdata,plot=F)
   pacff<-forecast::Pacf(tsdata,plot=F)
@@ -78,7 +78,9 @@ ts.acf.obeu<-function(tsdata, model_residuals=NULL, a=0.95){
   pacf.residuals.parameters=NULL
   
   if (!is.null(model_residuals)){
-    # acf, pacf of model's residuals
+    
+    model_residuals=as.numeric(unlist(model_residuals))
+        # acf, pacf of model's residuals
     acff.res<-forecast::Acf(model_residuals,plot=F)
     pacff.res<-forecast::Pacf(model_residuals,plot=F)
     climits.res.up <- stats::qnorm((1 + a)/2)/sqrt(length(model_residuals))
