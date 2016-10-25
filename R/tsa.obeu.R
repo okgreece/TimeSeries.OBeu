@@ -120,7 +120,7 @@ tsa.obeu<-function(tsdata,h=1){
   forecasts<-  forecast.ts.obeu(ts_model,h)
   
   ##  Parameter Extraction
-  par<-list(ts_name,acf.param,param,forecasts)
+  par<-list(timeseriesname=ts_name,acf.param=acf.param,param=param,forecasts=forecasts)
   
   ##  to JSON
   
