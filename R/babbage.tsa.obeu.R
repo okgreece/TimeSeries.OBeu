@@ -48,7 +48,7 @@ babbage.tsa.obeu<-function(json_data,time,amount,prediction_steps=1){
 
   tsdata <- stats::ts(amounts,start=min(tim),end=max(tim))
   tsdata <- na.omit(tsdata)
-  plot(tsdata)
+
   ts.result<-tsa.obeu(tsdata, prediction_steps)
   
 
