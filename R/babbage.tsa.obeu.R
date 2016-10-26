@@ -38,7 +38,7 @@ babbage.tsa.obeu<-function(json_data,time,amount,prediction_steps=1){
   
   data <- jsonlite::fromJSON(json_data)
   
-  data<-data$cells
+  data<-data$cells 
   
   tim<-lapply(data[paste(time)], as.integer)
   
@@ -46,10 +46,10 @@ babbage.tsa.obeu<-function(json_data,time,amount,prediction_steps=1){
   
   amount= data[paste(amount)]
  
-  tsdata<-stats::ts(amount,start=min(tim),end=max(tim))
-  tsdata<-na.omit(tsdata)
+  tsdata <- stats::ts(amount,start=min(tim),end=max(tim))
+  tsdata <- na.omit(tsdata)
   
-  ts.result<-tsa.obeu(tsdata,prediction_steps)
+  ts.result<-tsa.obeu(tsdata, prediction_steps)
   
 
   return(ts.result)  
