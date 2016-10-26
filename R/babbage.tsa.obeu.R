@@ -45,8 +45,12 @@ babbage.tsa.obeu<-function(json_data,time,amount,prediction_steps=1){
   tim<-c(do.call("cbind",tim))
   
   amounts<- c(do.call("cbind",data[paste(amount)]))
-
-  tsdata <- stats::ts(amounts,start=min(tim),end=max(tim))
+   
+  df<-cbind(tim,amounts)
+  
+  df<-df[order(df[,"tim"],decreasing=F),]
+  
+  tsdata <- stats::ts(df[,"amounts"],start=min(df[,"tim"]),end=max(df[,"tim"]))
   tsdata <- na.omit(tsdata)
 
   ts.result<-tsa.obeu(tsdata, prediction_steps)
