@@ -52,7 +52,7 @@ aic.obeu = function(aic,x) {
   aiccc<-list()
   modelss<-list()
  
-  for(i in 1:9){
+  for(i in 1:7){
   
     modelss[[i]]<-arima.obeu(tsdata,i)
     aiccc[[i]]<-aic.obeu(modelss[[i]]$aic,i)
