@@ -60,7 +60,7 @@ aic.obeu = function(aic,x) {
   
   df<-data.frame(matrix(unlist(aiccc),ncol=4,byrow = T))
   colnames(df)=c("aic","ar","diff","ma")
-  mindf<-df[df$aic==min(df$aic),]
+  mindf<-df[order(df$aic),][2,]
   x<-c(mindf$ar,mindf$diff,mindf$ma)
   
   #Fit the appropriate model
