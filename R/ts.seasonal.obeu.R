@@ -63,7 +63,7 @@
 #' 
 #' @examples
 #'
-#' @rdname ts.obeu
+#' @rdname ts.seasonal.obeu
 #' 
 #' @import forecast
 #' @import tseries
