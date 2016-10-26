@@ -33,36 +33,24 @@
 #' 
 #' @export
 ############################################################################
+
 babbage.tsa.obeu<-function(json_data,time,amount,prediction_steps=1){
   
   data <- jsonlite::fromJSON(json_data)
-  data<-data$cells[-3]
-  names(data)=c("time","amount")
-  data$time<-as.integer(data$time)
   
-  # Check prediction_steps
-  #if( is.nan(prediction_steps)==T | is.na(prediction_steps)==T |
-   #   is.character(prediction_steps)==T | is.numeric(as.numeric(as.character(prediction_steps)))==F){
-    #stop("Please give an integer input as 'prediction_steps', e.g. prediction_steps= 3.")}
-  #import lubridate
-
-  # Check time.
-  #if( any(is.nan(data$time)==T) | any(is.na(data$time)==T) |
-   #   is.numeric(as.numeric(as.character(data$time)))==F | 
-    #  any(data$time>lubridate::year(now()))==T | any(data$time<1990)==T) {
-  #  stop("Please give a valid year input as 'time', time should be greater than 1990 and
-#         could not be greater than the current year")}
+  data<-data$cells
   
-  # Check amount
-  #if( any(is.nan(data$amount)==T) | any(is.na(data$amount)==T) |
-  #    is.character(data$amount)==T | is.numeric(as.numeric(as.character(data$amount)))==F){
-  #  stop("Please give a numeric input as 'amount'.")}
+  tim<-lapply(data[paste(time)], as.integer)
+  
+  tim<-c(do.call("cbind",tim))
+  
+  amount= data[paste(amount)]
  
-  tsdata<-stats::ts(data$amount,start=min(data$time),end=max(data$time))
+  tsdata<-stats::ts(amount,start=min(tim),end=max(tim))
+  tsdata<-na.omit(tsdata)
+  
+  ts.result<-tsa.obeu(tsdata,prediction_steps)
+  
 
-  ts.result1<-tsa.obeu(tsdata,prediction_steps)
-   
-  ts.result<-list(ts.result1)
-
-  return(ts.result1)  
+  return(ts.result)  
 }
