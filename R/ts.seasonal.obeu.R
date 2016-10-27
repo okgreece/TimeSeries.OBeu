@@ -73,8 +73,6 @@
 #' @export
 ############################################################################
 
-ts.seasonal.obeu(austres)
-
 ts.seasonal.obeu<-function(tsdata){
 
 tsdata.stl <- forecast::stlm(tsdata, s.window="periodic", robust=FALSE, method="arima",
