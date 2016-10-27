@@ -17,7 +17,7 @@
 #' 
 #' 
 #' @return A json string with the parameters (Missing some):
-#' ts_name
+#' 
 #' param
 #' forecasts
 #' @author Kleanthis Koupidis
@@ -53,7 +53,7 @@ tsa.obeu<-function(tsdata,h=1){
   
   
   # Extract the time series name
-  ts_name<-deparse(substitute(tsdata))
+  #ts_name<-deparse(substitute(tsdata))
   
   #Stationarity testing
   check_stat=stationary.test(tsdata)
@@ -120,7 +120,8 @@ tsa.obeu<-function(tsdata,h=1){
   forecasts<-  forecast.ts.obeu(ts_model,h)
   
   ##  Parameter Extraction
-  par<-list(timeseriesname=ts_name,acf.param=acf.param,param=param,forecasts=forecasts)
+  par<-list(#timeseriesname=ts_name,
+            acf.param=acf.param,param=param,forecasts=forecasts)
   
   ##  to JSON
   

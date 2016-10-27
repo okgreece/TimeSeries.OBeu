@@ -25,18 +25,6 @@
 #'  \item conf.interval.up: The upper limit of the trend confidence interval
 #'  \item conf.interval.low: The lower limit of the trend confidence interval}
 #'  
-#' \item loess.comparison:
-#' \itemize{
-#'  \item number.observation: The time series length
-#'  \item loess.residuals: The loess residuals
-#'  \item loess.enp: 
-#'  \item loess.s: 
-#'  \item loess.onedelta:
-#'  \item loess.twodelta: 
-#'  \item loess.tracehat: 
-#'  \item loess.divisor: 
-#'  \item loess.robust: 
-#'  \item loess.weights:}}
 #'  
 #' @author Kleanthis Koupidis
 #' 
@@ -52,60 +40,84 @@
 ############################################################################
 
 ts.non.seas.decomp<-function(tsdata){
-    
-  ## trend
-  trend <- c()
-  loess.model <- stats::loess(tsdata~stats::time(tsdata)) #,  span=0.3)
-  trend<-stats::fitted(loess.model)
+
+  ## decompose
+  tsdata.stl <- stats::loess(tsdata~stats::time(tsdata))
+  trend<-stats::fitted(tsdata.stl)
   seasonal <- NULL
   remainder <- tsdata - trend
 
-  #Confidence Intervals
-  ci = cbind(
-    trend= stats::predict(loess.model, data.frame(x=stats::time(tsdata))),
+  # Trend Confidence Intervals
+
+  trend.ci.up= stats::predict(tsdata.stl, data.frame(x=stats::time(tsdata)))+
+    stats::predict(tsdata.stl, data.frame(x=stats::time(tsdata)), se=TRUE)$se.fit*1.96
   
-    trend.ci.up= stats::predict(loess.model, data.frame(x=stats::time(tsdata)))+
-      stats::predict(loess.model, data.frame(x=stats::time(tsdata)), se=TRUE)$se.fit*1.96,
+  #trend.ci.up=ts(trend.ci.up,
+    #             start=min(time(tsdata)),
+   #              end = max(time(tsdata)),
+    #             frequency =frequency(trend) )
+
+  trend.ci.low= stats::predict(tsdata.stl, data.frame(x=stats::time(tsdata)))-
+    stats::predict(tsdata.stl, data.frame(x=stats::time(tsdata)), se=TRUE)$se.fit*1.96
   
-    trend.ci.low= stats::predict(loess.model, data.frame(x=stats::time(tsdata)))-
-      stats::predict(loess.model, data.frame(x=stats::time(tsdata)), se=TRUE)$se.fit*1.96
-  )
+ # trend.ci.low=ts(trend.ci.low,
+           #       start=min(time(tsdata)),
+          #        end = max(time(tsdata)),
+         #         frequency =frequency(trend) )
+  
+  residuals=residuals(tsdata.stl)
+
+  # loglik=locfit::aic(tsdata.stl)["lik"]
+  
+  # aic=locfit::aic(tsdata.stl)["aic"]
+ 
   
   ##
-  #data=list(		#time series data
-                   # timeseries=tsdata)
-
-  season=list(seasonal) 
-  
-  trend.plot=list(			#loess trend
-							trend= ci[,"trend"],
-							conf.interval.up = ci[,"trend.ci.up"],
-							conf.interval.low = ci[,"trend.ci.low"])
-  
-  remainder.plot=list(
-              remainder)
+    stl.plot=list( #stl plot
+    trend=trend,
+    conf.interval.up = trend.ci.up,
+    conf.interval.low = trend.ci.low,
     
-  loess.comparison=list(	#general characteristics
-							number.observation= loess.model$n,
-							loess.residuals = loess.model$residuals,
-							loess.enp = loess.model$enp,
-							loess.s = loess.model$s,
-							loess.onedelta = loess.model$one.delta,
-							loess.twodelta = loess.model$two.delta,
-							loess.tracehat = loess.model$trace.hat)
-							#loess.divisor = loess.model$divisor,
-							#loess.robust = loess.model$robust,
-							#loess.parameters = loess.model$pars,
-							#loess.kd = loess.model$kd,
-							#loess.weights = loess.model$weights)
-
-	parameters<-list(#data=data,
-	                 season=season,
-	                 trend.plot=trend.plot,
-	                 remainder.plot=remainder.plot,
-	                 loess.comparison=loess.comparison
-	                 )
+    seasonal=seasonal,
+    remainder=remainder,
+    time=time(tsdata)
+  )
   
-  return(parameters)
-} 
+   
+    #  stl.general=list( #stl general
+    #   #weights=tsdata.stl$stl$weights,
+    #   window=tsdata.stl$stl$win,
+    #   stl.degree=tsdata.stl$stl$deg,
+    #   lambda=tsdata.stl$lambda,
+    # fitted=tsdata.stl$fitted)
+  
+  residuals=list(
+    residuals=residuals)
 
+  # compare=list(  #Comparison
+  #   #model
+  #   order=2,
+  #   coef=tsdata.stl$model$coef,
+  #   arima.coef.se=round(sqrt(diag(tsdata.stl$model$var.coef)),digits=4),
+    
+  # variance.coefs=
+    
+  #  resid.variance=
+  #  not.used.obs=
+  #  used.obs=
+    
+  #   loglik=loglik,
+  # aic=aic,
+    # bic=
+    #   aicc=
+  # )
+    
+
+	model.details<-list(
+	  stl.plot=stl.plot
+	  #stl.general=stl.general,
+	  #residuals=residuals,
+	  #compare=compare
+	)
+  return(model.details)
+} 

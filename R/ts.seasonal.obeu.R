@@ -73,6 +73,8 @@
 #' @export
 ############################################################################
 
+ts.seasonal.obeu(austres)
+
 ts.seasonal.obeu<-function(tsdata){
 
 tsdata.stl <- forecast::stlm(tsdata, s.window="periodic", robust=FALSE, method="arima",
@@ -85,51 +87,45 @@ remainder <-  tsdata.stl$stl$time.series[,"remainder"]
 stl.plot=list( #stl plot
 				  trend=trend,
 				  seasonal=season,
-				  remainder=remainder)
-				  
+				  remainder=remainder,
+				  time=time(tsdata)
+				  )
+
 stl.general=list( #stl general
-				    weights=tsdata.stl$stl$weights,
+				          #weights=tsdata.stl$stl$weights,
                   window=tsdata.stl$stl$win,
                   stl.degree=tsdata.stl$stl$deg,
                   lambda=tsdata.stl$lambda,
-                  #tsdata.stl$x,##??
-                  #tsdata.stl$m,##??
                   fitted=tsdata.stl$fitted)
+
+residuals=list(
+          residuals=tsdata.stl$model$residuals)
+
 				  
 
-model=list( 	  #model
-				  arima.order=tsdata.stl$model$arma,
-				  arima.coef=tsdata.stl$model$coef,
-                  arima.coef.se=round(sqrt(diag(tsdata.stl$model$var.coef)),digits=4))
-residuals=list(
-                  residuals=tsdata.stl$model$residuals)
-other=list(
-				  resid.variance=tsdata.stl$model$sigma2,
-				  variance.coef=tsdata.stl$model$var.coef)
-				  
-used.notused.observations= list(#used-notused observations
+compare=list(  #Comparison
+                  #model
+                  arima.order=tsdata.stl$model$arma,
+                  arima.coef=tsdata.stl$model$coef,
+                  arima.coef.se=round(sqrt(diag(tsdata.stl$model$var.coef)),digits=4),
+                  
+                  variance.coefs=tsdata.stl$model$var.coef,
+                  
+                  resid.variance=tsdata.stl$model$sigma2,
                   not.used.obs=tsdata.stl$model$n.cond,
-                  used.obs=tsdata.stl$model$nobs)
-comparison=list(  #Comparison
-				  loglik=tsdata.stl$model$loglik,
+                  used.obs=tsdata.stl$model$nobs,
+                  
+				          loglik=tsdata.stl$model$loglik,
                   aic=tsdata.stl$model$aic,
                   bic=tsdata.stl$model$bic,
                   aicc=tsdata.stl$model$aicc)
 				  
-#data=list(        #time series data
-                  #tsdata=tsdata.stl$model$x,
-                  #ts.name=tsdata.stl$model$series)
-				  
+
 model.details<-list(
-					ts_model=tsdata.stl$model,
 					stl.plot=stl.plot,
 					stl.general=stl.general,
-					ts_model=model,
 					residuals=residuals,
-					other,
-					used.notused.observations=used.notused.observations,
-					comparison=comparison
-					#data=data
+					compare=compare
 					)
 
 return(model.details)
