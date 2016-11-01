@@ -10,7 +10,7 @@
 #' 
 #' @details 
 #' This function tests the deterministic and stohastic trend of the input time series data. This function uses ACF and PACF functions 
-#' from forecast package, Phillips-Perron test, Augmented Dickey–Fuller (ADF) test, Kwiatkowski-Phillips-Schmidt-Shin (KPSS) test,
+#' from forecast package, Phillips-Perron test, Augmented Dickey-Fuller (ADF) test, Kwiatkowski-Phillips-Schmidt-Shin (KPSS) test,
 #' from tseries package and Mann-Kendall test for Monotonic Trend Cox and Stuart trend test from trend package.
 #' 
 #' Phillips-Perron test tests the null hypothesis of whether a unit root is present in a time series sample, 
