@@ -69,9 +69,12 @@ stationary.test<-function(tsdata){
     acf_pacf<-c(acftest,pacftest)
 	
     # Phillips-Perron test
-    
+    if (length(tsdata)>4){
     pptest<-tseries::pp.test(tsdata,alternative = "stationary")
-    
+    }
+    else {
+      pptest=NULL
+    }
     # Augmented Dickey–Fuller (ADF) test
     if (length(tsdata)<7){
     adftest<-tseries::adf.test(tsdata,alternative = "stationary",k=0)

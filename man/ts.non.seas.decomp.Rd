@@ -12,36 +12,39 @@ ts.non.seas.decomp(tsdata)
 \value{
 A list with the following components:
 \itemize{
-\item timeseries: The time series data
-
-\item season: There is no seasonality, this parameter is set NULL
-
-\item loess.trend:
-
- \itemize{
- \item trend: The trend values
- \item conf.interval.up: The upper limit of the trend confidence interval
- \item conf.interval.low: The lower limit of the trend confidence interval}
- 
-\item loess.comparison:
+\item stl.plot: 
 \itemize{
- \item number.observation: The time series length
- \item loess.residuals: The loess residuals
- \item loess.enp: 
- \item loess.s: 
- \item loess.onedelta:
- \item loess.twodelta: 
- \item loess.tracehat: 
- \item loess.divisor: 
- \item loess.robust: 
- \item loess.weights:}}
+ \item trend: The estimated trend component
+ \item trend.ci.up: The estimated up limit for trend component
+ \item trend.ci.low: The estimated low limit for trend component
+ \item seasonal: The estimated seasonal component
+ \item remainder: The estimated remainder component
+ \item time: The time of the series was sampled}
+
+\item stl.general:
+\itemize{
+ \item stl.degree: The degree of fit
+ \item degfr: The effective degrees of freedom 
+ \item degfr.fitted: The fitted degrees of freedom
+ \item fitted: The model's fitted values }
+ 
+\item residuals: The residuals of the model (fitted innovations)
+
+\item compare: 
+ \itemize{
+ \item resid.variance: The residuals variance
+ \item used.obs: The used observations for the fitting
+ \item loglik: The maximized log-likelihood (of the differenced data), or the approximation to it used
+ \item aic: The AIC value corresponding to the log-likelihood
+ \item bic: The BIC value corresponding to the log-likelihood
+ \item gcv: The generalized cross-validation statistic }}
 }
 \description{
-Decomposition of time series with no seasonal component
+Decomposition of time series with no seasonal component using local regression models
 }
 \details{
-For non-seasonal time series there is no seasonal component. We use Local Polynomial Regression Fitting (LOESS)
-in order to extract the trend component and then we subtract the trend from the initial values to extract the irregular terms.
+For non-seasonal time series there is no seasonal component. Local regression and likelihood models (locfit package) are used
+in order to extract the trend and remaider components.
 }
 \examples{
 
@@ -53,6 +56,6 @@ Kleanthis Koupidis
 add
 }
 \seealso{
-\code{\link{tsa.obeu}}, loess, predict.loess (stats package)
+\code{\link{tsa.obeu}}, locfit, predict.locfit
 }
 

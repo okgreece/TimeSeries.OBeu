@@ -22,19 +22,14 @@ A json string with the resulted parameters of the tsa.obeu function.
 Extract and analyze time series data from babbage api, using the tsa.obeu function.
 }
 \details{
-This function extracts the time series data provided by the Babbage API.
-A json file  analyze it using the tsa.obeu function.
+This function extracts the time series data provided by the Babbage API, in order to
+return the results from the \code{\link{tsa.obeu}} function.
 }
 \examples{
-
-
 
 }
 \author{
 Kleanthis Koupidis
-}
-\references{
-add
 }
 \seealso{
 \code{\link{tsa.obeu}}

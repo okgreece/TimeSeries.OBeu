@@ -2,7 +2,7 @@
 % Please edit documentation in R/ts.non.seas.model.r
 \name{ts.non.seas.model}
 \alias{ts.non.seas.model}
-\title{Decomposition of non seasonal time series}
+\title{Model fit of non seasonal time series}
 \usage{
 ts.non.seas.decomp(tsdata)
 }
@@ -11,15 +11,40 @@ ts.non.seas.decomp(tsdata)
 }
 \value{
 A list with the following components:
+\itemize{
+\item model.summary: 
+\itemize{
+\item ts_model: The summary model details returned as Arima object for internal use in tsa.obeu function}
+
+\item model:
+\itemize{
+ \item ts_model: 
+ \item arima.order: The Arima order
+ \item arima.coef: A vector of AR, MA and regression coefficients
+ \item arima.coef.se: The standard error of the coefficients }
+
+\item residuals: The residuals of the model (fitted innovations)
+
+\item compare:
+\itemize{
+ \item variance.coef: The matrix of the estimated variance of the coefficients
+ \item resid.variance: The MLE of the innovations variance
+ \item not.used.obs: The number of not used observations for the fitting
+ \item used.obs: the number of used observations for the fitting
+ \item loglik: The maximized log-likelihood (of the differenced data), or the approximation to it used
+ \item aic: The AIC value corresponding to the log-likelihood
+ \item bic: The BIC value corresponding to the log-likelihood
+ \item aicc: The second-order Akaike Information Criterion corresponding to the log-likelihood}}
 }
 \description{
-Decomposition of time series with no seasonal component
+Model fit of non seasonal time series
 }
 \details{
-For non-seasonal time series there is no seasonal component. We use Local Polynomial Regression Fitting (LOESS)
-in order to extract the trend component and then we subtract the trend from the initial values to extract the irregular terms.
+Model fit of non seasonal time series using arima models of non seasonal time series data.
+The model with the lowest AIC value is selected for forecasts.
 }
 \examples{
+ts.non.seas.model(Athens_draft_ts)
 
 }
 \author{
@@ -29,6 +54,6 @@ Kleanthis Koupidis
 add
 }
 \seealso{
-\code{\link{tsa.obeu}}, loess, predict.loess (stats package)
+\code{\link{tsa.obeu}}, Arima
 }
 

@@ -17,7 +17,7 @@
 #' 
 #' @return A list with the parameters:
 #' 
-#' \itemize{ \item ts.name: a string indicating the name of the time series data
+#' \itemize{ 
 #'
 #' \item ts.model: a string indicating the arima orders
 #' 
@@ -51,7 +51,7 @@ forecast.ts.obeu<-function(ts_model,h=1){
   ## Model Forecasting
   forecasts<-forecast::forecast(ts_model,h)
   
-  forecast.param<-list(#ts.name= ts_model$series,
+  forecast.param<-list(
                        ts.model=forecasts$method,
                        data_year=stats::time(ts_model$x),
                        data=ts_model$x,

@@ -14,7 +14,7 @@ forecast.ts.obeu(ts_model, h=1)
 \value{
 A list with the parameters:
 
-\itemize{ \item ts.name: a string indicating the name of the time series data
+\itemize{ 
 
 \item ts.model: a string indicating the arima orders
 

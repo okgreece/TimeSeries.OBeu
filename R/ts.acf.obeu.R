@@ -80,7 +80,8 @@ ts.acf.obeu<-function(tsdata, model_residuals=NULL, a=0.95){
   if (!is.null(model_residuals)){
     
     model_residuals=as.numeric(unlist(model_residuals))
-        # acf, pacf of model's residuals
+    
+    # acf, pacf of model's residuals
     acff.res<-forecast::Acf(model_residuals,plot=F)
     pacff.res<-forecast::Pacf(model_residuals,plot=F)
     climits.res.up <- stats::qnorm((1 + a)/2)/sqrt(length(model_residuals))

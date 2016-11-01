@@ -10,54 +10,43 @@ ts.seasonal.obeu(tsdata)
 \item{tsdata}{The input univariate seasonal time series data}
 }
 \value{
+A list with the following components:
 \itemize{
-\item ts_model: Summary of the arima model
-\item stl.general:
+\item stl.plot: 
 \itemize{
  \item trend: The estimated trend component
  \item seasonal: The estimated seasonal component
  \item remainder: The estimated remainder component
- \item weights: The final robust weights (if robust=F all weights are one)
- \item window: A vector with the spans used for the "s", "t", and "l" smoothers
+ \item time: The time of the series was sampled}
+
+\item stl.general:
+\itemize{
  \item stl.degree: A vector with the polynomial degrees for these smoothers
- \item lambda: Box-Cox transformation parameter
- \item tsdata.stl$x:
- \item tsdata.stl$m:
  \item fitted: The model's fitted values }
-\item ts_model:
- \itemize{
- \item arima.order: The Arima order
- \item arima.coef: A vector of AR, MA and regression coefficients
- \item arima.coef.se: The standard error of the coefficients}
  
 \item residuals: The residuals of the model (fitted innovations)
 
-\item residuals.other: 
+\item compare: 
  \itemize{
+ \item arima.order: The Arima order
+ \item arima.coef: A vector of AR, MA and regression coefficients
+ \item arima.coef.se: The standard error of the coefficients
+ \item covariance.coef: The matrix of the estimated variance of the coefficients
  \item resid.variance: The MLE of the innovations variance
- \item covariance.coef: The matrix of the estimated variance of the coefficients}
- 
-\item used.notused.observations:
- \itemize{
  \item not.used.obs: The number of not used observations for the fitting
- \item used.obs: the number of used observations for the fitting}
- 
-\item comparison:
- \itemize{
+ \item used.obs: the number of used observations for the fitting
  \item loglik: The maximized log-likelihood (of the differenced data), or the approximation to it used
  \item aic: The AIC value corresponding to the log-likelihood
  \item bic: The BIC value corresponding to the log-likelihood
- \item aicc: The second-order Akaike Information Criterion corresponding to the log-likelihood}
- 
-\item data: The time series data}
+ \item aicc: The second-order Akaike Information Criterion corresponding to the log-likelihood}}
 }
 \description{
 Decomposition of seasonal time series data using stlm from forecast package. 
 This function is used internally in tsa.obeu.
 }
 \details{
-Decomposition of seasonal time series data is based on stlm from forecast package and
-returns a list with useful parameters for OBEU.
+Decomposition of seasonal time series data through arima models is based on stlm from forecast package
+and returns a list with useful parameters for OBEU.
 }
 \examples{
 

@@ -12,20 +12,16 @@
 #' @param prediction_steps The number of prediction steps.
 #' 
 #' @details 
-#' This function extracts the time series data provided by the Babbage API.
-#' A json file  analyze it using the tsa.obeu function.
+#' This function extracts the time series data provided by the Babbage API, in order to
+#' return the results from the \code{\link{tsa.obeu}} function.
 #' 
 #' @return A json string with the resulted parameters of the tsa.obeu function.
 #'
 #' @author Kleanthis Koupidis
 #' 
-#' @references add
-#' 
 #' @seealso \code{\link{tsa.obeu}}
 #' 
 #' @examples
-#' 
-#' 
 #' 
 #' @rdname babbage.tsa.obeu
 #' 

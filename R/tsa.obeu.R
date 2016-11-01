@@ -10,16 +10,97 @@
 #' @param h The number of prediction steps
 #' 
 #' @details 
-#' This function automatically tests for stationarity of the input time series data in order to 
-#' select the appropriate arima model that fits the input data using the auto.arima function(see forecast package). 
-#' For short time series the selected arima model is among various orders of the AR part using 1st differences and MA(1), with the lower AIC.
+#' This function automatically tests for stationarity of the input time series data using \code{\link{stationary.test}}
+#' function. Depending the nature of the time series data and the stationary tests there are four branches:
+#' a.)short and non seasonal, b.)short and seasonal, c.)long and non seasonal and d.)long and seasonal.
+#' For a,b and c branches \code{\link{ts.non.seas.model}} is used and for long and seasonal time series 
+#' \code{\link{ts.seasonal.obeu}} is used.
+#' 
 #' This function also decomposes both seasonal and non seasonal time series and forecasts h steps ahead the user selected(default h=1).
 #' 
 #' 
-#' @return A json string with the parameters (Missing some):
+#' @return A json string with the parameters:
 #' 
-#' param
-#' forecasts
+#' \itemize{
+#' \item acf.param
+#' \itemize{
+#'  \item acf.parameters: 
+#'  \itemize{ 
+#'  \item acf: The estimated acf values of the input time series
+#'  \item acf.lag: The lags at which the acf is estimated
+#'  \item confidence.interval.up: The upper limit of the confidence interval
+#'  \item confidence.interval.low: The lower limit of the confidence interval}
+#'  
+#'  \item pacf.parameters: 
+#'  \itemize{ 
+#'  \item pacf: The estimated pacf values of the input time series
+#'  \item pacf.lag: The lags at which the pacf is estimated
+#'  \item confidence.interval.up: The upper limit of the confidence interval
+#'  \item confidence.interval.low: The lower limit of the confidence interval}
+#'  
+#'  \item acf.residuals.parameters: 
+#'  \itemize{ \item acf.res: The estimated acf values of the model residuals
+#'  \item acf.res.lag: The lags at which the acf is estimated of the model residuals
+#'  \item confidence.interval.up: The upper limit of the confidence interval
+#'  \item confidence.interval.low: The lower limit of the confidence interval}
+#'  
+#'  \item pacf.residuals.parameters: 
+#'  \itemize{ 
+#'  \item pacf.res: The estimated pacf values of the model residuals
+#'  \item pacf.res.lag: The lags at which the pacf is estimated of the model residuals
+#'  \item confidence.interval.up: The upper limit of the confidence interval
+#'  \item confidence.interval.low: The lower limit of the confidence interval}}
+#'  
+#' \item param
+#' \itemize{
+#' \item stl.plot: 
+#' \itemize{
+#'  \item trend: The estimated trend component
+#'  \item trend.ci.up: The estimated up limit for trend component (for non seasonal
+#'  time series)
+#'  \item trend.ci.low: The estimated low limit for trend component (for non seasonal
+#'  time series)
+#'  \item seasonal: The estimated seasonal component
+#'  \item remainder: The estimated remainder component
+#'  \item time: The time of the series was sampled}
+#'
+#' \item stl.general:
+#' \itemize{
+#'  \item stl.degree: The degree of fit
+#'  \item degfr: The effective degrees of freedom for non seasonal time series
+#'  \item degfr.fitted: The fitted degrees of freedom for non seasonal time series
+#'  \item fitted: The model's fitted values }
+#'  
+#' \item residuals: The residuals of the model (fitted innovations)
+#' 
+#' \item compare: 
+#'  \itemize{
+#'  \item arima.order: The Arima order for seasonal time series
+#'  \item arima.coef: A vector of AR, MA and regression coefficients for seasonal time series
+#'  \item arima.coef.se: The standard error of the coefficients for seasonal time series
+#'  \item covariance.coef: The matrix of the estimated variance of the coefficients for seasonal time series
+#'  \item resid.variance: The residuals variance
+#'  \item not.used.obs: The number of not used observations for the fitting for seasonal time series
+#'  \item used.obs: The used observations for the fitting
+#'  \item loglik: The maximized log-likelihood (of the differenced data), or the approximation to it used
+#'  \item aic: The AIC value corresponding to the log-likelihood
+#'  \item bic: The BIC value corresponding to the log-likelihood
+#'  \item gcv: The generalized cross-validation statistic for non seasonal time series or
+#'  \item aicc: The second-order Akaike Information Criterion corresponding to the log-likelihood
+#'  for seasonal time series}}
+#'
+#' \item forecasts
+#' \itemize{
+#' \item ts.model: a string indicating the arima orders
+#' \item data_year: The time that time series data were sampled
+#' \item data: The time series values
+#' \item predict_time: The time that defined by the prediction_steps parameter
+#' \item predict_values: The predicted values that defined by the prediction_steps parameter
+#' \item up80: The upper limit of the 80\% predicted confidence interval
+#' \item low80: The lower limit of the 80\% predicted confidence interval
+#' \item up95: The upper limit of the 95\% predicted confidence interval
+#' \item low95: The lower limit of the 95\% predicted confidence interval}
+#' }
 #' @author Kleanthis Koupidis
 #' 
 #' @references add
@@ -82,6 +163,7 @@ tsa.obeu<-function(tsdata,h=1){
     ts_model=model$model.summary
     residuals=model$residuals
     param<-list(decomposition,model[-1])
+    
     ## If TS is >20 and non seasonal
   }else if(length(tsdata)>20 && stats::frequency(tsdata)<2) {
     
@@ -103,14 +185,16 @@ tsa.obeu<-function(tsdata,h=1){
       
     }
     param<-list(decomposition,model,ts_model)
+    
     ## If TS is >20 and seasonal
-  }else if(length(tsdata)>20 && stats::frequency(tsdata)>2) {
+  }else if(length(austres)>20 && stats::frequency(austres)>2) {
+    
     #Model and decomposition
-    tsmodel=ts.seasonal.obeu(tsdata)
+    tsmodel=ts.seasonal.obeu(austres)
     ts_model=tsmodel$ts_model
     residuals=tsmodel$residuals
     
-    param<-tsmodel[-1]
+    param<-tsmodel
   }	
   
   #ACF and PACF extraction before and after model fit
@@ -120,12 +204,12 @@ tsa.obeu<-function(tsdata,h=1){
   forecasts<-  forecast.ts.obeu(ts_model,h)
   
   ##  Parameter Extraction
-  par<-list(#timeseriesname=ts_name,
+  par<-list(
             acf.param=acf.param,param=param,forecasts=forecasts)
   
   ##  to JSON
   
-  parameters<-jsonlite::toJSON(par)#,force=T)
+  parameters<-jsonlite::toJSON(par)
   
   ##  Return
   

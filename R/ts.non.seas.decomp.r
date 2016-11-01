@@ -2,47 +2,63 @@
 #' Non seasonal decomposition
 #'
 #' @description
-#' Decomposition of time series with no seasonal component
+#' Decomposition of time series with no seasonal component using local regression models  
 #'
 #' @usage ts.non.seas.decomp(tsdata)
 #' 
 #' @param tsdata The input univariate non seasonal time series data
 #' 
 #' @details 
-#' For non-seasonal time series there is no seasonal component. We use Local Polynomial Regression Fitting (LOESS)
-#' in order to extract the trend component and then we subtract the trend from the initial values to extract the irregular terms.
+#' For non-seasonal time series there is no seasonal component. Local regression and likelihood models (locfit package) are used
+#' in order to extract the trend and remaider components.
 #'
-#' @return A list with the following components:
+#' @return 
+#' A list with the following components:
 #' \itemize{
-#' \item timeseries: The time series data
-#' 
-#' \item season: There is no seasonality, this parameter is set NULL
-#' 
-#' \item loess.trend:
-#' 
-#'  \itemize{
-#'  \item trend: The trend values
-#'  \item conf.interval.up: The upper limit of the trend confidence interval
-#'  \item conf.interval.low: The lower limit of the trend confidence interval}
+#' \item stl.plot: 
+#' \itemize{
+#'  \item trend: The estimated trend component
+#'  \item trend.ci.up: The estimated up limit for trend component
+#'  \item trend.ci.low: The estimated low limit for trend component
+#'  \item seasonal: The estimated seasonal component
+#'  \item remainder: The estimated remainder component
+#'  \item time: The time of the series was sampled}
+#'
+#' \item stl.general:
+#' \itemize{
+#'  \item stl.degree: The degree of fit
+#'  \item degfr: The effective degrees of freedom 
+#'  \item degfr.fitted: The fitted degrees of freedom
+#'  \item fitted: The model's fitted values }
 #'  
+#' \item residuals: The residuals of the model (fitted innovations)
+#' 
+#' \item compare: 
+#'  \itemize{
+#'  \item resid.variance: The residuals variance
+#'  \item used.obs: The used observations for the fitting
+#'  \item loglik: The maximized log-likelihood (of the differenced data), or the approximation to it used
+#'  \item aic: The AIC value corresponding to the log-likelihood
+#'  \item bic: The BIC value corresponding to the log-likelihood
+#'  \item gcv: The generalized cross-validation statistic }}
 #'  
 #' @author Kleanthis Koupidis
 #' 
 #' @references add
 #' 
-#' @seealso \code{\link{tsa.obeu}}, loess, predict.loess (stats package)
+#' @seealso \code{\link{tsa.obeu}}, locfit, predict.locfit
 #' 
 #' @examples
 #' 
 #' @rdname ts.non.seas.decomp
 #' 
 #' @export
-############################################################################
+######################################################################################################################################
 
 ts.non.seas.decomp<-function(tsdata){
 
-  ## decompose
-  tsdata.stl <- stats::loess(tsdata~stats::time(tsdata))
+  ## Decompose
+  tsdata.stl <- stats::locfit(tsdata~stats::time(tsdata))
   trend<-stats::fitted(tsdata.stl)
   seasonal <- NULL
   remainder <- tsdata - trend
@@ -52,25 +68,39 @@ ts.non.seas.decomp<-function(tsdata){
   trend.ci.up= stats::predict(tsdata.stl, data.frame(x=stats::time(tsdata)))+
     stats::predict(tsdata.stl, data.frame(x=stats::time(tsdata)), se=TRUE)$se.fit*1.96
   
-  #trend.ci.up=ts(trend.ci.up,
-    #             start=min(time(tsdata)),
-   #              end = max(time(tsdata)),
-    #             frequency =frequency(trend) )
-
   trend.ci.low= stats::predict(tsdata.stl, data.frame(x=stats::time(tsdata)))-
     stats::predict(tsdata.stl, data.frame(x=stats::time(tsdata)), se=TRUE)$se.fit*1.96
-  
- # trend.ci.low=ts(trend.ci.low,
-           #       start=min(time(tsdata)),
-          #        end = max(time(tsdata)),
-         #         frequency =frequency(trend) )
-  
-  residuals=residuals(tsdata.stl)
-
-  # loglik=locfit::aic(tsdata.stl)["lik"]
-  
-  # aic=locfit::aic(tsdata.stl)["aic"]
  
+  # Fitted
+  degfr<- tsdata.stl$dp["df1"] 
+  
+  degfr.fitted<- tsdata.stl$dp["df2"] 
+  
+  stl.degree= unique(lfknots(tsdata.stl,what="deg"))
+  
+  fitted=fitted(tsdata.stl,what="coef")
+  
+  # Residuals
+  residuals=residuals(tsdata.stl)
+  
+  sigma2 <- sum( residuals^2 ) / (length(tsdata)-1)
+  
+  # Compare
+  influence.function=fitted(tsdata.stl,what="infl")
+  
+  max.local.likelihood=  fitted(tsdata.stl,what="lik")
+  
+  local.residual.deg.freedom=fitted(tsdata.stl,what="rdf")
+  
+  variance.function=fitted(tsdata.stl,what="vari")
+
+  loglik=tsdata.stl$dp["lk"]
+  
+  aic=locfit::aic(tsdata.stl)["aic"]
+  
+  bic=locfit::aic(tsdata.stl,pen=log(length(tsdata) ) )["aic"]
+  
+  gcv<-locfit::gcv(tsdata.stl)["gcv"]
   
   ##
     stl.plot=list( #stl plot
@@ -81,43 +111,36 @@ ts.non.seas.decomp<-function(tsdata){
     seasonal=seasonal,
     remainder=remainder,
     time=time(tsdata)
+    
   )
   
-   
-    #  stl.general=list( #stl general
-    #   #weights=tsdata.stl$stl$weights,
-    #   window=tsdata.stl$stl$win,
-    #   stl.degree=tsdata.stl$stl$deg,
-    #   lambda=tsdata.stl$lambda,
-    # fitted=tsdata.stl$fitted)
+    stl.general=list( #stl general
+    degfr=degfr,
+    degfr.fitted=degfr.fitted,
+    stl.degree=stl.degree,
+    fitted=fitted)
   
   residuals=list(
     residuals=residuals)
 
-  # compare=list(  #Comparison
-  #   #model
-  #   order=2,
-  #   coef=tsdata.stl$model$coef,
-  #   arima.coef.se=round(sqrt(diag(tsdata.stl$model$var.coef)),digits=4),
+  compare=list(  #Comparison
+ 
+  resid.variance=sigma2,
     
-  # variance.coefs=
+  used.obs=tsdata.stl$eva$xev,
     
-  #  resid.variance=
-  #  not.used.obs=
-  #  used.obs=
-    
-  #   loglik=loglik,
-  # aic=aic,
-    # bic=
-    #   aicc=
-  # )
+   loglik=loglik,
+   aic=aic,
+   bic=bic,
+   gcv=gcv
+   )
     
 
 	model.details<-list(
-	  stl.plot=stl.plot
-	  #stl.general=stl.general,
-	  #residuals=residuals,
-	  #compare=compare
+	  stl.plot=stl.plot,
+	  stl.general=stl.general,
+	  residuals=residuals,
+	  compare=compare
 	)
   return(model.details)
 } 
