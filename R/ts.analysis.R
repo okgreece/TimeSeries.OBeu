@@ -10,7 +10,7 @@
 #' @param h The number of prediction steps
 #' 
 #' @details 
-#' This function automatically tests for stationarity of the input time series data using \code{\link{stationary.test}}
+#' This function automatically tests for stationarity of the input time series data using \code{\link{ts.stationary.test}}
 #' function. Depending the nature of the time series data and the stationary tests there are four branches:
 #' a.)short and non seasonal, b.)short and seasonal, c.)long and non seasonal and d.)long and seasonal.
 #' For a,b and c branches \code{\link{ts.non.seas.model}} is used and for long and seasonal time series 
@@ -137,7 +137,7 @@ ts.analysis<-function(tsdata,h=1){
   #ts_name<-deparse(substitute(tsdata))
   
   #Stationarity testing
-  check_stat=stationary.test(tsdata)
+  check_stat=ts.stationary.test(tsdata)
     
   
   ## If TS is <20 and non seasonal 

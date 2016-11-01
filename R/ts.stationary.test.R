@@ -4,7 +4,7 @@
 #' @description
 #' This functions tests the stationarity of the input time series data.
 #' 
-#' @usage stationary.test(tsdata)
+#' @usage ts.stationary.test(tsdata)
 #' 
 #' @param tsdata The input univariate time series data
 #' 
@@ -42,8 +42,8 @@
 #' mk.test and cs.test (trend package)
 #' 
 #' @examples
-#' stationary.test(Athens_approved_ts)
-#' @rdname stationary.test
+#' ts.stationary.test(Athens_approved_ts)
+#' @rdname ts.stationary.test
 #' 
 #' @import forecast
 #' @import tseries
@@ -52,7 +52,7 @@
 #' @export
 ############################################################################
 
-stationary.test<-function(tsdata){
+ts.stationary.test<-function(tsdata){
   options(warn=-1)
 
     #ACF
