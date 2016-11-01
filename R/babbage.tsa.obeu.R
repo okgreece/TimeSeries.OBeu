@@ -1,18 +1,18 @@
 #' @title 
-#' Read and analyze time series data from Babbage API
+#' Read and analyze time series data from Open Spending API
 #'  
 #' @description
-#' Extract and analyze time series data from babbage api, using the tsa.obeu function.
+#' Extract and analyze time series data from Open Spending API, using the tsa.obeu function.
 #' 
 #' @usage babbage.tsa.obeu(json_data,time,amount,prediction_steps)
 #' 
-#' @param json_data The json string, URL or file from babbage api.
-#' @param time Specify the time label of the json time series data.
-#' @param amount Specify the amount label of the json time series data.
-#' @param prediction_steps The number of prediction steps.
+#' @param json_data The json string, URL or file from Open Spending API
+#' @param time Specify the time label of the json time series data
+#' @param amount Specify the amount label of the json time series data
+#' @param prediction_steps The number of prediction steps
 #' 
 #' @details 
-#' This function extracts the time series data provided by the Babbage API, in order to
+#' This function extracts the time series data provided by the Open Spending API, in order to
 #' return the results from the \code{\link{tsa.obeu}} function.
 #' 
 #' @return A json string with the resulted parameters of the tsa.obeu function.
@@ -23,14 +23,14 @@
 #' 
 #' @examples
 #' 
-#' @rdname babbage.tsa.obeu
+#' @rdname os.ts.obeu
 #' 
 #' @import jsonlite
 #' 
 #' @export
 ############################################################################
 
-babbage.tsa.obeu<-function(json_data,time,amount,prediction_steps=1){
+os.ts.obeu<-function(json_data,time,amount,prediction_steps=1){
   
   data <- jsonlite::fromJSON(json_data)
   
