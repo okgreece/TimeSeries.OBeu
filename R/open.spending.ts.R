@@ -4,7 +4,7 @@
 #' @description
 #' Extract and analyze time series data from Open Spending API, using the ts.analysis function.
 #' 
-#' @usage babbage.ts.analysis(json_data,time,amount,prediction_steps)
+#' @usage open.spending.ts(json_data,time,amount,prediction_steps)
 #' 
 #' @param json_data The json string, URL or file from Open Spending API
 #' @param time Specify the time label of the json time series data

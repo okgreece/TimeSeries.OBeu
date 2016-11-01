@@ -105,7 +105,7 @@
 #' 
 #' @references add
 #' 
-#' @seealso \code{\link{babbage.ts.analysis}}
+#' @seealso \code{\link{open.spending.ts}}
 #' 
 #' @examples
 #' 
