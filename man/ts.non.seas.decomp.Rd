@@ -47,6 +47,7 @@ For non-seasonal time series there is no seasonal component. Local regression an
 in order to extract the trend and remaider components.
 }
 \examples{
+ts.non.seas.decomp(Athens_draft_ts)
 
 }
 \author{

@@ -14,6 +14,7 @@ Suggests:
     testthat
 Imports:
     forecast,
+    locfit,
     jsonlite,
     trend,
     tseries

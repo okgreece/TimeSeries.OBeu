@@ -4,7 +4,7 @@
 \alias{open.spending.ts}
 \title{Read and analyze time series data from Open Spending API}
 \usage{
-babbage.ts.analysis(json_data,time,amount,prediction_steps)
+open.spending.ts(json_data,time,amount,prediction_steps)
 }
 \arguments{
 \item{json_data}{The json string, URL or file from Open Spending API}

@@ -187,10 +187,10 @@ ts.analysis<-function(tsdata,h=1){
     param<-list(decomposition,model,ts_model)
     
     ## If TS is >20 and seasonal
-  }else if(length(austres)>20 && stats::frequency(austres)>2) {
+  }else if(length(tsdata)>20 && stats::frequency(tsdata)>2) {
     
     #Model and decomposition
-    tsmodel=ts.seasonal(austres)
+    tsmodel=ts.seasonal(tsdata)
     ts_model=tsmodel$ts_model
     residuals=tsmodel$residuals
     

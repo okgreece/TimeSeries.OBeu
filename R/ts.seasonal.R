@@ -75,7 +75,7 @@ stl.plot=list( #stl plot
 				  trend=trend,
 				  seasonal=season,
 				  remainder=remainder,
-				  time=time(tsdata)
+				  time=stats::time(tsdata)
 				  )
 
 stl.general=list( #stl general

@@ -117,6 +117,6 @@ Kleanthis Koupidis
 add
 }
 \seealso{
-\code{\link{babbage.ts.analysis}}
+\code{\link{open.spending.ts}}
 }
 

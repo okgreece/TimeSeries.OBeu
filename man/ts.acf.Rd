@@ -47,6 +47,7 @@ ACF and PACF parameters of the input time series data, as well as the ACF and PA
 of the residuals needed for the graphical purposes in OBEU.
 }
 \examples{
+ts.acf(Athens_draft_ts)
 
 }
 \author{

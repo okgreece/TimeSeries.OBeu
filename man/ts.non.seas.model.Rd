@@ -4,7 +4,7 @@
 \alias{ts.non.seas.model}
 \title{Model fit of non seasonal time series}
 \usage{
-ts.non.seas.decomp(tsdata)
+ts.non.seas.model(tsdata)
 }
 \arguments{
 \item{tsdata}{The input univariate non seasonal time series data}

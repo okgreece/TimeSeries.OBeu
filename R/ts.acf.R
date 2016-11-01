@@ -45,6 +45,7 @@
 #' @seealso \code{\link{ts.analysis}}
 #' 
 #' @examples 
+#' ts.acf(Athens_draft_ts)
 #' 
 #' @rdname ts.acf
 #' 

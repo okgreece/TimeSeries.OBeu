@@ -4,7 +4,7 @@
 #' @description
 #' Model fit of non seasonal time series
 #'
-#' @usage ts.non.seas.decomp(tsdata)
+#' @usage ts.non.seas.model(tsdata)
 #' 
 #' @param tsdata The input univariate non seasonal time series data
 #' 
@@ -49,7 +49,7 @@
 #' ts.non.seas.model(Athens_draft_ts)
 #' 
 #' @rdname ts.non.seas.model
-#'
+#' @import forecast
 #' @export
 ####################################################################################################################################
 

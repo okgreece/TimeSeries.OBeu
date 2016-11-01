@@ -49,9 +49,10 @@
 #' @seealso \code{\link{ts.analysis}}, locfit, predict.locfit
 #' 
 #' @examples
+#' ts.non.seas.decomp(Athens_draft_ts)
 #' 
 #' @rdname ts.non.seas.decomp
-#' 
+#' @import locfit
 #' @export
 ######################################################################################################################################
 
@@ -76,7 +77,7 @@ ts.non.seas.decomp<-function(tsdata){
   
   degfr.fitted<- tsdata.stl$dp["df2"] 
   
-  stl.degree= unique(lfknots(tsdata.stl,what="deg"))
+  stl.degree= unique(locfit::lfknots(tsdata.stl,what="deg"))
   
   fitted=fitted(tsdata.stl,what="coef")
   
@@ -110,7 +111,7 @@ ts.non.seas.decomp<-function(tsdata){
     
     seasonal=seasonal,
     remainder=remainder,
-    time=time(tsdata)
+    time=stats::time(tsdata)
     
   )
   
