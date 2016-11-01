@@ -2,9 +2,9 @@
 #' Read and analyze time series data from Open Spending API
 #'  
 #' @description
-#' Extract and analyze time series data from Open Spending API, using the tsa.obeu function.
+#' Extract and analyze time series data from Open Spending API, using the ts.analysis function.
 #' 
-#' @usage babbage.tsa.obeu(json_data,time,amount,prediction_steps)
+#' @usage babbage.ts.analysis(json_data,time,amount,prediction_steps)
 #' 
 #' @param json_data The json string, URL or file from Open Spending API
 #' @param time Specify the time label of the json time series data
@@ -13,24 +13,24 @@
 #' 
 #' @details 
 #' This function extracts the time series data provided by the Open Spending API, in order to
-#' return the results from the \code{\link{tsa.obeu}} function.
+#' return the results from the \code{\link{ts.analysis}} function.
 #' 
-#' @return A json string with the resulted parameters of the tsa.obeu function.
+#' @return A json string with the resulted parameters of the ts.analysis function.
 #'
 #' @author Kleanthis Koupidis
 #' 
-#' @seealso \code{\link{tsa.obeu}}
+#' @seealso \code{\link{ts.analysis}}
 #' 
 #' @examples
 #' 
-#' @rdname os.ts.obeu
+#' @rdname open.spending.ts
 #' 
 #' @import jsonlite
 #' 
 #' @export
 ############################################################################
 
-os.ts.obeu<-function(json_data,time,amount,prediction_steps=1){
+open.spending.ts<-function(json_data,time,amount,prediction_steps=1){
   
   data <- jsonlite::fromJSON(json_data)
   
@@ -49,7 +49,7 @@ os.ts.obeu<-function(json_data,time,amount,prediction_steps=1){
   tsdata <- stats::ts(df[,"amounts"],start=min(df[,"tim"]),end=max(df[,"tim"]))
   tsdata <- na.omit(tsdata)
 
-  ts.result<-tsa.obeu(tsdata, prediction_steps)
+  ts.result<-ts.analysis(tsdata, prediction_steps)
   
 
   return(ts.result)  

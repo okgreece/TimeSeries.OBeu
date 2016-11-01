@@ -17,7 +17,7 @@
 #' \itemize{
 #' \item model.summary: 
 #' \itemize{
-#' \item ts_model: The summary model details returned as Arima object for internal use in tsa.obeu function}
+#' \item ts_model: The summary model details returned as Arima object for internal use in ts.analysis function}
 #'
 #' \item model:
 #' \itemize{
@@ -43,7 +43,7 @@
 #' 
 #' @references add
 #' 
-#' @seealso \code{\link{tsa.obeu}}, Arima
+#' @seealso \code{\link{ts.analysis}}, Arima
 #' 
 #' @examples
 #' ts.non.seas.model(Athens_draft_ts)

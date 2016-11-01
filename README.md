@@ -15,13 +15,13 @@ install_github("okgreece/TimeSeries.OBeu")
 
 ##Use:
 
-The basic function is: tsa.obeu(tsdata,h)
+The basic function is: ts.analysis(tsdata,h)
 
 where tsdata: the time series data
 
 and h: the prediction steps.
 
-e.g. tsa.obeu(Athens_approved_ts,4)
+e.g. ts.analysis(Athens_approved_ts,4)
 
 The package includes the following time series data:
 
@@ -49,7 +49,7 @@ select method: post
 Go to http://okfnrg.math.auth.gr/ocpu/test/
 
 ##Copy and paste to the endpoint the following
-../library/TimeSeries.OBeu/R/tsa.obeu
+../library/TimeSeries.OBeu/R/ts.analysis
 
 ##Select Method: Post
 
@@ -86,7 +86,7 @@ and paste http://okfnrg.math.auth.gr/ocpu/tmp/{something}/R/.val on a new tab.
 Go to http://okfnrg.math.auth.gr/ocpu/test/
 
 ##Copy and paste to the endpoint the following
-../library/TimeSeries.OBeu/R/os.ts.obeu
+../library/TimeSeries.OBeu/R/open.spending.ts
 
 ##Select Method: Post
 

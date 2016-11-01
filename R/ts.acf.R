@@ -2,10 +2,10 @@
 #' Extract the ACF and PACF parameters of time series and their model residuals 
 #'  
 #' @description
-#' This function is included in tsa.obeu function and aims to extract the ACF and PACF details 
+#' This function is included in ts.analysis function and aims to extract the ACF and PACF details 
 #' of the input time series data and the ACF, PACF of the residuals after fitting an Arima model. 
 #' 
-#' @usage ts.acf.obeu(tsdata,model_residuals,a=0.95)
+#' @usage ts.acf(tsdata,model_residuals,a=0.95)
 #' 
 #' @param tsdata The input univariate time series data
 #' @param model_residuals The model's residuals after fitting a model to the time series
@@ -13,7 +13,7 @@
 #' 
 #' @details 
 #' 
-#' This function is used internally in tsa.obeu function and the output is a list with grouped 
+#' This function is used internally in ts.analysis function and the output is a list with grouped 
 #' ACF and PACF parameters of the input time series data, as well as the ACF and PACF parameters 
 #' of the residuals needed for the graphical purposes in OBEU.
 #' 
@@ -42,18 +42,18 @@
 #' 
 #' @author Kleanthis Koupidis
 #' 
-#' @seealso \code{\link{tsa.obeu}}
+#' @seealso \code{\link{ts.analysis}}
 #' 
 #' @examples 
 #' 
-#' @rdname ts.acf.obeu
+#' @rdname ts.acf
 #' 
 #' @import forecast
 #'
 #' @export
 ###################################################################################
 
-ts.acf.obeu<-function(tsdata, model_residuals=NULL, a=0.95){
+ts.acf<-function(tsdata, model_residuals=NULL, a=0.95){
   
   # acf, pacf of ts 
   acff<-forecast::Acf(tsdata,plot=F)

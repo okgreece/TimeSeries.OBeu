@@ -46,7 +46,7 @@
 #' 
 #' @references add
 #' 
-#' @seealso \code{\link{tsa.obeu}}, locfit, predict.locfit
+#' @seealso \code{\link{ts.analysis}}, locfit, predict.locfit
 #' 
 #' @examples
 #' 

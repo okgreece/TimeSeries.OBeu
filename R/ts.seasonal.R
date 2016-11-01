@@ -3,9 +3,9 @@
 #'  
 #' @description
 #' Decomposition of seasonal time series data using stlm from forecast package. 
-#' This function is used internally in tsa.obeu.
+#' This function is used internally in ts.analysis.
 #' 
-#' @usage ts.seasonal.obeu(tsdata)
+#' @usage ts.seasonal(tsdata)
 #' 
 #' @param tsdata The input univariate seasonal time series data
 #' 
@@ -48,11 +48,11 @@
 #' 
 #' @references add
 #' 
-#' @seealso \code{\link{tsa.obeu}}, stlm (forecast package)
+#' @seealso \code{\link{ts.analysis}}, stlm (forecast package)
 #' 
 #' @examples
 #'
-#' @rdname ts.seasonal.obeu
+#' @rdname ts.seasonal
 #' 
 #' @import forecast
 #' @import tseries
@@ -62,7 +62,7 @@
 #' @export
 ##############################################################################################################
 
-ts.seasonal.obeu<-function(tsdata){
+ts.seasonal<-function(tsdata){
 
 tsdata.stl <- forecast::stlm(tsdata, s.window="periodic", robust=FALSE, method="arima",
                              modelfunction=forecast::auto.arima,allow.multiplicative.trend=TRUE)

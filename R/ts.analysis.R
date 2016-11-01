@@ -4,7 +4,7 @@
 #' @description
 #' Univariate time series analysis for short and long time series data using the appropriate model.
 #' 
-#' @usage tsa.obeu(tsdata, h)
+#' @usage ts.analysis(tsdata, h)
 #' 
 #' @param tsdata The input univariate time series data
 #' @param h The number of prediction steps
@@ -14,7 +14,7 @@
 #' function. Depending the nature of the time series data and the stationary tests there are four branches:
 #' a.)short and non seasonal, b.)short and seasonal, c.)long and non seasonal and d.)long and seasonal.
 #' For a,b and c branches \code{\link{ts.non.seas.model}} is used and for long and seasonal time series 
-#' \code{\link{ts.seasonal.obeu}} is used.
+#' \code{\link{ts.seasonal}} is used.
 #' 
 #' This function also decomposes both seasonal and non seasonal time series and forecasts h steps ahead the user selected(default h=1).
 #' 
@@ -105,11 +105,11 @@
 #' 
 #' @references add
 #' 
-#' @seealso \code{\link{babbage.tsa.obeu}}
+#' @seealso \code{\link{babbage.ts.analysis}}
 #' 
 #' @examples
 #' 
-#' @rdname tsa.obeu
+#' @rdname ts.analysis
 #' 
 #' @import forecast
 #' @import tseries
@@ -119,7 +119,7 @@
 #' @export
 ############################################################################
 
-tsa.obeu<-function(tsdata,h=1){
+ts.analysis<-function(tsdata,h=1){
   
   # Stop if no time series data provided
   
@@ -190,7 +190,7 @@ tsa.obeu<-function(tsdata,h=1){
   }else if(length(austres)>20 && stats::frequency(austres)>2) {
     
     #Model and decomposition
-    tsmodel=ts.seasonal.obeu(austres)
+    tsmodel=ts.seasonal(austres)
     ts_model=tsmodel$ts_model
     residuals=tsmodel$residuals
     
@@ -198,10 +198,10 @@ tsa.obeu<-function(tsdata,h=1){
   }	
   
   #ACF and PACF extraction before and after model fit
-  acf.param<-ts.acf.obeu(tsdata,residuals, a=0.95)
+  acf.param<-ts.acf(tsdata,residuals, a=0.95)
   
   ## Forecasts
-  forecasts<-  forecast.ts.obeu(ts_model,h)
+  forecasts<-  ts.forecast(ts_model,h)
   
   ##  Parameter Extraction
   par<-list(

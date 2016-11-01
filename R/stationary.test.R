@@ -32,13 +32,13 @@
 #' against the fact that there is a time dependent trend (monotonic trend).
 #'
 #' @return 
-#' A string indicating if the time series is stationary or non stationary for internal use in tsa.obeu.
+#' A string indicating if the time series is stationary or non stationary for internal use in ts.analysis.
 #'
 #' @author Kleanthis Koupidis
 #' 
 #' @references tseries, trend
 #' 
-#' @seealso \code{\link{tsa.obeu}}, Acf and Pacf(forecast package),pp.test, adf.test and kpss.test (tseries)
+#' @seealso \code{\link{ts.analysis}}, Acf and Pacf(forecast package),pp.test, adf.test and kpss.test (tseries)
 #' mk.test and cs.test (trend package)
 #' 
 #' @examples
