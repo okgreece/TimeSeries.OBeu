@@ -13,7 +13,8 @@
 #' This function is used internally in tsa.obeu and forecasts the model 
 #' that fits the input data using the auto.arima function(see forecast package). 
 #' The model selection depends on the results of some diagnostic tests (acf,pacf,pp adf and kpss).
-#' For short time series the selected arima model is among various orders of the AR part using 1st differences and MA(1), with the lower AIC value.
+#' For short time series the selected arima model is among various orders of the AR part using 
+#' the first differences and the first order moving average component, with the lower AIC value.
 #' 
 #' @return A list with the parameters:
 #' 
