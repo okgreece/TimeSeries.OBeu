@@ -42,7 +42,7 @@
 #' mk.test and cs.test (trend package)
 #' 
 #' @examples
-#' 
+#' stationary.test(Athens_approved_ts)
 #' @rdname stationary.test
 #' 
 #' @import forecast

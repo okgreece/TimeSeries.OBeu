@@ -105,10 +105,10 @@
 #' 
 #' @references add
 #' 
-#' @seealso \code{\link{open.spending.ts}}
+#' @seealso \code{\link{ts.analysis}}
 #' 
 #' @examples
-#' 
+#' ts.analysis(Athens_draft_ts,h=3)
 #' @rdname ts.analysis
 #' 
 #' @import forecast

@@ -86,7 +86,7 @@ and paste http://okfnrg.math.auth.gr/ocpu/tmp/{something}/R/.val on a new tab.
 Go to http://okfnrg.math.auth.gr/ocpu/test/
 
 ##Copy and paste to the endpoint the following
-../library/TimeSeries.OBeu/R/open.spending.ts
+../library/TimeSeries.OBeu/R/open_spending.ts
 
 ##Select Method: Post
 

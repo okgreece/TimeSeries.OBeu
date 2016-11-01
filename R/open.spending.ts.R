@@ -4,7 +4,7 @@
 #' @description
 #' Extract and analyze time series data from Open Spending API, using the ts.analysis function.
 #' 
-#' @usage open.spending.ts(json_data,time,amount,prediction_steps)
+#' @usage open_spending.ts(json_data,time,amount,prediction_steps)
 #' 
 #' @param json_data The json string, URL or file from Open Spending API
 #' @param time Specify the time label of the json time series data
@@ -23,14 +23,14 @@
 #' 
 #' @examples
 #' 
-#' @rdname open.spending.ts
+#' @rdname open_spending.ts
 #' 
 #' @import jsonlite
 #' 
 #' @export
 ############################################################################
 
-open.spending.ts<-function(json_data,time,amount,prediction_steps=1){
+open_spending.ts <- function(json_data,time,amount,prediction_steps=1){
   
   data <- jsonlite::fromJSON(json_data)
   

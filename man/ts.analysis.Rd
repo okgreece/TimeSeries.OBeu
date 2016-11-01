@@ -108,7 +108,7 @@ For a,b and c branches \code{\link{ts.non.seas.model}} is used and for long and 
 This function also decomposes both seasonal and non seasonal time series and forecasts h steps ahead the user selected(default h=1).
 }
 \examples{
-
+ts.analysis(Athens_draft_ts,h=3)
 }
 \author{
 Kleanthis Koupidis
@@ -117,6 +117,6 @@ Kleanthis Koupidis
 add
 }
 \seealso{
-\code{\link{open.spending.ts}}
+\code{\link{ts.analysis}}
 }
 

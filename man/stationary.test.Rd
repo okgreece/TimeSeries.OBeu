@@ -39,7 +39,7 @@ The Cox and Stuart test is a modified sign test. The null hypothesis, H0, is tha
 against the fact that there is a time dependent trend (monotonic trend).
 }
 \examples{
-
+stationary.test(Athens_approved_ts)
 }
 \author{
 Kleanthis Koupidis
