@@ -58,7 +58,7 @@
 ts.non.seas.decomp<-function(tsdata){
 
   ## Decompose
-  tsdata.stl <- stats::locfit(tsdata~stats::time(tsdata))
+  tsdata.stl <- locfit::locfit(tsdata~stats::time(tsdata))
   trend<-stats::fitted(tsdata.stl)
   seasonal <- NULL
   remainder <- tsdata - trend
