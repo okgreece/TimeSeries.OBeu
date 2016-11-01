@@ -17,7 +17,7 @@
 #' against a stationary alternative. The truncation lag parameter is set to trunc(4*(n/100)^0.25), 
 #' where n the length of the in input time series data
 #'
-#' Augmented Dickey–Fuller (ADF) test, tests the null hypothesis of whether a unit root is present in a time series sample.
+#' Augmented Dickey-Fuller (ADF) test, tests the null hypothesis of whether a unit root is present in a time series sample.
 #' The truncation lag parameter is set to trunc((n-1)^(1/3))), where n the lengthof the input time series data
 #'
 #' Kwiatkowski-Phillips-Schmidt-Shin (KPSS) test, tests a null hypothesis that an observable time series is stationary
