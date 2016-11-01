@@ -49,7 +49,7 @@ open.spending.ts<-function(json_data,time,amount,prediction_steps=1){
   tsdata <- stats::ts(df[,"amounts"],start=min(df[,"tim"]),end=max(df[,"tim"]))
   tsdata <- stats::na.omit(tsdata)
 
-  ts.result=ts.analysis(tsdata, prediction_steps)
+  ts.result <- ts.analysis(tsdata, prediction_steps)
   
   return(ts.result)  
 }
