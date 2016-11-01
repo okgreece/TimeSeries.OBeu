@@ -6,7 +6,8 @@
 \title{Time series of Approved Expenditure Budget Phase of Municipality of Athens}
 \format{A ts object with 12 approved amounts from 2004-2015}
 \source{
-add #url#
+The ttl and rdf expenditure data are stored in:
+https://github.com/openbudgets/datasets/tree/master/greek-municipalities/municipality-of-athens/dataset
 }
 \usage{
 Athens_approved_ts

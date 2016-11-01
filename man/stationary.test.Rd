@@ -10,7 +10,7 @@ stationary.test(tsdata)
 \item{tsdata}{The input univariate time series data}
 }
 \value{
-A string indicating if the time series is stationary or non stationary for internal use in tsa.obeu.
+A string indicating if the time series is stationary or non stationary for internal use in ts.analysis.
 }
 \description{
 This functions tests the stationarity of the input time series data.
@@ -48,7 +48,7 @@ Kleanthis Koupidis
 tseries, trend
 }
 \seealso{
-\code{\link{tsa.obeu}}, Acf and Pacf(forecast package),pp.test, adf.test and kpss.test (tseries)
+\code{\link{ts.analysis}}, Acf and Pacf(forecast package),pp.test, adf.test and kpss.test (tseries)
 mk.test and cs.test (trend package)
 }
 

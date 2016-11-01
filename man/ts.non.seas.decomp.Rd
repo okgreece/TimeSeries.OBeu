@@ -56,6 +56,6 @@ Kleanthis Koupidis
 add
 }
 \seealso{
-\code{\link{tsa.obeu}}, locfit, predict.locfit
+\code{\link{ts.analysis}}, locfit, predict.locfit
 }
 

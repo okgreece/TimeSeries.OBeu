@@ -14,7 +14,7 @@ A list with the following components:
 \itemize{
 \item model.summary: 
 \itemize{
-\item ts_model: The summary model details returned as Arima object for internal use in tsa.obeu function}
+\item ts_model: The summary model details returned as Arima object for internal use in ts.analysis function}
 
 \item model:
 \itemize{
@@ -54,6 +54,6 @@ Kleanthis Koupidis
 add
 }
 \seealso{
-\code{\link{tsa.obeu}}, Arima
+\code{\link{ts.analysis}}, Arima
 }
 
