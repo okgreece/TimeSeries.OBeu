@@ -28,10 +28,12 @@
 #' \itemize{
 #'  \item stl.degree: The degree of fit
 #'  \item degfr: The effective degrees of freedom 
-#'  \item degfr.fitted: The fitted degrees of freedom
-#'  \item fitted: The model's fitted values }
+#'  \item degfr.fitted: The fitted degrees of freedom }
 #'  
+#' \item residuals_fitted:
+#' \itemize{
 #' \item residuals: The residuals of the model (fitted innovations)
+#' \item fitted: The model's fitted values }
 #' 
 #' \item compare: 
 #'  \itemize{
@@ -118,11 +120,12 @@ ts.non.seas.decomp<-function(tsdata){
     stl.general=list( #stl general
     degfr=degfr,
     degfr.fitted=degfr.fitted,
-    stl.degree=stl.degree,
-    fitted=fitted)
+    stl.degree=stl.degree
+    )
   
-  residuals=list(
-    residuals=residuals)
+  residuals_fitted=list(
+    residuals=residuals,
+    fitted=fitted)
 
   compare=list(  #Comparison
  
@@ -140,7 +143,7 @@ ts.non.seas.decomp<-function(tsdata){
 	model.details<-list(
 	  stl.plot=stl.plot,
 	  stl.general=stl.general,
-	  residuals=residuals,
+	  residuals_fitted=residuals_fitted,
 	  compare=compare
 	)
   return(model.details)

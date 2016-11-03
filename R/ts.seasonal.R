@@ -25,10 +25,13 @@
 #'
 #' \item stl.general:
 #' \itemize{
-#'  \item stl.degree: A vector with the polynomial degrees for these smoothers
-#'  \item fitted: The model's fitted values }
+#'  \item stl.win: An integer vector of length 3 indicating the spans used for the "s", "t", and "l" smoothers
+#'  \item stl.degree: An integer vector of length 3 indicating the polynomial degrees for these smoothers}
 #'  
+#' \item residuals_fitted: 
+#' \itemize{
 #' \item residuals: The residuals of the model (fitted innovations)
+#' \item fitted: The model's fitted values }
 #' 
 #' \item compare: 
 #'  \itemize{
@@ -80,13 +83,14 @@ stl.plot=list( #stl plot
 
 stl.general=list( #stl general
 				          #weights=tsdata.stl$stl$weights,
-                  #window=tsdata.stl$stl$win,
-                  stl.degree=tsdata.stl$stl$deg,
+                  stl.win=tsdata.stl$stl$win,
+                  stl.degree=tsdata.stl$stl$deg
                   #lambda=tsdata.stl$lambda,
-                  fitted=tsdata.stl$fitted)
+                  )
 
-residuals=list(
-          residuals=tsdata.stl$model$residuals)
+residuals_fitted=list(
+          residuals=tsdata.stl$model$residuals,
+          fitted=tsdata.stl$fitted)
 
 				  
 
@@ -111,7 +115,7 @@ compare=list(  #Comparison
 model.details<-list(
 					stl.plot=stl.plot,
 					stl.general=stl.general,
-					residuals=residuals,
+					residuals_fitted=residuals_fitted,
 					compare=compare
 					)
 
