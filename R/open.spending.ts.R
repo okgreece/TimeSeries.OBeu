@@ -1,8 +1,8 @@
 #' @title 
-#' Read and analyze time series data from Open Spending API
+#' Read and analyze univariate time series data from Open Spending API
 #'  
 #' @description
-#' Extract and analyze time series data from Open Spending API, using the ts.analysis function.
+#' Extract and analyze univariate time series data from Open Spending API, using the ts.analysis function.
 #' 
 #' @usage open_spending.ts(json_data,time,amount,prediction_steps)
 #' 
@@ -19,7 +19,7 @@
 #'
 #' @author Kleanthis Koupidis
 #' 
-#' @seealso \code{\link{ts.analysis}}
+#' @seealso \code{\link{ts.analysis}},\code{\link{csv.ts.analysis}}
 #' 
 #' @examples
 #' 
@@ -28,7 +28,7 @@
 #' @import jsonlite
 #' 
 #' @export
-############################################################################
+#####################################################################################################
 
 open_spending.ts <- function(json_data,time,amount,prediction_steps=1){
   

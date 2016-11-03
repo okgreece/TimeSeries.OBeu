@@ -2,7 +2,7 @@
 % Please edit documentation in R/open.spending.ts.R
 \name{open_spending.ts}
 \alias{open_spending.ts}
-\title{Read and analyze time series data from Open Spending API}
+\title{Read and analyze univariate time series data from Open Spending API}
 \usage{
 open_spending.ts(json_data,time,amount,prediction_steps)
 }
@@ -19,7 +19,7 @@ open_spending.ts(json_data,time,amount,prediction_steps)
 A json string with the resulted parameters of the ts.analysis function.
 }
 \description{
-Extract and analyze time series data from Open Spending API, using the ts.analysis function.
+Extract and analyze univariate time series data from Open Spending API, using the ts.analysis function.
 }
 \details{
 This function extracts the time series data provided by the Open Spending API, in order to
@@ -32,6 +32,6 @@ return the results from the \code{\link{ts.analysis}} function.
 Kleanthis Koupidis
 }
 \seealso{
-\code{\link{ts.analysis}}
+\code{\link{ts.analysis}},\code{\link{csv.ts.analysis}}
 }
 
