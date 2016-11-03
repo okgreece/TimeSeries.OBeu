@@ -21,10 +21,13 @@ A list with the following components:
 
 \item stl.general:
 \itemize{
- \item stl.degree: A vector with the polynomial degrees for these smoothers
- \item fitted: The model's fitted values }
+ \item stl.win: An integer vector of length 3 indicating the spans used for the "s", "t", and "l" smoothers
+ \item stl.degree: An integer vector of length 3 indicating the polynomial degrees for these smoothers}
  
+\item residuals_fitted: 
+\itemize{
 \item residuals: The residuals of the model (fitted innovations)
+\item fitted: The model's fitted values }
 
 \item compare: 
  \itemize{

@@ -25,10 +25,12 @@ A list with the following components:
 \itemize{
  \item stl.degree: The degree of fit
  \item degfr: The effective degrees of freedom 
- \item degfr.fitted: The fitted degrees of freedom
- \item fitted: The model's fitted values }
+ \item degfr.fitted: The fitted degrees of freedom }
  
+\item residuals_fitted:
+\itemize{
 \item residuals: The residuals of the model (fitted innovations)
+\item fitted: The model's fitted values }
 
 \item compare: 
  \itemize{
