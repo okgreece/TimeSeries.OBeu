@@ -4,9 +4,9 @@
 #' @description
 #' Univariate time series forecasts for short and long time series data using the appropriate model.
 #' 
-#' @usage ts.forecast(ts_model, h=1)
+#' @usage ts.forecast(ts_modelx,h=1)
 #' 
-#' @param ts_model The input univariate time series data
+#' @param ts_modelx The input univariate time series data
 #' @param h The number of prediction steps
 #' 
 #' @details 
@@ -38,7 +38,10 @@
 #' @seealso \code{\link{ts.analysis}}, forecast(forecast package)
 #' 
 #' @examples
-#' 
+#' Athens_draft <- ts.non.seas.model(Athens_draft_ts)
+#' #Hold the model object of non seasonal modeling
+#' draft<-Athens_draft$model.summary 
+#' ts.forecast(draft)
 #' 
 #' @rdname ts.forecast
 #' 

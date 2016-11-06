@@ -54,7 +54,6 @@
 #' 
 #' @seealso \code{\link{ts.analysis}}, stlm (forecast package)
 #' 
-#' @examples
 #'
 #' @rdname ts.seasonal.decomp
 #' 
