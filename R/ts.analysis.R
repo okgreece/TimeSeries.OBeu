@@ -4,19 +4,20 @@
 #' @description
 #' Univariate time series analysis for short and long time series data using the appropriate model.
 #' 
-#' @usage ts.analysis(tsdata, h)
+#' @usage ts.analysis(tsdata,x.order=NULL,h=1)
 #' 
 #' @param tsdata The input univariate time series data
+#' @param x.order An integer vector of length 3 specifying the order of the Arima model
 #' @param h The number of prediction steps
 #' 
 #' @details 
 #' This function automatically tests for stationarity of the input time series data using \code{\link{ts.stationary.test}}
 #' function. Depending the nature of the time series data and the stationary tests there are four branches:
 #' a.)short and non seasonal, b.)short and seasonal, c.)long and non seasonal and d.)long and seasonal.
-#' For a,b and c branches \code{\link{ts.non.seas.model}} is used and for long and seasonal time series 
-#' \code{\link{ts.seasonal}} is used.
+#' For branches a and c \code{\link{ts.non.seas.model}} is used and for b and d \code{\link{ts.seasonal.model}} is used.
 #' 
-#' This function also decomposes both seasonal and non seasonal time series and forecasts h steps ahead the user selected(default h=1).
+#' This function also decomposes both seasonal and non seasonal time series through \code{\link{ts.non.seas.decomp}} and 
+#' \code{\link{ts.seasonal.decomp}} and forecasts h steps ahead the user selected(default h=1) using \code{\link{ts.forecast}}.
 #' 
 #' 
 #' @return A json string with the parameters:
@@ -119,7 +120,7 @@
 #' @export
 ############################################################################
 
-ts.analysis<-function(tsdata,h=1){
+ts.analysis<-function(tsdata,x.order=NULL,h=1){
   
   # Stop if no time series data provided
   
@@ -144,75 +145,121 @@ ts.analysis<-function(tsdata,h=1){
   if ( length(tsdata)<=20 && stats::frequency(tsdata)<=2) {
     
     #decomposition
-    decomposition=ts.non.seas.decomp(tsdata)
+    decomposition <- ts.non.seas.decomp(tsdata)
 
     #model
-    model<-ts.non.seas.model(tsdata)
-    ts_model=model$model.summary
-    residuals=model$residuals
-    param<-list(decomposition,model[-1])
+    model <- ts.non.seas.model(tsdata,x.ord=x.order)
+    
+    ts_model <- model$model.summary
+    residuals <- model$residuals
+    
+    model.param <- model[-1]
     
     ## If TS is <20 and seasonal 
   }else if ( length(tsdata)<=20 && stats::frequency(tsdata)>2) {
     
     #decomposition
-    decomposition=stats::stl(tsdata)
+    decomposition <- ts.seasonal.decomp(tsdata)
     
     #model
-    model<-ts.non.seas.model(tsdata)
-    ts_model=model$model.summary
-    residuals=model$residuals
-    param<-list(decomposition,model[-1])
     
+    model <- ts.seasonal.model(tsdata,x.ord=x.order)
+    
+    #model param for >20 and seasonal
+    
+    if(is.null(x.order)){
+      ts_model <- decomposition$model.summary
+      residuals <- decomposition$residuals_fitted$residuals
+      
+    }else if (is.null(x.order)==F){
+      ts_model <- model$model.summary
+      residuals <- model$residuals
+    }
+    
+    decomposition <- decomposition[-1]
+    model.param <- model[-1]
+   
     ## If TS is >20 and non seasonal
-  }else if(length(tsdata)>20 && stats::frequency(tsdata)<2) {
     
-    #decomposition
-    decomposition=ts.non.seas.decomp(tsdata)
+    }else if(length(tsdata)>20 && stats::frequency(tsdata)<2) {
+    
+    # Decomposition
+    decomposition <- ts.non.seas.decomp(tsdata)
     
     # Stationary 
     if(check_stat=="Stationary") {
       
-      ts_model<-forecast::auto.arima(tsdata,trace=F)
+      model <- ts.non.seas.model(tsdata,x.ord=x.order)
       
       # ΝΟΝ Stationary 
     }else if(check_stat=="Non-Stationary") {
       
       #log transform
-      tsr<-log(tsdata+0.000000001)
+      tsr <- log(tsdata+0.000000001)
       #model
-      ts_model<-forecast::auto.arima(tsr,trace=F)
+      model <- ts.non.seas.model(tsr,x.ord=x.order)
+      }
       
-    }
-    param<-list(decomposition,model,ts_model)
+    #model param for >20 and non seasonal
+   
+    ts_model <- model$model.summary
+    residuals <- model$residuals
     
+    model.param <- model[-1]
+     
     ## If TS is >20 and seasonal
   }else if(length(tsdata)>20 && stats::frequency(tsdata)>2) {
     
-    #Model and decomposition
-    tsmodel=ts.seasonal(tsdata)
-    ts_model=tsmodel$ts_model
-    residuals=tsmodel$residuals
+    #Decomposition
+    decomposition <- ts.seasonal.decomp(tsdata)
     
-    param<-tsmodel
-  }	
-  
+    # Stationary 
+    if(check_stat=="Stationary") {
+      
+      model <- ts.seasonal.model(tsdata,x.ord=x.order)
+    
+    # ΝΟΝ Stationary 
+    }else if(check_stat=="Non-Stationary") {
+      
+      #log transform
+      tsr <- log(tsdata+0.000000001)
+      
+      #model
+      
+      model <- ts.seasonal.model(tsr,x.ord=x.order)}
+      
+    #model param for >20 and seasonal
+    
+    if(is.null(x.order)){
+      ts_model <- decomposition$model.summary
+      residuals <- decomposition$residuals_fitted$residuals
+      
+    }else if (is.null(x.order)==F){
+      ts_model <- model$model.summary
+      residuals <- model$residuals
+      }
+    decomposition <- decomposition[-1]
+    model.param <- model[-1]
+}
   #ACF and PACF extraction before and after model fit
-  acf.param<-ts.acf(tsdata,residuals, a=0.95)
+  acf.param <- ts.acf(tsdata,residuals, a=0.95)
   
   ## Forecasts
-  forecasts<-  ts.forecast(ts_model,h)
+  forecasts <- ts.forecast(ts_modelx=ts_model,h)
   
   ##  Parameter Extraction
-  par<-list(
-            acf.param=acf.param,param=param,forecasts=forecasts)
+  par <- list(
+            acf.param=acf.param,
+            decomposition=decomposition,
+            model.param=model.param,
+            forecasts=forecasts)
   
   ##  to JSON
   
-  parameters<-jsonlite::toJSON(par)
+  parameters <- jsonlite::toJSON(par)
   
   ##  Return
   
   return(parameters)
-}
+} 
 ## more comparison results

@@ -9,6 +9,7 @@
 #' @param json_data The json string, URL or file from Open Spending API
 #' @param time Specify the time label of the json time series data
 #' @param amount Specify the amount label of the json time series data
+#' @param order An integer vector of length 3 specifying the order of the Arima model
 #' @param prediction_steps The number of prediction steps
 #' 
 #' @details 
@@ -19,7 +20,7 @@
 #'
 #' @author Kleanthis Koupidis
 #' 
-#' @seealso \code{\link{ts.analysis}},\code{\link{csv.ts.analysis}}
+#' @seealso \code{\link{ts.analysis}}
 #' 
 #' @examples
 #' 
@@ -30,7 +31,7 @@
 #' @export
 #####################################################################################################
 
-open_spending.ts <- function(json_data,time,amount,prediction_steps=1){
+open_spending.ts <- function(json_data,time,amount,order=NULL,prediction_steps=1){
   
   data <- jsonlite::fromJSON(json_data)
   
@@ -49,7 +50,7 @@ open_spending.ts <- function(json_data,time,amount,prediction_steps=1){
   tsdata <- stats::ts(df[,"amounts"],start=min(df[,"tim"]),end=max(df[,"tim"]))
   tsdata <- stats::na.omit(tsdata)
 
-  ts.result <- ts.analysis(tsdata, prediction_steps)
+  ts.result <- ts.analysis(tsdata, x.order=order ,prediction_steps)
   
   return(ts.result)  
 }

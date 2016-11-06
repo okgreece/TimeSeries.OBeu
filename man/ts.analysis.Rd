@@ -4,10 +4,12 @@
 \alias{ts.analysis}
 \title{Time series analysis results for OBEU Time series}
 \usage{
-ts.analysis(tsdata, h)
+ts.analysis(tsdata,x.order=NULL,h=1)
 }
 \arguments{
 \item{tsdata}{The input univariate time series data}
+
+\item{x.order}{An integer vector of length 3 specifying the order of the Arima model}
 
 \item{h}{The number of prediction steps}
 }
@@ -102,10 +104,10 @@ Univariate time series analysis for short and long time series data using the ap
 This function automatically tests for stationarity of the input time series data using \code{\link{ts.stationary.test}}
 function. Depending the nature of the time series data and the stationary tests there are four branches:
 a.)short and non seasonal, b.)short and seasonal, c.)long and non seasonal and d.)long and seasonal.
-For a,b and c branches \code{\link{ts.non.seas.model}} is used and for long and seasonal time series 
-\code{\link{ts.seasonal}} is used.
+For branches a and c \code{\link{ts.non.seas.model}} is used and for b and d \code{\link{ts.seasonal.model}} is used.
 
-This function also decomposes both seasonal and non seasonal time series and forecasts h steps ahead the user selected(default h=1).
+This function also decomposes both seasonal and non seasonal time series through \code{\link{ts.non.seas.decomp}} and 
+\code{\link{ts.seasonal.decomp}} and forecasts h steps ahead the user selected(default h=1) using \code{\link{ts.forecast}}.
 }
 \examples{
 ts.analysis(Athens_draft_ts,h=3)

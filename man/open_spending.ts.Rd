@@ -13,6 +13,8 @@ open_spending.ts(json_data,time,amount,prediction_steps)
 
 \item{amount}{Specify the amount label of the json time series data}
 
+\item{order}{An integer vector of length 3 specifying the order of the Arima model}
+
 \item{prediction_steps}{The number of prediction steps}
 }
 \value{
@@ -32,6 +34,6 @@ return the results from the \code{\link{ts.analysis}} function.
 Kleanthis Koupidis
 }
 \seealso{
-\code{\link{ts.analysis}},\code{\link{csv.ts.analysis}}
+\code{\link{ts.analysis}}
 }
 

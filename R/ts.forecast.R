@@ -47,15 +47,15 @@
 #' @export
 ############################################################################
 
-ts.forecast<-function(ts_model,h=1){
+ts.forecast<-function(ts_modelx,h=1){
 
   ## Model Forecasting
-  forecasts<-forecast::forecast(ts_model,h)
+  forecasts<-forecast::forecast(ts_modelx,h)
   
   forecast.param<-list(
                        ts.model=forecasts$method,
-                       data_year=stats::time(ts_model$x),
-                       data=ts_model$x,
+                       data_year=stats::time(ts_modelx$x),
+                       data=ts_modelx$x,
                        predict_time=stats::time(forecasts$mean),
                        predict_values=forecasts$mean,
                        up80=forecasts$upper[,"80%"],

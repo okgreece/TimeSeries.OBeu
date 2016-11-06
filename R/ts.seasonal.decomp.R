@@ -5,7 +5,7 @@
 #' Decomposition of seasonal time series data using stlm from forecast package. 
 #' This function is used internally in ts.analysis.
 #' 
-#' @usage ts.seasonal(tsdata)
+#' @usage ts.seasonal.decomp(tsdata)
 #' 
 #' @param tsdata The input univariate seasonal time series data
 #' 
@@ -25,6 +25,7 @@
 #'
 #' \item stl.general:
 #' \itemize{
+#'  \item model.summary The summary object of the arima model to use in forecast if needed
 #'  \item stl.win: An integer vector of length 3 indicating the spans used for the "s", "t", and "l" smoothers
 #'  \item stl.degree: An integer vector of length 3 indicating the polynomial degrees for these smoothers}
 #'  
@@ -55,7 +56,7 @@
 #' 
 #' @examples
 #'
-#' @rdname ts.seasonal
+#' @rdname ts.seasonal.decomp
 #' 
 #' @import forecast
 #' @import tseries
@@ -65,7 +66,7 @@
 #' @export
 ##############################################################################################################
 
-ts.seasonal<-function(tsdata){
+ts.seasonal.decomp<-function(tsdata){
 
 tsdata.stl <- forecast::stlm(tsdata, s.window="periodic", robust=FALSE, method="arima",
                              modelfunction=forecast::auto.arima,allow.multiplicative.trend=TRUE)
@@ -74,6 +75,8 @@ trend <- tsdata.stl$stl$time.series[,"trend"]
 season <- tsdata.stl$stl$time.series[,"seasonal"]
 remainder <-  tsdata.stl$stl$time.series[,"remainder"]
 
+model.summary=tsdata.stl$model
+
 stl.plot=list( #stl plot
 				  trend=trend,
 				  seasonal=season,
@@ -81,8 +84,8 @@ stl.plot=list( #stl plot
 				  time=stats::time(tsdata)
 				  )
 
+
 stl.general=list( #stl general
-				          #weights=tsdata.stl$stl$weights,
                   stl.win=tsdata.stl$stl$win,
                   stl.degree=tsdata.stl$stl$deg
                   #lambda=tsdata.stl$lambda,
@@ -113,7 +116,8 @@ compare=list(  #Comparison
 				  
 
 model.details<-list(
-					stl.plot=stl.plot,
+          model.summary=model.summary,
+          stl.plot=stl.plot,
 					stl.general=stl.general,
 					residuals_fitted=residuals_fitted,
 					compare=compare

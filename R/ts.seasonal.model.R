@@ -1,16 +1,17 @@
 #' @title 
-#' Model fit of non seasonal time series
+#' Model fit of seasonal time series
 #'
 #' @description
-#' Model fit of non seasonal time series
+#' Model fit of seasonal time series
 #'
-#' @usage ts.non.seas.model(tsdata,x.ord=NULL)
+#' @usage ts.seasonal.model(tsdata,x.ord=NULL)
 #' 
-#' @param tsdata The input univariate non seasonal time series data
+#' @param tsdata The input univariate seasonal time series data
 #' @param x.ord An integer vector of length 3 specifying the order of the Arima model
 #' 
+#' 
 #' @details 
-#' Model fit of non seasonal time series using arima models of non seasonal time series data.
+#' Model fit of seasonal time series using arima models of seasonal time series data.
 #' The model with the lowest AIC value is selected for forecasts.
 #' 
 #' @return 
@@ -42,58 +43,22 @@
 #'  
 #' @author Kleanthis Koupidis
 #' 
-#' @references add
 #' 
 #' @seealso \code{\link{ts.analysis}}, Arima
 #' 
-#' @examples
-#' ts.non.seas.model(Athens_draft_ts)
-#' 
-#' @rdname ts.non.seas.model
+#' @rdname ts.seasonal.model
 #' @import forecast
 #' @export
 ####################################################################################################################################
 
-ts.non.seas.model<-function(tsdata,x.ord=NULL){
-
-#arima obeu
-arima.obeu = function(tsdata,x) {
-  tryCatch(forecast::Arima(tsdata,order=c(x,1,1)),
-           warning = function(w) {print(paste("next order", x)); 
-             NULL},
-           error = function(e) {print(paste("next order", x)); 
-             NULL} ) 
-}
-#aic.obeu
-aic.obeu = function(aic,x) {
-  tryCatch( c(aic=modelss[[x]]$aic,order=c(x,1,1)),
-           warning = function(w) {print(paste("next order", x)); 
-             NULL},
-           error = function(e) {print(paste("next order", x)); 
-             NULL} ) 
-}
-
-if ( is.null(x.ord)==T | all(x.ord==c(0L,0L,0L))==T) {
-  #Selection of the appropriate model
-  aiccc<-list()
-  modelss<-list()
- 
-  for(i in 1:7){
+ts.seasonal.model<-function(tsdata,x.ord=NULL){
   
-    modelss[[i]]<-arima.obeu(tsdata,i)
-    aiccc[[i]]<-aic.obeu(modelss[[i]]$aic,i)
+  if (is.null(x.ord)){
+    ts_model<-forecast::auto.arima(tsdata)
+  } else if (is.null(x.ord)==F){
+    ts_model<-forecast::Arima(tsdata,order=x.ord)
   }
   
-  df<-data.frame(matrix(unlist(aiccc),ncol=4,byrow = T))
-  colnames(df)=c("aic","ar","diff","ma")
-  mindf<-df[order(df$aic),][1,]
-  x<-c(mindf$ar,mindf$diff,mindf$ma)
-}
-if (is.null(x.ord)==F){
-  x=x.ord
-}
-  # Fit the appropriate model
-  ts_model<-forecast::Arima(tsdata,order=x)
   
   model.summary = ts_model
   
@@ -108,16 +73,16 @@ if (is.null(x.ord)==F){
   compare=list(
     resid.variance = ts_model$sigma2,
     variance.coef = ts_model$var.coef,
-  
-  # Used-not used observations
+    
+    # Used-not used observations
     not.used.obs = ts_model$n.cond,
     used.obs = ts_model$nobs,
-  
+    
     loglik = ts_model$loglik,
     aic = ts_model$aic,
     bic = ts_model$bic,
     aicc = ts_model$aicc)
-
+  
   model.details<-list(model.summary=model.summary, 
                       model=model,
                       residuals=residuals,
