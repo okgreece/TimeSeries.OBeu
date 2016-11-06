@@ -32,7 +32,9 @@
 #' \item residuals_fitted: 
 #' \itemize{
 #' \item residuals: The residuals of the model (fitted innovations)
-#' \item fitted: The model's fitted values }
+#' \item fitted: The model's fitted values
+#' \item time the time of tsdata
+#' \item line The y=0 line} 
 #' 
 #' \item compare: 
 #'  \itemize{
@@ -92,7 +94,9 @@ stl.general=list( #stl general
 
 residuals_fitted=list(
           residuals=tsdata.stl$model$residuals,
-          fitted=tsdata.stl$fitted)
+          fitted=tsdata.stl$fitted,
+          time=stats::time(tsdata),
+          line=0)
 
 				  
 

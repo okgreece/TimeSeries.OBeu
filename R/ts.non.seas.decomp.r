@@ -33,7 +33,9 @@
 #' \item residuals_fitted:
 #' \itemize{
 #' \item residuals: The residuals of the model (fitted innovations)
-#' \item fitted: The model's fitted values }
+#' \item fitted: The model's fitted values 
+#' \item time the time of tsdata
+#' \item line The y=0 line}
 #' 
 #' \item compare: 
 #'  \itemize{
@@ -125,7 +127,9 @@ ts.non.seas.decomp<-function(tsdata){
   
   residuals_fitted=list(
     residuals=residuals,
-    fitted=fitted)
+    fitted=fitted,
+    time=stats::time(tsdata),
+    line=0)
 
   compare=list(  #Comparison
  

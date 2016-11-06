@@ -30,7 +30,9 @@ A list with the following components:
 \item residuals_fitted:
 \itemize{
 \item residuals: The residuals of the model (fitted innovations)
-\item fitted: The model's fitted values }
+\item fitted: The model's fitted values 
+\item time the time of tsdata
+\item line The y=0 line}
 
 \item compare: 
  \itemize{

@@ -192,7 +192,7 @@ ts.analysis<-function(tsdata,x.order=NULL,h=1){
       model <- ts.non.seas.model(tsdata,x.ord=x.order)
       
       # ΝΟΝ Stationary 
-    }else if(check_stat=="Non-Stationary") {
+    }else if(check_stat=="Non Stationary") {
       
       #log transform
       tsr <- log(tsdata+0.000000001)
@@ -219,7 +219,7 @@ ts.analysis<-function(tsdata,x.order=NULL,h=1){
       model <- ts.seasonal.model(tsdata,x.ord=x.order)
     
     # ΝΟΝ Stationary 
-    }else if(check_stat=="Non-Stationary") {
+    }else if(check_stat=="Non Stationary") {
       
       #log transform
       tsr <- log(tsdata+0.000000001)
@@ -262,4 +262,3 @@ ts.analysis<-function(tsdata,x.order=NULL,h=1){
   
   return(parameters)
 } 
-## more comparison results
