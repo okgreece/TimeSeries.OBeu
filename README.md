@@ -73,6 +73,7 @@ Athens_executed_ts
 ##Add another one parameters and set:
 
 Param Name: x.order (optional)
+
 Param Value: c(2,1,1)
 
 Param Name: h
@@ -115,6 +116,7 @@ Param Value(the amount label of the json file): 'global__amount__0397f.sum' or
                                                   
 
 Param Name: order (optional)
+
 Param Value: c(3,1,1)
 
 Param Name: prediction_steps (optional but necessary, default=1)
@@ -137,12 +139,9 @@ https://cran.r-project.org/web/packages/opencpu/vignettes/opencpu-server.pdf
 https://www.opencpu.org/jslib.html
 
 
-#About the package:
-Two choices to install it in R or RStudio:
 
-##Github directly:
+##Github:
 https://github.com/okgreece/TimeSeries.OBeu 
 
-##Source package:
-https://github.com/okgreece/TimeSeries.OBeu-source-package 
+
 
