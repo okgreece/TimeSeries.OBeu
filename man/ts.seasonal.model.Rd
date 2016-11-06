@@ -25,8 +25,13 @@ A list with the following components:
  \item arima.coef: A vector of AR, MA and regression coefficients
  \item arima.coef.se: The standard error of the coefficients }
 
+\item residuals_fitted:
+\itemize{
 \item residuals: The residuals of the model (fitted innovations)
-
+\item fitted: The model's fitted values 
+\item time the time of tsdata
+\item line The y=0 line}
+ 
 \item compare:
 \itemize{
  \item variance.coef: The matrix of the estimated variance of the coefficients

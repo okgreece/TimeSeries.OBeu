@@ -28,8 +28,13 @@
 #'  \item arima.coef: A vector of AR, MA and regression coefficients
 #'  \item arima.coef.se: The standard error of the coefficients }
 #' 
+#' \item residuals_fitted:
+#' \itemize{
 #' \item residuals: The residuals of the model (fitted innovations)
-#' 
+#' \item fitted: The model's fitted values 
+#' \item time the time of tsdata
+#' \item line The y=0 line}
+#'  
 #' \item compare:
 #' \itemize{
 #'  \item variance.coef: The matrix of the estimated variance of the coefficients
@@ -67,8 +72,11 @@ ts.seasonal.model<-function(tsdata,x.ord=NULL){
     arima.coef = ts_model$coef,
     arima.coef.se = round(sqrt(diag(ts_model$var.coef)),digits=4))
   
-  residuals=list(	# Residuals
-    residuals = ts_model$residuals)
+  residuals_fitted=list(
+    residuals=ts_model$residuals,
+    fitted=stats::fitted(ts_model),
+    time=stats::time(tsdata),
+    line=0)
   
   compare=list(
     resid.variance = ts_model$sigma2,
@@ -85,7 +93,7 @@ ts.seasonal.model<-function(tsdata,x.ord=NULL){
   
   model.details<-list(model.summary=model.summary, 
                       model=model,
-                      residuals=residuals,
+                      residuals_fitted=residuals_fitted,
                       compare=compare
                       )
   

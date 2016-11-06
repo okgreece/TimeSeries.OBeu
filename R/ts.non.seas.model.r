@@ -102,8 +102,12 @@ if (is.null(x.ord)==F){
     arima.coef = ts_model$coef,
     arima.coef.se = round(sqrt(diag(ts_model$var.coef)),digits=4))
   
-  residuals=list(	# Residuals
-    residuals = ts_model$residuals)
+ 
+  residuals_fitted=list(
+    residuals=ts_model$residuals,
+    fitted=stats::fitted(ts_model),
+    time=stats::time(tsdata),
+    line=0)
   
   compare=list(
     resid.variance = ts_model$sigma2,
@@ -120,7 +124,7 @@ if (is.null(x.ord)==F){
 
   model.details<-list(model.summary=model.summary, 
                       model=model,
-                      residuals=residuals,
+                      residuals_fitted=residuals_fitted,
                       compare=compare
                       )
   
