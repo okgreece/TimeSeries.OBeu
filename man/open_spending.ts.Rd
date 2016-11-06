@@ -4,7 +4,7 @@
 \alias{open_spending.ts}
 \title{Read and analyze univariate time series data from Open Spending API}
 \usage{
-open_spending.ts(json_data,time,amount,prediction_steps)
+open_spending.ts(json_data,time,amount,order=NULL,prediction_steps=1)
 }
 \arguments{
 \item{json_data}{The json string, URL or file from Open Spending API}
@@ -26,9 +26,6 @@ Extract and analyze univariate time series data from Open Spending API, using th
 \details{
 This function extracts the time series data provided by the Open Spending API, in order to
 return the results from the \code{\link{ts.analysis}} function.
-}
-\examples{
-
 }
 \author{
 Kleanthis Koupidis

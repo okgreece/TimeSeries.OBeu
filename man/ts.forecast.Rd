@@ -4,12 +4,12 @@
 \alias{ts.forecast}
 \title{Time series forecast results of OBEU Time Series}
 \usage{
-ts.forecast(ts_model, h=1)
+ts.forecast(ts_modelx,h=1)
 }
 \arguments{
-\item{h}{The number of prediction steps}
+\item{ts_modelx}{The input univariate time series data}
 
-\item{ts_model}{The input univariate time series data}
+\item{h}{The number of prediction steps}
 }
 \value{
 A list with the parameters:
@@ -39,7 +39,10 @@ For short time series the selected arima model is among various orders of the AR
 the first differences and the first order moving average component, with the lower AIC value.
 }
 \examples{
-
+Athens_draft <- ts.non.seas.model(Athens_draft_ts)
+#Hold the model object of non seasonal modeling
+draft<-Athens_draft$model.summary 
+ts.forecast(draft)
 
 }
 \author{

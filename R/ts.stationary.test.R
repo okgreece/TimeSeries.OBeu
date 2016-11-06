@@ -10,10 +10,10 @@
 #' 
 #' @details 
 #' This function tests the deterministic and stohastic trend of the input time series data. This function uses ACF and PACF functions 
-#' from forecast package, Phillips-Perron test, Augmented Dickey Fuller (ADF) test, Kwiatkowski-Phillips-Schmidt-Shin (KPSS) test,
-#' from tseries package and Mann-Kendall test for Monotonic Trend Cox and Stuart trend test from trend package.
+#' from forecast package, Phillips Perron test, Augmented Dickey Fuller (ADF) test, Kwiatkowski Phillips Schmidt Shin (KPSS) test,
+#' from tseries package and Mann Kendall test for Monotonic Trend Cox and Stuart trend test from trend package.
 #' 
-#' Phillips-Perron test tests the null hypothesis of whether a unit root is present in a time series sample, 
+#' Phillips Perron test tests the null hypothesis of whether a unit root is present in a time series sample, 
 #' against a stationary alternative. The truncation lag parameter is set to trunc(4*(n/100)^0.25), 
 #' where n the length of the in input time series data
 #'
@@ -21,10 +21,10 @@
 #' The truncation lag parameter is set to trunc((n-1)^(1/3))), where n the length of the input time series data
 #'
 #' Kwiatkowski Phillips Schmidt Shin (KPSS) test, tests a null hypothesis that an observable time series is stationary
-#' around a deterministic trend (i.e. trend-stationary) against the alternative of a unit root. 
+#' around a deterministic trend (i.e. trend stationary) against the alternative of a unit root. 
 #' The truncation lag parameter is set to trunc(3*sqrt(n)/13), where n the length of the input time series data
 #'
-#' The non-parametric Mann Kendall test is used to detect monotonic trends. The null hypothesis, H0, is that the data 
+#' The non parametric Mann Kendall test is used to detect monotonic trends. The null hypothesis, H0, is that the data 
 #' come from a population with independent realizations and are identically distributed. 
 #' The alternative hypothesis, HA, is that the data follow a monotonic trend.
 #'
@@ -64,18 +64,18 @@ ts.stationary.test<-function(tsdata){
     pacF<-forecast::Pacf(tsdata,plot=F)
     pacftest<-ifelse(pacF$acf[2:length(pacF$lag)]<1.96/sqrt(length(tsdata)) &&
                        pacF$acf[2:length(pacF$lag)]>-1.96/sqrt(length(tsdata)),
-                     "Stationary","Non-Stationary")
+                     "Stationary","Non Stationary")
     
     acf_pacf<-c(acftest,pacftest)
 	
-    # Phillips-Perron test
+    # Phillips Perron test
     if (length(tsdata)>4){
     pptest<-tseries::pp.test(tsdata,alternative = "stationary")
     }
     else {
       pptest=NULL
     }
-    # Augmented Dickey–Fuller (ADF) test
+    # Augmented Dickey Fuller (ADF) test
     if (length(tsdata)<7){
     adftest<-tseries::adf.test(tsdata,alternative = "stationary",k=0)
     }
@@ -86,7 +86,7 @@ ts.stationary.test<-function(tsdata){
     
     kpsstest<-tseries::kpss.test(tsdata)
     
-    # Mann-Kendall Test For Monotonic Trend
+    # Mann Kendall Test For Monotonic Trend
     
     mktest<-trend::mk.test(tsdata)
 
@@ -99,13 +99,13 @@ ts.stationary.test<-function(tsdata){
 test_hypo<-data.frame("p_value"=c(pptest$p.value,adftest$p.value,kpsstest$p.value,
                                   mktest$pvalue,cstest$p.value))
 
-rownames(test_hypo)<-c("Phillips-Perron test","Augmented Dickey–Fuller test",
-                       "Kwiatkowski-Phillips-Schmidt-Shin test","Mann-Kendall Test","Cox and Stuart test")
+rownames(test_hypo)<-c("Phillips Perron test","Augmented Dickey Fuller test",
+                       "Kwiatkowski Phillips Schmidt Shin test","Mann Kendall Test","Cox Stuart test")
 
-test_hypo$result<-ifelse(test_hypo$p_value>0.05,"Non-Stationary","Stationary")
+test_hypo$result<-ifelse(test_hypo$p_value>0.05,"Non Stationary","Stationary")
 
 #Fix the Kpss Result
-test_hypo$result[3]<-ifelse(kpsstest$p.value<0.05,"Non-Stationary","Stationary")
+test_hypo$result[3]<-ifelse(kpsstest$p.value<0.05,"Non Stationary","Stationary")
 tests<-test_hypo$result
 
 #Add acf,pacf results

@@ -52,9 +52,6 @@ This function is used internally in ts.analysis.
 Decomposition of seasonal time series data through arima models is based on stlm from forecast package
 and returns a list with useful parameters for OBEU.
 }
-\examples{
-
-}
 \author{
 Kleanthis Koupidis
 }
