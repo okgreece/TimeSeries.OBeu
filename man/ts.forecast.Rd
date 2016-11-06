@@ -7,9 +7,9 @@
 ts.forecast(ts_model, h=1)
 }
 \arguments{
-\item{ts_model}{The input univariate time series data}
-
 \item{h}{The number of prediction steps}
+
+\item{ts_model}{The input univariate time series data}
 }
 \value{
 A list with the parameters:

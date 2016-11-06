@@ -24,14 +24,14 @@ Phillips-Perron test tests the null hypothesis of whether a unit root is present
 against a stationary alternative. The truncation lag parameter is set to trunc(4*(n/100)^0.25), 
 where n the length of the in input time series data
 
-Augmented Dickey-Fuller (ADF) test, tests the null hypothesis of whether a unit root is present in a time series sample.
-The truncation lag parameter is set to trunc((n-1)^(1/3))), where n the lengthof the input time series data
+Augmented Dickey Fuller (ADF) test, tests the null hypothesis of whether a unit root is present in a time series sample.
+The truncation lag parameter is set to trunc((n-1)^(1/3))), where n the length of the input time series data
 
-Kwiatkowski-Phillips-Schmidt-Shin (KPSS) test, tests a null hypothesis that an observable time series is stationary
+Kwiatkowski Phillips Schmidt Shin (KPSS) test, tests a null hypothesis that an observable time series is stationary
 around a deterministic trend (i.e. trend-stationary) against the alternative of a unit root. 
 The truncation lag parameter is set to trunc(3*sqrt(n)/13), where n the length of the input time series data
 
-The non-parametric Mann-Kendall test is used to detect monotonic trends. The null hypothesis, H0, is that the data 
+The non-parametric Mann Kendall test is used to detect monotonic trends. The null hypothesis, H0, is that the data 
 come from a population with independent realizations and are identically distributed. 
 The alternative hypothesis, HA, is that the data follow a monotonic trend.
 
