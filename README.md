@@ -15,13 +15,13 @@ install_github("okgreece/TimeSeries.OBeu")
 
 ##Use:
 
-The basic function is: tsa.obeu(tsdata,h)
+The basic function is: ts.analysis(tsdata,h)
 
 where tsdata: the time series data
 
 and h: the prediction steps.
 
-e.g. tsa.obeu(Athens_approved_ts,4)
+e.g. ts.analysis(Athens_approved_ts,4)
 
 The package includes the following time series data:
 
@@ -49,7 +49,7 @@ select method: post
 Go to http://okfnrg.math.auth.gr/ocpu/test/
 
 ##Copy and paste to the endpoint the following
-../library/TimeSeries.OBeu/R/tsa.obeu
+../library/TimeSeries.OBeu/R/ts.analysis
 
 ##Select Method: Post
 
@@ -71,22 +71,26 @@ Athens_executed_ts
 
 
 ##Add another one parameters and set:
+
+Param Name: x.order (optional)
+Param Value: c(2,1,1)
+
 Param Name: h
 
 Param Value: 4 (or another number, default h=1)
 
 Ready! Click on Ajax request!
 
-To see the results: copy the /ocpu/tmp/{something}/R/.val (the first choice on the right panel)
+To see the results: copy the /ocpu/tmp/{this}/R/.val (the first choice on the right panel)
 
-and paste http://okfnrg.math.auth.gr/ocpu/tmp/{something}/R/.val on a new tab.
+and paste http://okfnrg.math.auth.gr/ocpu/tmp/{this}/R/.val on a new tab.
 
 #Open Spending Time Series - Example #2:
 
 Go to http://okfnrg.math.auth.gr/ocpu/test/
 
 ##Copy and paste to the endpoint the following
-../library/TimeSeries.OBeu/R/babbage.tsa.obeu
+../library/TimeSeries.OBeu/R/open_spending.ts
 
 ##Select Method: Post
 
@@ -99,26 +103,29 @@ Param Value the following output from open spending api or you can provide the U
 
 Param Name: time
 
-Param Value (the time label of the json file):  'global__fiscalPeriod__28951.global__fiscalPeriod__28951' or
+Param Value (the time label of the json file):  'global__fiscalPeriod__28951.notation' or
                                                   
                                                   "global__fiscalPeriod__28951.global__fiscalPeriod__28951"
 
 Param Name: amount
 
-Param Value(the amount label of the json file): 'amount__0397f.sum' or
+Param Value(the amount label of the json file): 'global__amount__0397f.sum' or
                                                   
-                                                  "amount__0397f.sum"
+                                                  "global__amount__0397f.sum"
                                                   
-                                                  
+
+Param Name: order (optional)
+Param Value: c(3,1,1)
+
 Param Name: prediction_steps (optional but necessary, default=1)
 
 Param Value: Select a number e.g. 4.
 
 Ready! Click on Ajax request!
 
-To see the results: copy the /ocpu/tmp/{something}/R/.val (the first choice on the right panel)
+To see the results: copy the /ocpu/tmp/{this}/R/.val (the first choice on the right panel)
 
-and paste http://okfnrg.math.auth.gr/ocpu/tmp/{something}/R/.val on a new tab.
+and paste http://okfnrg.math.auth.gr/ocpu/tmp/{this}/R/.val on a new tab.
 
 
 #Further Details:
@@ -138,11 +145,4 @@ https://github.com/okgreece/TimeSeries.OBeu
 
 ##Source package:
 https://github.com/okgreece/TimeSeries.OBeu-source-package 
-
-
-##This package is almost ready.
-
-##Some details in documentation are missing, but everything will be included in the near future.
-
-
 
