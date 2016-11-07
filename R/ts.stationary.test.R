@@ -9,7 +9,7 @@
 #' @param tsdata The input univariate time series data
 #' 
 #' @details 
-#' This function tests the deterministic and stohastic trend of the input time series data. This function uses ACF and PACF functions 
+#' This function tests the deterministic and stochastic trend of the input time series data. This function uses ACF and PACF functions 
 #' from forecast package, Phillips Perron test, Augmented Dickey Fuller (ADF) test, Kwiatkowski Phillips Schmidt Shin (KPSS) test,
 #' from tseries package and Mann Kendall test for Monotonic Trend Cox and Stuart trend test from trend package.
 #' 
