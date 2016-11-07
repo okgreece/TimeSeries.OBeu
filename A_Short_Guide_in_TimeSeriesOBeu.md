@@ -3,6 +3,8 @@ How to Use TimeSeries.OBeu Package
 Kleanthis Koupidis
 November 7, 2016
 
+[![Github Issues](https://github.com/okgreece/TimeSeries.OBeu/issues.svg)](https://github.com/okgreece/TimeSeries.OBeu/issues)
+
 This document describes the use of the functions implemented in TimeSeries.OBeu package both in R and OpenCPU environments.
 
 Install:
