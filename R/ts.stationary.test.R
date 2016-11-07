@@ -11,7 +11,7 @@
 #' @details 
 #' This function tests the deterministic and stochastic trend of the input time series data. This function uses ACF and PACF functions 
 #' from forecast package, Phillips Perron test, Augmented Dickey Fuller (ADF) test, Kwiatkowski Phillips Schmidt Shin (KPSS) test,
-#' from tseries package and Mann Kendall test for Monotonic Trend Cox and Stuart trend test from trend package.
+#' from tseries package and Mann Kendall test for Monotonic Trend Cox Stuart trend test from trend package.
 #' 
 #' Phillips Perron test tests the null hypothesis of whether a unit root is present in a time series sample, 
 #' against a stationary alternative. The truncation lag parameter is set to trunc(4*(n/100)^0.25), 
@@ -28,7 +28,7 @@
 #' come from a population with independent realizations and are identically distributed. 
 #' The alternative hypothesis, HA, is that the data follow a monotonic trend.
 #'
-#' The Cox and Stuart test is a modified sign test. The null hypothesis, H0, is that the input time series assumed to be independent
+#' The Cox Stuart test is a modified sign test. The null hypothesis, H0, is that the input time series assumed to be independent
 #' against the fact that there is a time dependent trend (monotonic trend).
 #'
 #' @return 
