@@ -3,11 +3,13 @@ How to Use TimeSeries.OBeu Package
 Kleanthis Koupidis
 November 7, 2016
 
+[![Pending Pull-Requests](http://githubbadges.herokuapp.com/okgreece/TimeSeries.OBeu/pulls.svg)](https://github.com/okgreece/TimeSeries.OBeu/pulls)
+
 [![Github Issues](http://githubbadges.herokuapp.com/okgreece/TimeSeries.OBeu/issues.svg)](https://github.com/okgreece/TimeSeries.OBeu/issues)
 
 This document describes the use of the functions implemented in TimeSeries.OBeu package both in R and OpenCPU environments.
 
-<img src="obeu_logo.png" align="center" />
+<img src="obeu_logo.png" align="right" />
 
 Install:
 ========
