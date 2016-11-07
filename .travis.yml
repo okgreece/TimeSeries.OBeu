@@ -1,0 +1,27 @@
+language: r
+sudo: false
+cache: packages
+
+r:
+  - oldrel
+  - release
+  - devel  
+before_install:
+  - tlmgr install index
+github_packages:
+  - devtools
+r_packages:
+ - stats
+ - rmarkdown
+ - knitr
+ - devtools
+ - ade4
+ - forecast
+ - locfit
+ - jsonlite
+ - trend
+ - tseries
+apt_packages:
+  - libxml2-dev
+sudo: required
+warnings_are_errors: false
