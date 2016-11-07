@@ -1224,3 +1224,6 @@ PDF statistics:
  29 named destinations out of 1000 (max. 500000)
  10313 words of extra memory for PDF output out of 12000 (max. 10000000)
 
+\institute{My institute}
+\pgfdeclareimage[width=2cm]{logo}{openbudgets_logo.png}
+\usebackgroundtemplate{\pgfuseimage{logo}}
