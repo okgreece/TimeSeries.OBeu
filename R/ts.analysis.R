@@ -124,14 +124,14 @@ ts.analysis<-function(tsdata,x.order=NULL,h=1){
   
   # Stop if no time series data provided
   
-  if( length(tsdata)<3 ) {
+  if( length(tsdata)<5 ) {
     stop("Invalid time series object.")}
   
   # Stop if no time series data provided
   
   if( is.nan(h)==T | is.na(h)==T |
       is.character(h)==T | is.numeric(as.numeric(as.character(h)))==F){
-    stop("Please give an integer input as 'h', e.g. h= 3.")}
+    stop("Please give an integer input as 'h', e.g. h= 4.")}
   
   
   # Extract the time series name
