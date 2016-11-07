@@ -29,7 +29,11 @@ The basic function is:
 ts.analysis(tsdata,x.order=NULL,h=1)
 ```
 
-where *tsdata*: The input univariate time series data *x.order*: An integer vector of length 3 specifying the order of the Arima model and *h*: The number of prediction steps
+where *tsdata*: The input univariate time series data
+
+*x.order*: An integer vector of length 3 specifying the order of the Arima model
+
+and *h*: The number of prediction steps
 
 ### R Example
 
