@@ -1,6 +1,6 @@
 ---
 title: "Time Series Analysis-OpenBudgets.eu"
-output: pdf_document
+output: html_notebook
 ---
 
 #Install:
