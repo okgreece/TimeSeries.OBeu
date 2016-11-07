@@ -8,7 +8,7 @@ Author: Kleanthis Koupidis
 Maintainer: Kleanthis Koupidis <koupidis.okfgr@gmail.com>
 URL: https://github.com/okgreece/OBeU
 BugReports: https://github.com/okgreece/OBeU/issues
-License: GPL-3
+License: GPL-2
 LazyData: TRUE
 Suggests: testthat
 Imports: forecast, locfit, jsonlite, trend, tseries
