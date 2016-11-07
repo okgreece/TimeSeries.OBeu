@@ -4,14 +4,18 @@ author: "Kleanthis Koupidis"
 date: "November 7, 2016"
 output:
   github_document:
+    fig_width: 8
+    fig_height: 8
+    dev: png
     html_preview: false
   number_sections: yes
 subtitle: A Short Guide in R and OpenCPU environments
 ---
-[![Github Issues](https://github.com/okgreece/TimeSeries.OBeu/issues.svg)](https://github.com/okgreece/TimeSeries.OBeu/issues)
+[![Github Issues](https://github.com/okgreece/TimeSeries.OBeu/issues.png)](https://github.com/okgreece/TimeSeries.OBeu/issues)
 
 This document describes the use of the functions implemented in TimeSeries.OBeu package both in R and OpenCPU
 environments. 
+[!]()
 
 #Install:
 
