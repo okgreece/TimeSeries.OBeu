@@ -1,0 +1,323 @@
+---
+title: "How to Use TimeSeries.OBeu Package"
+author: "Kleanthis Koupidis"
+date: "November 7, 2016"
+output: pdf_document
+subtitle: "A Short Guide in R and OpenCPU environments"
+---
+
+This document describes the use of the functions implemented in TimeSeries.OBeu package both in R and OpenCPU environments. 
+
+#Install:
+
+Load *devtools* library or install it if not already:
+
+```{r, eval=FALSE, include=FALSE}
+install.packages("devtools")
+```
+
+Then install *TimeSeries.OBeu* from [Github](https://github.com/okgreece/TimeSeries.OBeu)
+
+```{r, eval=FALSE, include=FALSE}
+devtools::install_github("okgreece/TimeSeries.OBeu")
+```
+
+And load the library
+
+```{r}
+library(TimeSeries.OBeu)
+```
+
+#Use:
+
+The basic function is: 
+```{r, eval=FALSE, include=TRUE}
+ts.analysis(tsdata,x.order=NULL,h=1)
+```
+
+where *tsdata*: The input univariate time series data
+*x.order*: An integer vector of length 3 specifying the order of the Arima model
+and *h*: The number of prediction steps
+
+### R Example
+
+The package includes the following time series data: Athens_draft_ts, Athens_revised_ts, Athens_reserved_ts, Athens_approved_ts and Athens_executed_ts.
+
+```{r}
+Athens_draft_ts
+```
+
+We select for example the approved budget phase of Athens and we want to predict 4 years ahead.
+
+```{r}
+ts.analysis(tsdata = Athens_approved_ts, h=4)
+```
+
+If we can set a specific order to fit the model for the same prediction steps. We select for example a three-length vector of p=2 (*AR order*) d=1 (*first differences*) and q=1 (*MA order*).
+
+```{r}
+ts.analysis(tsdata = Athens_approved_ts, x.order=c(2,1,1), h=4)
+```
+
+
+# OpenCPU Short Guide - TimeSeries.OBeu
+
+Go to: http://okfnrg.math.auth.gr/ocpu/test/
+
+## How to use functions:
+
+Type to the endpoint:
+
+```{r, eval=FALSE, include=TRUE}
+ ../library/ {name of the library} /R/ {function}
+```
+
+If you want to see the function parameters you should: 
+
++ Select Method:
+```{r, eval=FALSE, include=TRUE}
+Get
+```
+
+and in order to run a function you should:
+
++ Select Method:
+```{r, eval=FALSE, include=TRUE}
+Post
+```
+
+
+## Example #1:
+
+1. Go to http://okfnrg.math.auth.gr/ocpu/test/
+
+2. Copy and paste the following function to the endpoint 
+```{r, eval=FALSE, include=TRUE}
+../library/TimeSeries.OBeu/R/ts.analysis
+```
+
+3. *Select Method*:
+```{r, eval=FALSE, include=TRUE}
+ Post
+```
+
+4. **Add parameters** and set:
+
+Define the input time series data:
+
++ *Param Name*:
+ 
+```{r, eval=FALSE, include=TRUE}
+tsdata
+```
+
++ *Param Value* one of the following:
+ 
+```{r, eval=FALSE, include=TRUE}
+Athens_draft_ts
+
+Athens_revised_ts
+
+Athens_reserved_ts
+
+Athens_approved_ts
+
+Athens_executed_ts
+```
+
+
+Define the order of the model fits and forecasts (*optional*):
+
++ *Param Name*: 
+```{r, eval=FALSE, include=TRUE}
+x.order
+```
+
++ *Param Value* -for example: 
+```{r, eval=FALSE, include=TRUE}
+c(2,1,1)
+```
+
+Define the prediction steps (*default is 1 prediction step*):
+
++ *Param Name*: 
+```{r, eval=FALSE, include=TRUE}
+h
+```
+
++ *Param Value* -for example:
+```{r, eval=FALSE, include=TRUE}
+4 # (or another number, default h=1)
+```
+
+
+5. Ready! Click on **Ajax request**!
+
+6. To see the results: 
+
+copy the */ocpu/tmp/{this}/R/.val* (the first choice on the right panel)
+
+7. and paste http://okfnrg.math.auth.gr/ocpu/tmp/ {this} /R/.val on a new tab.
+
+
+
+## Example #2 - Rudolf/Open Spending Time Series
+
+1. Go to http://okfnrg.math.auth.gr/ocpu/test/
+
+2. Copy and paste the following function to the endpoint 
+```{r, eval=FALSE, include=TRUE}
+../library/TimeSeries.OBeu/R/open_spending.ts
+```
+
+3. *Select Method*:
+```{r, eval=FALSE, include=TRUE}
+Post
+```
+
+4. **Add parameters** and set:
+
+Define the input time series data:
+
++ *Param Name*:
+ 
+```{r, eval=FALSE, include=TRUE}
+json_data
+```
+
++ *Param Value* -the following output from open spending api or you can provide the also **json URL**:
+```{r, eval=FALSE, include=TRUE}
+'{"page":0,
+"page_size":30,
+"total_cell_count":15,
+"cell":[],
+"status":"ok",
+"cells":
+[{"global__fiscalPeriod__28951.notation":"2002",
+"global__amount__0397f.sum":290501420.64,
+"global__amount__0397f__CZK.sum":9210928544.2325,"_count":4805},
+{"global__fiscalPeriod__28951.notation":"2003",
+"global__amount__0397f.sum":311242291.07,
+"global__amount__0397f__CZK.sum":9832143974.9013,"_count":4988},
+{"global__fiscalPeriod__28951.notation":"2004",
+"global__amount__0397f.sum":5268500701.1,
+"global__amount__0397f__CZK.sum":170688885714.24,"_count":10055},
+{"global__fiscalPeriod__28951.notation":"2005",
+"global__amount__0397f.sum":2542887761.01,
+"global__amount__0397f__CZK.sum":77204615312.025,"_count":2032},
+{"global__fiscalPeriod__28951.notation":"2006",
+"global__amount__0397f.sum":14803951786.68,
+"global__amount__0397f__CZK.sum":429758720367.32,"_count":13632},
+{"global__fiscalPeriod__28951.notation":"2007",
+"global__amount__0397f.sum":16188514346.44,
+"global__amount__0397f__CZK.sum":445588857385.76,"_count":22798},
+{"global__fiscalPeriod__28951.notation":"2008",
+"global__amount__0397f.sum":18231035815.89,
+"global__amount__0397f__CZK.sum":480643028250.12,"_count":24176},
+{"global__fiscalPeriod__28951.notation":"2009",
+"global__amount__0397f.sum":19079541164.68,
+"global__amount__0397f__CZK.sum":511808691742.54,"_count":26250},
+{"global__fiscalPeriod__28951.notation":"2010",
+"global__amount__0397f.sum":22738650575.01,
+"global__amount__0397f__CZK.sum":597685430364.14,"_count":87667},
+{"global__fiscalPeriod__28951.notation":"2011",
+"global__amount__0397f.sum":24961375670.57,
+"global__amount__0397f__CZK.sum":626230992823.26,"_count":134352},
+{"global__fiscalPeriod__28951.notation":"2012",
+"global__amount__0397f.sum":261513607691.41,
+"global__amount__0397f__CZK.sum":7030666436872.5,"_count":147556},
+{"global__fiscalPeriod__28951.notation":"2013",
+"global__amount__0397f.sum":268946402299.09,
+"global__amount__0397f__CZK.sum":7226220232913.8,"_count":150079},
+{"global__fiscalPeriod__28951.notation":"2014",
+"global__amount__0397f.sum":255222816704.9,
+"global__amount__0397f__CZK.sum":6907598086283.4,"_count":176019},
+{"global__fiscalPeriod__28951.notation":"2015",
+"global__amount__0397f.sum":22976062973.62,
+"global__amount__0397f__CZK.sum":636276111928.46,"_count":213777},
+{"global__fiscalPeriod__28951.notation":"2016",
+"global__amount__0397f.sum":12051686541.16,
+"global__amount__0397f__CZK.sum":325672725401.77,"_count":161797}],
+"order":[["global__fiscalPeriod__28951.fiscalPeriod","asc"]],
+"aggregates":["","_count"],
+"summary":{"global__amount__0397f.sum":945126777743.27,
+"global__amount__0397f__CZK.sum":25485085887878},
+"attributes":[""]}'
+```
+
+Define the time label of the json input:
+
++ *Param Name*: 
+```{r, eval=FALSE, include=TRUE}
+time
+```
+
++ *Param Value* -for example: 
+```{r, eval=FALSE, include=TRUE}
+"global__fiscalPeriod__28951.notation" # or
+
+'global__fiscalPeriod__28951.notation'
+```
+
+Define the amount label of the json input:
+
++ *Param Name*: 
+```{r, eval=FALSE, include=TRUE}
+amount
+```
+
++ *Param Value* -for example:
+```{r, eval=FALSE, include=TRUE}
+'global__amount__0397f.sum' # or
+
+"global__amount__0397f.sum"
+```
+
+Define the order of the model fits and forecasts (*optional*):
+
++ *Param Name*: 
+```{r, eval=FALSE, include=TRUE}
+order
+```
+
++ *Param Value* -for example: 
+```{r, eval=FALSE, include=TRUE}
+c(3,1,1)
+```
+
+Define the prediction steps (*default is 1 prediction step*):
+
++ *Param Name*: 
+```{r, eval=FALSE, include=TRUE}
+prediction_steps
+```
+
++ *Param Value* -for example:
+```{r, eval=FALSE, include=TRUE}
+4 # (or another number, default h=1)
+```
+
+
+5. Ready! Click on **Ajax request**!
+
+6. To see the results: 
+
+copy the */ocpu/tmp/{this}/R/.val* (the first choice on the right panel)
+
+7. and paste http://okfnrg.math.auth.gr/ocpu/tmp/ {this} /R/.val on a new tab.
+
+
+# Further Details:
+
++ https://www.opencpu.org/help.html
+
++ https://cran.r-project.org/web/packages/opencpu/vignettes/opencpu-server.pdf
+
++ https://www.opencpu.org/jslib.html
+
+# Github:
+
++ https://github.com/okgreece/TimeSeries.OBeu
+
+
+
