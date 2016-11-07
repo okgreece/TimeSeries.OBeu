@@ -9,8 +9,8 @@ UseSpacesForTab: Yes
 NumSpacesForTab: 2
 Encoding: UTF-8
 
-RnwWeave: knitr
-LaTeX: pdfLaTeX
+RnwWeave: Sweave
+LaTeX: XeLaTeX
 
 BuildType: Package
 PackageUseDevtools: Yes

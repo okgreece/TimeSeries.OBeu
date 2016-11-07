@@ -3,12 +3,14 @@ title: "How to Use TimeSeries.OBeu Package"
 author: "Kleanthis Koupidis"
 date: "November 7, 2016"
 output:
-  pdf_document:
-    number_sections: true
-subtitle: "A Short Guide in R and OpenCPU environments"
+  github_document:
+    html_preview: false
+  number_sections: yes
+subtitle: A Short Guide in R and OpenCPU environments
 ---
 
-This document describes the use of the functions implemented in TimeSeries.OBeu package both in R and OpenCPU environments. 
+This document describes the use of the functions implemented in TimeSeries.OBeu package both in R and OpenCPU
+environments. 
 
 #Install:
 
@@ -60,7 +62,6 @@ If we can set a specific order to fit the model for the same prediction steps. W
 ```{r}
 ts.analysis(tsdata = Athens_approved_ts, x.order=c(2,1,1), h=4)
 ```
-
 
 # OpenCPU Short Guide - TimeSeries.OBeu
 
@@ -127,7 +128,6 @@ Athens_approved_ts
 Athens_executed_ts
 ```
 
-
 Define the order of the model fits and forecasts (*optional*):
 
 + *Param Name*: 
@@ -152,7 +152,6 @@ h
 4 # (or another number, default h=1)
 ```
 
-
 5. Ready! Click on **Ajax request**!
 
 6. To see the results: 
@@ -160,8 +159,6 @@ h
 copy the */ocpu/tmp/{this}/R/.val* (the first choice on the right panel)
 
 7. and paste http://okfnrg.math.auth.gr/ocpu/tmp/ {this} /R/.val on a new tab.
-
-
 
 ## Example #2 - Rudolf/Open Spending Time Series
 
@@ -299,7 +296,6 @@ prediction_steps
 4 # (or another number, default h=1)
 ```
 
-
 5. Ready! Click on **Ajax request**!
 
 6. To see the results: 
@@ -307,7 +303,6 @@ prediction_steps
 copy the */ocpu/tmp/{this}/R/.val* (the first choice on the right panel)
 
 7. and paste http://okfnrg.math.auth.gr/ocpu/tmp/ {this} /R/.val on a new tab.
-
 
 # Further Details:
 
@@ -320,6 +315,3 @@ copy the */ocpu/tmp/{this}/R/.val* (the first choice on the right panel)
 # Github:
 
 + https://github.com/okgreece/TimeSeries.OBeu
-
-
-
