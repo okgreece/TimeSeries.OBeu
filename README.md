@@ -13,13 +13,19 @@ and then install TimeSeries.OBeu from github
 
 install_github("okgreece/TimeSeries.OBeu")
 
+And load the library
+
+library(TimeSeries.OBeu)
+
 ##Use:
 
-The basic function is: ts.analysis(tsdata,h)
+The basic function is: ts.analysis(tsdata,x.order=NULL,h=1)
 
-where tsdata: the time series data
+where tsdata: The input univariate time series data
 
-and h: the prediction steps.
+x.order: An integer vector of length 3 specifying the order of the Arima model
+
+and h: The number of prediction steps.
 
 e.g. ts.analysis(Athens_approved_ts,4)
 
