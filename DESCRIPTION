@@ -10,6 +10,5 @@ URL: https://github.com/okgreece/OBeU
 BugReports: https://github.com/okgreece/OBeU/issues
 License: GPL-2
 LazyData: TRUE
-Suggests: testthat
 Imports: forecast, locfit, jsonlite, trend, tseries
 RoxygenNote: 5.0.1

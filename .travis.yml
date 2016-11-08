@@ -15,7 +15,6 @@ r_packages:
  - rmarkdown
  - knitr
  - devtools
- - ade4
  - forecast
  - locfit
  - jsonlite
