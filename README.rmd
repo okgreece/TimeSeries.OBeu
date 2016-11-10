@@ -67,7 +67,7 @@ We select for example the approved budget phase of Athens and we want to predict
 ts.analysis(tsdata = Athens_approved_ts, h=4)
 ```
 
-If we can set a specific order to fit the model for the same prediction steps. We select for example a three-length vector of p=2 (*AR order*) d=1 (*first differences*) and q=1 (*MA order*).
+We can set a specific order to fit the model for the same prediction steps. We select for example a three-length vector of p=2 (*AR order*) d=1 (*first differences*) and q=1 (*MA order*).
 
 ```{r}
 ts.analysis(tsdata = Athens_approved_ts, x.order=c(2,1,1), h=4)
@@ -102,19 +102,19 @@ Post
 
 ## Example #1:
 
-1. Go to http://okfnrg.math.auth.gr/ocpu/test/
+1 Go to http://okfnrg.math.auth.gr/ocpu/test/
 
-2. Copy and paste the following function to the endpoint 
+2 Copy and paste the following function to the endpoint 
 ```{r, eval=FALSE, include=TRUE}
 ../library/TimeSeries.OBeu/R/ts.analysis
 ```
 
-3. *Select Method*:
+3 *Select Method*:
 ```{r, eval=FALSE, include=TRUE}
  Post
 ```
 
-4. **Add parameters** and set:
+4 **Add parameters** and set:
 
 Define the input time series data:
 
@@ -162,29 +162,29 @@ h
 4 # (or another number, default h=1)
 ```
 
-5. Ready! Click on **Ajax request**!
+5 Ready! Click on **Ajax request**!
 
-6. To see the results: 
+6 To see the results: 
 
 copy the */ocpu/tmp/{this}/R/.val* (the first choice on the right panel)
 
-7. and paste http://okfnrg.math.auth.gr/ocpu/tmp/ {this} /R/.val on a new tab.
+7 and paste http://okfnrg.math.auth.gr/ocpu/tmp/ {this} /R/.val on a new tab.
 
 ## Example #2 - Rudolf/Open Spending Time Series
 
-1. Go to http://okfnrg.math.auth.gr/ocpu/test/
+1 Go to http://okfnrg.math.auth.gr/ocpu/test/
 
-2. Copy and paste the following function to the endpoint 
+2 Copy and paste the following function to the endpoint 
 ```{r, eval=FALSE, include=TRUE}
 ../library/TimeSeries.OBeu/R/open_spending.ts
 ```
 
-3. *Select Method*:
+3 *Select Method*:
 ```{r, eval=FALSE, include=TRUE}
 Post
 ```
 
-4. **Add parameters** and set:
+4 **Add parameters** and set:
 
 Define the input time series data:
 
@@ -306,13 +306,13 @@ prediction_steps
 4 # (or another number, default h=1)
 ```
 
-5. Ready! Click on **Ajax request**!
+5 Ready! Click on **Ajax request**!
 
-6. To see the results: 
+6 To see the results: 
 
 copy the */ocpu/tmp/{this}/R/.val* (the first choice on the right panel)
 
-7. and paste http://okfnrg.math.auth.gr/ocpu/tmp/ {this} /R/.val on a new tab.
+7 and paste http://okfnrg.math.auth.gr/ocpu/tmp/ {this} /R/.val on a new tab.
 
 # Further Details:
 
