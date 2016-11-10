@@ -24,13 +24,13 @@ environments.
 
 Load *devtools* library or install it if not already:
 
-```{r, eval=FALSE, include=FALSE}
+```{r, eval=FALSE, include=T}
 install.packages("devtools")
 ```
 
 Then install *TimeSeries.OBeu* from [Github](https://github.com/okgreece/TimeSeries.OBeu)
 
-```{r, eval=FALSE, include=FALSE}
+```{r, eval=FALSE, include=T}
 devtools::install_github("okgreece/TimeSeries.OBeu")
 ```
 

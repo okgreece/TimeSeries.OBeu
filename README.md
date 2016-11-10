@@ -12,7 +12,15 @@ Install:
 
 Load *devtools* library or install it if not already:
 
+``` r
+install.packages("devtools")
+```
+
 Then install *TimeSeries.OBeu* from [Github](https://github.com/okgreece/TimeSeries.OBeu)
+
+``` r
+devtools::install_github("okgreece/TimeSeries.OBeu")
+```
 
 And load the library
 
