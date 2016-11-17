@@ -86,7 +86,7 @@ if ( is.null(x.ord)==T | all(x.ord==c(0L,0L,0L))==T) {
   
   df<-data.frame(matrix(unlist(aiccc),ncol=4,byrow = T))
   colnames(df)=c("aic","ar","diff","ma")
-  mindf<-df[order(df$aic),][2,]
+  mindf<-df[order(df$aic),][4,]
   x<-c(mindf$ar,mindf$diff,mindf$ma)
 }
 if (is.null(x.ord)==F){
