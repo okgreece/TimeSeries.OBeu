@@ -147,7 +147,7 @@ ts.analysis<-function(tsdata, x.order=c(0,0,0), prediction.steps=1){
     decomposition <- ts.non.seas.decomp(tsdata)
 
     #model
-    model <- ts.non.seas.model(tsdata=tsdata,x.ord=x.order)
+    model <- ts.non.seas.model(tsdata,x.ord=x.order)
     
     ts_model <- model$model.summary
     residuals <- model$residuals

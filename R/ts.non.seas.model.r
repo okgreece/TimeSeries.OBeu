@@ -90,7 +90,7 @@ if (is.null(x.ord)==F|all(x.ord==c(0,0,0))==F){
   df<-data.frame(matrix(unlist(aiccc),ncol=4,byrow = T))
   colnames(df)=c("aic","ar","diff","ma")
   mindf<-df[order(df$aic),]
-  mindf<-mindf[2,]
+  mindf<-mindf[3,]
   
   x<-c(mindf$ar,mindf$diff,mindf$ma)
 } 
