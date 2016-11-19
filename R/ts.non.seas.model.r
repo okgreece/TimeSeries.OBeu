@@ -50,11 +50,12 @@
 #' ts.non.seas.model(Athens_draft_ts)
 #' 
 #' @rdname ts.non.seas.model
+#' 
 #' @import forecast
 #' @export
 ####################################################################################################################################
 
-ts.non.seas.model<-function(tsdata,x.ord=NULL){
+ts.non.seas.model<-function(tsdata, x.ord=NULL){
 
 #arima obeu
 arima.obeu = function(tsdata,x) {
@@ -73,7 +74,9 @@ aic.obeu = function(aic,x) {
              NULL} ) 
 }
 
-if ( is.null(x.ord)==T | all(x.ord==c(0L,0L,0L))==T) {
+if (is.null(x.ord)==F|missing(x.ord)==F|all(x.ord==c(0,0,0))==F){
+  x=x.ord
+} else  {
   #Selection of the appropriate model
   aiccc<-list()
   modelss<-list()
@@ -86,15 +89,13 @@ if ( is.null(x.ord)==T | all(x.ord==c(0L,0L,0L))==T) {
   
   df<-data.frame(matrix(unlist(aiccc),ncol=4,byrow = T))
   colnames(df)=c("aic","ar","diff","ma")
-  mindf<-df[order(df$aic),][4,]
+  mindf<-df[order(df$aic),]
+  mindf<-mindf[2,]
   x<-c(mindf$ar,mindf$diff,mindf$ma)
-}
-if (is.null(x.ord)==F){
-  x=x.ord
-}
+} 
   # Fit the appropriate model
-  ts_model<-forecast::Arima(tsdata,order=x)
-  
+  ts_model<-forecast::Arima(y=tsdata, order=x)
+
   model.summary = ts_model
   
   model=list(	# Model

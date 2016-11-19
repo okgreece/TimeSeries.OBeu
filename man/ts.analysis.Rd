@@ -4,14 +4,14 @@
 \alias{ts.analysis}
 \title{Time series analysis results for OBEU Time series}
 \usage{
-ts.analysis(tsdata,x.order=NULL,h=1)
+ts.analysis(tsdata,x.order=c(0,0,0),prediction.steps=1)
 }
 \arguments{
 \item{tsdata}{The input univariate time series data}
 
 \item{x.order}{An integer vector of length 3 specifying the order of the Arima model}
 
-\item{h}{The number of prediction steps}
+\item{prediction.steps}{The number of prediction steps}
 }
 \value{
 A json string with the parameters:
@@ -110,7 +110,7 @@ This function also decomposes both seasonal and non seasonal time series through
 \code{\link{ts.seasonal.decomp}} and forecasts h steps ahead the user selected(default h=1) using \code{\link{ts.forecast}}.
 }
 \examples{
-ts.analysis(Athens_draft_ts,h=3)
+ts.analysis(Athens_draft_ts,prediction.steps=3)
 }
 \author{
 Kleanthis Koupidis

@@ -4,11 +4,11 @@
 #' @description
 #' Univariate time series analysis for short and long time series data using the appropriate model.
 #' 
-#' @usage ts.analysis(tsdata,x.order=NULL,h=1)
+#' @usage ts.analysis(tsdata,x.order=c(0,0,0),prediction.steps=1)
 #' 
 #' @param tsdata The input univariate time series data
 #' @param x.order An integer vector of length 3 specifying the order of the Arima model
-#' @param h The number of prediction steps
+#' @param prediction.steps The number of prediction steps
 #' 
 #' @details 
 #' This function automatically tests for stationarity of the input time series data using \code{\link{ts.stationary.test}}
@@ -109,7 +109,7 @@
 #' @seealso \code{\link{ts.analysis}}
 #' 
 #' @examples
-#' ts.analysis(Athens_draft_ts,h=3)
+#' ts.analysis(Athens_draft_ts,prediction.steps=3)
 #' @rdname ts.analysis
 #' 
 #' @import forecast
@@ -119,8 +119,7 @@
 #'
 #' @export
 ############################################################################
-
-ts.analysis<-function(tsdata,x.order=NULL,h=1){
+ts.analysis<-function(tsdata, x.order=c(0,0,0), prediction.steps=1){
   
   # Stop if no time series data provided
   
@@ -129,9 +128,9 @@ ts.analysis<-function(tsdata,x.order=NULL,h=1){
   
   # Stop if no time series data provided
   
-  if( is.nan(h)==T | is.na(h)==T |
-      is.character(h)==T | is.numeric(as.numeric(as.character(h)))==F){
-    stop("Please give an integer input as 'h', e.g. h= 4.")}
+  if( is.nan(prediction.steps)==T | is.na(prediction.steps)==T |
+      is.character(prediction.steps)==T | is.numeric(as.numeric(as.character(prediction.steps)))==F){
+    stop("Please give an integer input as 'prediction.steps', e.g. prediction.steps= 4.")}
   
   
   # Extract the time series name
@@ -148,7 +147,7 @@ ts.analysis<-function(tsdata,x.order=NULL,h=1){
     decomposition <- ts.non.seas.decomp(tsdata)
 
     #model
-    model <- ts.non.seas.model(tsdata,x.ord=x.order)
+    model <- ts.non.seas.model(tsdata=tsdata,x.ord=x.order)
     
     ts_model <- model$model.summary
     residuals <- model$residuals
@@ -245,7 +244,7 @@ ts.analysis<-function(tsdata,x.order=NULL,h=1){
   acf.param <- ts.acf(tsdata,residuals, a=0.95)
   
   ## Forecasts
-  forecasts <- ts.forecast(ts_modelx=ts_model,h)
+  forecasts <- ts.forecast(ts_modelx=ts_model,h=prediction.steps)
   
   ##  Parameter Extraction
   par <- list(

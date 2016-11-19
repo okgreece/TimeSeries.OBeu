@@ -58,9 +58,9 @@
 
 ts.seasonal.model<-function(tsdata,x.ord=NULL){
   
-  if (is.null(x.ord)){
+  if (is.null(x.ord)|all(x.ord==c(0,0,0)) ){
     ts_model<-forecast::auto.arima(tsdata)
-  } else if (is.null(x.ord)==F){
+  } else {
     ts_model<-forecast::Arima(tsdata,order=x.ord)
   }
   
