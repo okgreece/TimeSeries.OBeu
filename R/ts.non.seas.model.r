@@ -74,7 +74,7 @@ aic.obeu = function(aic,x) {
              NULL} ) 
 }
 
-if (is.null(x.ord)==F|missing(x.ord)==F|all(x.ord==c(0,0,0))==F){
+if (is.null(x.ord)==F|all(x.ord==c(0,0,0))==F){
   x=x.ord
 } else  {
   #Selection of the appropriate model
@@ -91,6 +91,7 @@ if (is.null(x.ord)==F|missing(x.ord)==F|all(x.ord==c(0,0,0))==F){
   colnames(df)=c("aic","ar","diff","ma")
   mindf<-df[order(df$aic),]
   mindf<-mindf[2,]
+  
   x<-c(mindf$ar,mindf$diff,mindf$ma)
 } 
   # Fit the appropriate model
