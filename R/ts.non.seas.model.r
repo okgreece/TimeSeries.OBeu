@@ -81,7 +81,7 @@ if (is.null(x.ord)==F|all(x.ord==c(0,0,0))==F){
   aiccc<-list()
   modelss<-list()
  
-  for(i in 1:7){
+  for(i in 1:8){
   
     modelss[[i]]<-arima.obeu(tsdata,i)
     aiccc[[i]]<-aic.obeu(modelss[[i]]$aic,i)
@@ -90,7 +90,7 @@ if (is.null(x.ord)==F|all(x.ord==c(0,0,0))==F){
   df<-data.frame(matrix(unlist(aiccc),ncol=4,byrow = T))
   colnames(df)=c("aic","ar","diff","ma")
   mindf<-df[order(df$aic),]
-  mindf<-mindf[4,]
+  mindf<-mindf[3,]
   
   x<-c(mindf$ar,mindf$diff,mindf$ma)
 } 

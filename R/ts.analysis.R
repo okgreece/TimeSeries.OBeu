@@ -4,7 +4,7 @@
 #' @description
 #' Univariate time series analysis for short and long time series data using the appropriate model.
 #' 
-#' @usage ts.analysis(tsdata,x.order=c(0,0,0),prediction.steps=1)
+#' @usage ts.analysis(tsdata,x.order=NULL,prediction.steps=1)
 #' 
 #' @param tsdata The input univariate time series data
 #' @param x.order An integer vector of length 3 specifying the order of the Arima model
@@ -119,7 +119,7 @@
 #'
 #' @export
 ############################################################################
-ts.analysis<-function(tsdata, x.order=c(0,0,0), prediction.steps=1){
+ts.analysis<-function(tsdata, x.order=NULL, prediction.steps=1){
   
   # Stop if no time series data provided
   

@@ -4,7 +4,7 @@
 \alias{ts.analysis}
 \title{Time series analysis results for OBEU Time series}
 \usage{
-ts.analysis(tsdata,x.order=c(0,0,0),prediction.steps=1)
+ts.analysis(tsdata,x.order=NULL,prediction.steps=1)
 }
 \arguments{
 \item{tsdata}{The input univariate time series data}
