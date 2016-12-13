@@ -40,20 +40,7 @@ And load the library
 library(TimeSeries.OBeu)
 ```
 
-#Use:
-
-The basic function is: 
-```{r, eval=FALSE, include=TRUE}
-ts.analysis(tsdata,x.order=NULL,h=1)
-```
-
-where *tsdata*: The input univariate time series data
-
-*x.order*: An integer vector of length 3 specifying the order of the Arima model
-
-and *h*: The number of prediction steps
-
-### R Example
+### R Datasets
 
 The package includes the following time series data: Athens_draft_ts, Athens_revised_ts, Athens_reserved_ts, Athens_approved_ts and Athens_executed_ts.
 
@@ -61,17 +48,6 @@ The package includes the following time series data: Athens_draft_ts, Athens_rev
 Athens_draft_ts
 ```
 
-We select for example the approved budget phase of Athens and we want to predict 4 years ahead.
-
-```{r}
-ts.analysis(tsdata = Athens_approved_ts, h=4)
-```
-
-We can set a specific order to fit the model for the same prediction steps. We select for example a three-length vector of p=2 (*AR order*) d=1 (*first differences*) and q=1 (*MA order*).
-
-```{r}
-ts.analysis(tsdata = Athens_approved_ts, x.order=c(2,1,1), h=4)
-```
 
 # OpenCPU Short Guide - TimeSeries.OBeu
 
@@ -100,77 +76,7 @@ Post
 ```
 
 
-## Example #1:
-
-1 Go to http://okfnrg.math.auth.gr/ocpu/test/
-
-2 Copy and paste the following function to the endpoint 
-```{r, eval=FALSE, include=TRUE}
-../library/TimeSeries.OBeu/R/ts.analysis
-```
-
-3 *Select Method*:
-```{r, eval=FALSE, include=TRUE}
- Post
-```
-
-4 **Add parameters** and set:
-
-Define the input time series data:
-
-+ *Param Name*:
- 
-```{r, eval=FALSE, include=TRUE}
-tsdata
-```
-
-+ *Param Value* one of the following:
- 
-```{r, eval=FALSE, include=TRUE}
-Athens_draft_ts
-
-Athens_revised_ts
-
-Athens_reserved_ts
-
-Athens_approved_ts
-
-Athens_executed_ts
-```
-
-Define the order of the model fits and forecasts (*optional*):
-
-+ *Param Name*: 
-```{r, eval=FALSE, include=TRUE}
-x.order
-```
-
-+ *Param Value* -for example: 
-```{r, eval=FALSE, include=TRUE}
-c(2,1,1)
-```
-
-Define the prediction steps (*default is 1 prediction step*):
-
-+ *Param Name*: 
-```{r, eval=FALSE, include=TRUE}
-h
-```
-
-+ *Param Value* -for example:
-```{r, eval=FALSE, include=TRUE}
-4 # (or another number, default h=1)
-```
-
-5 Ready! Click on **Ajax request**!
-
-6 To see the results: 
-
-copy the */ocpu/tmp/{this}/R/.val* (the first choice on the right panel)
-
-7 and paste http://okfnrg.math.auth.gr/ocpu/tmp/ {this} /R/.val on a new tab.
-
-## Example #2 - Rudolf/Open Spending Time Series
+## Example #1 - Rudolf/Open Spending Time Series
 
 1 Go to http://okfnrg.math.auth.gr/ocpu/test/
 
@@ -194,7 +100,7 @@ Define the input time series data:
 json_data
 ```
 
-+ *Param Value* -the following output from open spending api or you can provide the also **json URL**:
++ *Param Value* -the following output from open spending api or you can provide the also **json URL** in double or single quotes:
 ```{r, eval=FALSE, include=TRUE}
 '{"page":0,
 "page_size":30,
