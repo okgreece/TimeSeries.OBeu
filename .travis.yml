@@ -11,6 +11,7 @@ before_install:
 github_packages:
   - devtools
 r_packages:
+ - covr
  - stats
  - rmarkdown
  - knitr
@@ -26,3 +27,4 @@ sudo: required
 warnings_are_errors: false
 after_success:
   - Rscript -e 'covr::codecov()'
+  - Rscript -e 'library(covr); codecov()'
