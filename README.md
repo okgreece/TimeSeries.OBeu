@@ -3,7 +3,13 @@ TimeSeries.OBeu <img src="obeu_logo.png" align="right" />
 Kleanthis Koupidis
 November 7, 2016
 
-[![Build Status](https://travis-ci.org/okgreece/TimeSeries.OBeu.svg?branch=master)](https://travis-ci.org/okgreece/TimeSeries.OBeu) [![Pending Pull-Requests](http://githubbadges.herokuapp.com/okgreece/TimeSeries.OBeu/pulls.svg)](https://github.com/okgreece/TimeSeries.OBeu/pulls) [![Github Issues](http://githubbadges.herokuapp.com/okgreece/TimeSeries.OBeu/issues.svg)](https://github.com/okgreece/TimeSeries.OBeu/issues) badgecreatr::licbadgebuilder("GPL-2")
+[![Build Status](https://travis-ci.org/okgreece/TimeSeries.OBeu.svg?branch=master)](https://travis-ci.org/okgreece/TimeSeries.OBeu) [![Pending Pull-Requests](http://githubbadges.herokuapp.com/okgreece/TimeSeries.OBeu/pulls.svg)](https://github.com/okgreece/TimeSeries.OBeu/pulls) [![Github Issues](http://githubbadges.herokuapp.com/okgreece/TimeSeries.OBeu/issues.svg)](https://github.com/okgreece/TimeSeries.OBeu/issues)
+
+``` r
+badgecreatr::licbadgebuilder("GPL-2")
+```
+
+    ## [1] "[![Licence](https://img.shields.io/badge/licence-GPL--2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html)"
 
 This document describes the use of the functions implemented in TimeSeries.OBeu package both in R and OpenCPU environments.
 

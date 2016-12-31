@@ -15,7 +15,10 @@ subtitle: A Short Guide in R and OpenCPU environments
 [![Build Status](https://travis-ci.org/okgreece/TimeSeries.OBeu.svg?branch=master)](https://travis-ci.org/okgreece/TimeSeries.OBeu)
 [![Pending Pull-Requests](http://githubbadges.herokuapp.com/okgreece/TimeSeries.OBeu/pulls.svg)](https://github.com/okgreece/TimeSeries.OBeu/pulls)
 [![Github Issues](http://githubbadges.herokuapp.com/okgreece/TimeSeries.OBeu/issues.svg)](https://github.com/okgreece/TimeSeries.OBeu/issues)
+```{r}
 badgecreatr::licbadgebuilder("GPL-2")
+
+```
 
 This document describes the use of the functions implemented in TimeSeries.OBeu package both in R and OpenCPU
 environments. 
