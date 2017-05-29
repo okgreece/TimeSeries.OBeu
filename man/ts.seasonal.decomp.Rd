@@ -4,10 +4,12 @@
 \alias{ts.seasonal.decomp}
 \title{Decomposition of seasonal time series}
 \usage{
-ts.seasonal.decomp(tsdata)
+ts.seasonal.decomp(tsdata, tojson=F)
 }
 \arguments{
 \item{tsdata}{The input univariate seasonal time series data}
+
+\item{tojson}{If TRUE the results are returned in json format, default returns a list}
 }
 \value{
 A list with the following components:
@@ -54,13 +56,12 @@ This function is used internally in ts.analysis.
 Decomposition of seasonal time series data through arima models is based on stlm from forecast package
 and returns a list with useful parameters for OBEU.
 }
-\author{
-Kleanthis Koupidis
-}
 \references{
 add
 }
 \seealso{
-\code{\link{ts.analysis}}, stlm (forecast package)
+\code{\link{ts.analysis}}, \code{\link[forecast]{stlm}}
 }
-
+\author{
+Kleanthis Koupidis
+}

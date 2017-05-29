@@ -15,4 +15,3 @@ Time series data with the Revised Budget phase expenditure amounts of Municipali
   \item {The revised budget phase amounts of this time range.}
   }
 }
-

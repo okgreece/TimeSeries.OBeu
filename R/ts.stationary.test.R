@@ -38,11 +38,13 @@
 #' 
 #' @references tseries, trend
 #' 
-#' @seealso \code{\link{ts.analysis}}, Acf and Pacf(forecast package),pp.test, adf.test and kpss.test (tseries)
-#' mk.test and cs.test (trend package)
+#' @seealso \code{\link{ts.analysis}}, \code{\link[forecast]{Acf}}, \code{\link[forecast]{Pacf}}, \code{\link[tseries]{pp.test}},
+#' \code{\link[tseries]{adf.test}}, \code{\link[tseries]{kpss.test}}, \code{\link[trend]{mk.test}}, \code{\link[trend]{cs.test}}
+#' 
 #' 
 #' @examples
 #' ts.stationary.test(Athens_approved_ts)
+#' 
 #' @rdname ts.stationary.test
 #' 
 #' @import forecast

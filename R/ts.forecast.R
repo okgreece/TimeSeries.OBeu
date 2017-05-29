@@ -4,10 +4,11 @@
 #' @description
 #' Univariate time series forecasts for short and long time series data using the appropriate model.
 #' 
-#' @usage ts.forecast(ts_modelx,h=1)
+#' @usage ts.forecast(ts_modelx, h=1, tojson=F)
 #' 
 #' @param ts_modelx The input univariate time series data
 #' @param h The number of prediction steps
+#' @param tojson If TRUE the results are returned in json format, default returns a list
 #' 
 #' @details 
 #' This function is used internally in ts.analysis and forecasts the model 
@@ -20,13 +21,13 @@
 #' 
 #' \itemize{ 
 #'
-#' \item ts.model: a string indicating the arima orders
+#' \item ts.model a string indicating the arima orders
 #' 
-#' \item data_year: The time that time series data were sampled
+#' \item data_year The time that time series data were sampled
 #'
-#' \item data: The time series values
-#' \item predict_time: The time that defined by the prediction_steps parameter
-#' \item predict_values: The predicted values that defined by the prediction_steps parameter
+#' \item data The time series values
+#' \item predict_time The time that defined by the prediction_steps parameter
+#' \item predict_values The predicted values that defined by the prediction_steps parameter
 #' \item up80: The upper limit of the 80\% predicted confidence interval
 #' \item low80: The lower limit of the 80\% predicted confidence interval
 #' \item up95: The upper limit of the 95\% predicted confidence interval
@@ -35,7 +36,7 @@
 #' @author Kleanthis Koupidis
 #' 
 #' 
-#' @seealso \code{\link{ts.analysis}}, forecast(forecast package)
+#' @seealso \code{\link{ts.analysis}}, \code{\link[forecast]{forecast}}
 #' 
 #' @examples
 #' Athens_draft <- ts.non.seas.model(Athens_draft_ts)
@@ -46,11 +47,12 @@
 #' @rdname ts.forecast
 #' 
 #' @import forecast
+#' @import jsonlite
 #'
 #' @export
 ############################################################################
 
-ts.forecast<-function(ts_modelx,h=1){
+ts.forecast<-function(ts_modelx, h=1, tojson=F){
 
   ## Model Forecasting
   forecasts<-forecast::forecast(ts_modelx,h)
@@ -66,8 +68,10 @@ ts.forecast<-function(ts_modelx,h=1){
                        up95=forecasts$upper[,"95%"],
                        low95=forecasts$lower[,"95%"] )
   
-  ##  to JSON
-  #parameters<-jsonlite::toJSON(forecast.param)
+  if (tojson==T){
+    
+    forecast.param=jsonlite::toJSON(forecast.param)
+  }
   
   ##  Result
   return(forecast.param)

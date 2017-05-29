@@ -5,11 +5,12 @@
 #' This function is included in ts.analysis function and aims to extract the ACF and PACF details 
 #' of the input time series data and the ACF, PACF of the residuals after fitting an Arima model. 
 #' 
-#' @usage ts.acf(tsdata,model_residuals,a=0.95)
+#' @usage ts.acf(tsdata, model_residuals, a=0.95, tojson=T)
 #' 
 #' @param tsdata The input univariate time series data
 #' @param model_residuals The model's residuals after fitting a model to the time series
 #' @param a The significant level (default a=0.95)
+#' @param tojson If TRUE the results are returned in json format, default returns a list
 #' 
 #' @details 
 #' 
@@ -20,29 +21,29 @@
 #' @return A list with the parameters:
 #'\itemize{
 #'  \item acf.parameters: 
-#'  \itemize{ \item acf: The estimated acf values of the input time series
-#'  \item acf.lag: The lags at which the acf is estimated
-#'  \item confidence.interval.up: The upper limit of the confidence interval
-#'  \item confidence.interval.low: The lower limit of the confidence interval}
+#'  \itemize{ \item acf The estimated acf values of the input time series
+#'  \item acf.lag The lags at which the acf is estimated
+#'  \item confidence.interval.up The upper limit of the confidence interval
+#'  \item confidence.interval.low The lower limit of the confidence interval}
 #'  \item pacf.parameters: 
-#'  \itemize{ \item pacf: The estimated pacf values of the input time series
-#'  \item pacf.lag: The lags at which the pacf is estimated
-#'  \item confidence.interval.up: The upper limit of the confidence interval
-#'  \item confidence.interval.low: The lower limit of the confidence interval}
+#'  \itemize{ \item pacf The estimated pacf values of the input time series
+#'  \item pacf.lag The lags at which the pacf is estimated
+#'  \item confidence.interval.up The upper limit of the confidence interval
+#'  \item confidence.interval.low The lower limit of the confidence interval}
 #'  \item acf.residuals.parameters: 
-#'  \itemize{ \item acf.res: The estimated acf values of the model residuals
-#'  \item acf.res.lag: The lags at which the acf is estimated of the model residuals
-#'  \item confidence.interval.up: The upper limit of the confidence interval
-#'  \item confidence.interval.low: The lower limit of the confidence interval}
+#'  \itemize{ \item acf.res The estimated acf values of the model residuals
+#'  \item acf.res.lag The lags at which the acf is estimated of the model residuals
+#'  \item confidence.interval.up The upper limit of the confidence interval
+#'  \item confidence.interval.low The lower limit of the confidence interval}
 #'  \item pacf.residuals.parameters: 
-#'  \itemize{ \item pacf.res: The estimated pacf values of the model residuals
-#'  \item pacf.res.lag: The lags at which the pacf is estimated of the model residuals
-#'  \item confidence.interval.up: The upper limit of the confidence interval
-#'  \item confidence.interval.low: The lower limit of the confidence interval}}
+#'  \itemize{ \item pacf.res The estimated pacf values of the model residuals
+#'  \item pacf.res.lag The lags at which the pacf is estimated of the model residuals
+#'  \item confidence.interval.up The upper limit of the confidence interval
+#'  \item confidence.interval.low The lower limit of the confidence interval}}
 #' 
 #' @author Kleanthis Koupidis
 #' 
-#' @seealso \code{\link{ts.analysis}}
+#' @seealso \code{\link{ts.analysis}}, \code{\link[forecast]{Acf}}, \code{\link[forecast]{Pacf}}
 #' 
 #' @examples 
 #' ts.acf(Athens_draft_ts)
@@ -50,11 +51,12 @@
 #' @rdname ts.acf
 #' 
 #' @import forecast
+#' @import jsonlite
 #'
 #' @export
 ###################################################################################
 
-ts.acf<-function(tsdata, model_residuals=NULL, a=0.95){
+ts.acf<-function(tsdata, model_residuals=NULL, a=0.95, tojson=T){
   
   # acf, pacf of ts 
   acff<-forecast::Acf(tsdata,plot=F)
@@ -105,6 +107,12 @@ ts.acf<-function(tsdata, model_residuals=NULL, a=0.95){
     pacf.parameters=pacf.parameters,
     acf.residuals.parameters=acf.residuals.parameters,
     pacf.residuals.parameters=pacf.residuals.parameters)
+  
+  
+  if (tojson==T){
+    
+    parameters=jsonlite::toJSON(parameters)
+  }
   
   # return
   return(parameters)

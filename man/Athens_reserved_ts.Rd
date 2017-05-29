@@ -15,4 +15,3 @@ Time series data with the Reserved Budget phase expenditure amounts of Municipal
   \item {The reserved budget phase amounts of this time range.}
   }
 }
-

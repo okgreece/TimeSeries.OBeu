@@ -4,44 +4,46 @@
 \alias{ts.non.seas.decomp}
 \title{Non seasonal decomposition}
 \usage{
-ts.non.seas.decomp(tsdata)
+ts.non.seas.decomp(tsdata, tojson=F)
 }
 \arguments{
 \item{tsdata}{The input univariate non seasonal time series data}
+
+\item{tojson}{If TRUE the results are returned in json format, default returns a list}
 }
 \value{
 A list with the following components:
 \itemize{
 \item stl.plot: 
 \itemize{
- \item trend: The estimated trend component
- \item trend.ci.up: The estimated up limit for trend component
- \item trend.ci.low: The estimated low limit for trend component
- \item seasonal: The estimated seasonal component
- \item remainder: The estimated remainder component
- \item time: The time of the series was sampled}
+ \item trend The estimated trend component
+ \item trend.ci.up The estimated up limit for trend component
+ \item trend.ci.low The estimated low limit for trend component
+ \item seasonal The estimated seasonal component
+ \item remainder The estimated remainder component
+ \item time The time of the series was sampled}
 
 \item stl.general:
 \itemize{
- \item stl.degree: The degree of fit
- \item degfr: The effective degrees of freedom 
- \item degfr.fitted: The fitted degrees of freedom }
+ \item stl.degree The degree of fit
+ \item degfr The effective degrees of freedom 
+ \item degfr.fitted The fitted degrees of freedom }
  
 \item residuals_fitted:
 \itemize{
-\item residuals: The residuals of the model (fitted innovations)
-\item fitted: The model's fitted values 
+\item residuals The residuals of the model (fitted innovations)
+\item fitted The model's fitted values 
 \item time the time of tsdata
 \item line The y=0 line}
 
 \item compare: 
  \itemize{
- \item resid.variance: The residuals variance
- \item used.obs: The used observations for the fitting
- \item loglik: The maximized log-likelihood (of the differenced data), or the approximation to it used
- \item aic: The AIC value corresponding to the log-likelihood
- \item bic: The BIC value corresponding to the log-likelihood
- \item gcv: The generalized cross-validation statistic }}
+ \item resid.variance The residuals variance
+ \item used.obs The used observations for the fitting
+ \item loglik The maximized log-likelihood (of the differenced data), or the approximation to it used
+ \item aic The AIC value corresponding to the log-likelihood
+ \item bic The BIC value corresponding to the log-likelihood
+ \item gcv The generalized cross-validation statistic }}
 }
 \description{
 Decomposition of time series with no seasonal component using local regression models
@@ -54,13 +56,12 @@ in order to extract the trend and remaider components.
 ts.non.seas.decomp(Athens_draft_ts)
 
 }
-\author{
-Kleanthis Koupidis
-}
 \references{
 add
 }
 \seealso{
-\code{\link{ts.analysis}}, locfit, predict.locfit
+\code{\link{ts.analysis}}, \link[locfit]{locfit}, \link[locfit]{predict.locfit}
 }
-
+\author{
+Kleanthis Koupidis
+}

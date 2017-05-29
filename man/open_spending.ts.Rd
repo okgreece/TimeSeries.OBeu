@@ -27,10 +27,9 @@ Extract and analyze univariate time series data from Open Spending API, using th
 This function extracts the time series data provided by the Open Spending API, in order to
 return the results from the \code{\link{ts.analysis}} function.
 }
-\author{
-Kleanthis Koupidis
-}
 \seealso{
 \code{\link{ts.analysis}}
 }
-
+\author{
+Kleanthis Koupidis
+}

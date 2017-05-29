@@ -4,9 +4,10 @@
 #' @description
 #' Decomposition of time series with no seasonal component using local regression models  
 #'
-#' @usage ts.non.seas.decomp(tsdata)
+#' @usage ts.non.seas.decomp(tsdata, tojson=F)
 #' 
 #' @param tsdata The input univariate non seasonal time series data
+#' @param tojson If TRUE the results are returned in json format, default returns a list
 #' 
 #' @details 
 #' For non-seasonal time series there is no seasonal component. Local regression and likelihood models (locfit package) are used
@@ -17,50 +18,52 @@
 #' \itemize{
 #' \item stl.plot: 
 #' \itemize{
-#'  \item trend: The estimated trend component
-#'  \item trend.ci.up: The estimated up limit for trend component
-#'  \item trend.ci.low: The estimated low limit for trend component
-#'  \item seasonal: The estimated seasonal component
-#'  \item remainder: The estimated remainder component
-#'  \item time: The time of the series was sampled}
+#'  \item trend The estimated trend component
+#'  \item trend.ci.up The estimated up limit for trend component
+#'  \item trend.ci.low The estimated low limit for trend component
+#'  \item seasonal The estimated seasonal component
+#'  \item remainder The estimated remainder component
+#'  \item time The time of the series was sampled}
 #'
 #' \item stl.general:
 #' \itemize{
-#'  \item stl.degree: The degree of fit
-#'  \item degfr: The effective degrees of freedom 
-#'  \item degfr.fitted: The fitted degrees of freedom }
+#'  \item stl.degree The degree of fit
+#'  \item degfr The effective degrees of freedom 
+#'  \item degfr.fitted The fitted degrees of freedom }
 #'  
 #' \item residuals_fitted:
 #' \itemize{
-#' \item residuals: The residuals of the model (fitted innovations)
-#' \item fitted: The model's fitted values 
+#' \item residuals The residuals of the model (fitted innovations)
+#' \item fitted The model's fitted values 
 #' \item time the time of tsdata
 #' \item line The y=0 line}
 #' 
 #' \item compare: 
 #'  \itemize{
-#'  \item resid.variance: The residuals variance
-#'  \item used.obs: The used observations for the fitting
-#'  \item loglik: The maximized log-likelihood (of the differenced data), or the approximation to it used
-#'  \item aic: The AIC value corresponding to the log-likelihood
-#'  \item bic: The BIC value corresponding to the log-likelihood
-#'  \item gcv: The generalized cross-validation statistic }}
+#'  \item resid.variance The residuals variance
+#'  \item used.obs The used observations for the fitting
+#'  \item loglik The maximized log-likelihood (of the differenced data), or the approximation to it used
+#'  \item aic The AIC value corresponding to the log-likelihood
+#'  \item bic The BIC value corresponding to the log-likelihood
+#'  \item gcv The generalized cross-validation statistic }}
 #'  
 #' @author Kleanthis Koupidis
 #' 
 #' @references add
 #' 
-#' @seealso \code{\link{ts.analysis}}, locfit, predict.locfit
+#' @seealso \code{\link{ts.analysis}}, \link[locfit]{locfit}, \link[locfit]{predict.locfit}
 #' 
 #' @examples
 #' ts.non.seas.decomp(Athens_draft_ts)
 #' 
 #' @rdname ts.non.seas.decomp
 #' @import locfit
+#' @import jsonlite
+#' 
 #' @export
 ######################################################################################################################################
 
-ts.non.seas.decomp<-function(tsdata){
+ts.non.seas.decomp<-function(tsdata, tojson=F){
 
   ## Decompose
   tsdata.stl <- locfit::locfit(tsdata~stats::time(tsdata))
@@ -131,7 +134,7 @@ ts.non.seas.decomp<-function(tsdata){
     time=stats::time(tsdata),
     line=0)
 
-  compare=list(  #Comparison
+  compare=list(  #Compare
  
   resid.variance=sigma2,
     
@@ -142,13 +145,17 @@ ts.non.seas.decomp<-function(tsdata){
    bic=bic,
    gcv=gcv
    )
-    
 
-	model.details<-list(
-	  stl.plot=stl.plot,
-	  stl.general=stl.general,
-	  residuals_fitted=residuals_fitted,
-	  compare=compare
-	)
+	model.details = list(stl.plot=stl.plot,
+	                     stl.general=stl.general,
+	                     residuals_fitted=residuals_fitted,
+	                     compare=compare
+	                     )
+	
+	if (tojson==T){
+	  
+	  model.details=jsonlite::toJSON(model.details)
+	}
+	
   return(model.details)
 } 

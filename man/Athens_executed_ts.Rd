@@ -15,4 +15,3 @@ Time series data with the Executed Budget phase expenditure amounts of Municipal
   \item {The executed budget phase amounts of this time range.}
   }
 }
-

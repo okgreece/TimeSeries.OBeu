@@ -40,15 +40,15 @@ against the fact that there is a time dependent trend (monotonic trend).
 }
 \examples{
 ts.stationary.test(Athens_approved_ts)
-}
-\author{
-Kleanthis Koupidis
+
 }
 \references{
 tseries, trend
 }
 \seealso{
-\code{\link{ts.analysis}}, Acf and Pacf(forecast package),pp.test, adf.test and kpss.test (tseries)
-mk.test and cs.test (trend package)
+\code{\link{ts.analysis}}, \code{\link[forecast]{Acf}}, \code{\link[forecast]{Pacf}}, \code{\link[tseries]{pp.test}},
+\code{\link[tseries]{adf.test}}, \code{\link[tseries]{kpss.test}}, \code{\link[trend]{mk.test}}, \code{\link[trend]{cs.test}}
 }
-
+\author{
+Kleanthis Koupidis
+}

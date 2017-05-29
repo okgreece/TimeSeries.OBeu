@@ -15,4 +15,3 @@ Time series data with the Draft Budget phase expenditure amounts of Municipality
   \item {The draft budget phase amounts of this time range.}
   }
 }
-

@@ -4,7 +4,7 @@
 \alias{ts.acf}
 \title{Extract the ACF and PACF parameters of time series and their model residuals}
 \usage{
-ts.acf(tsdata,model_residuals,a=0.95)
+ts.acf(tsdata, model_residuals, a=0.95, tojson=T)
 }
 \arguments{
 \item{tsdata}{The input univariate time series data}
@@ -12,30 +12,32 @@ ts.acf(tsdata,model_residuals,a=0.95)
 \item{model_residuals}{The model's residuals after fitting a model to the time series}
 
 \item{a}{The significant level (default a=0.95)}
+
+\item{tojson}{If TRUE the results are returned in json format, default returns a list}
 }
 \value{
 A list with the parameters:
 \itemize{
  \item acf.parameters: 
- \itemize{ \item acf: The estimated acf values of the input time series
- \item acf.lag: The lags at which the acf is estimated
- \item confidence.interval.up: The upper limit of the confidence interval
- \item confidence.interval.low: The lower limit of the confidence interval}
+ \itemize{ \item acf The estimated acf values of the input time series
+ \item acf.lag The lags at which the acf is estimated
+ \item confidence.interval.up The upper limit of the confidence interval
+ \item confidence.interval.low The lower limit of the confidence interval}
  \item pacf.parameters: 
- \itemize{ \item pacf: The estimated pacf values of the input time series
- \item pacf.lag: The lags at which the pacf is estimated
- \item confidence.interval.up: The upper limit of the confidence interval
- \item confidence.interval.low: The lower limit of the confidence interval}
+ \itemize{ \item pacf The estimated pacf values of the input time series
+ \item pacf.lag The lags at which the pacf is estimated
+ \item confidence.interval.up The upper limit of the confidence interval
+ \item confidence.interval.low The lower limit of the confidence interval}
  \item acf.residuals.parameters: 
- \itemize{ \item acf.res: The estimated acf values of the model residuals
- \item acf.res.lag: The lags at which the acf is estimated of the model residuals
- \item confidence.interval.up: The upper limit of the confidence interval
- \item confidence.interval.low: The lower limit of the confidence interval}
+ \itemize{ \item acf.res The estimated acf values of the model residuals
+ \item acf.res.lag The lags at which the acf is estimated of the model residuals
+ \item confidence.interval.up The upper limit of the confidence interval
+ \item confidence.interval.low The lower limit of the confidence interval}
  \item pacf.residuals.parameters: 
- \itemize{ \item pacf.res: The estimated pacf values of the model residuals
- \item pacf.res.lag: The lags at which the pacf is estimated of the model residuals
- \item confidence.interval.up: The upper limit of the confidence interval
- \item confidence.interval.low: The lower limit of the confidence interval}}
+ \itemize{ \item pacf.res The estimated pacf values of the model residuals
+ \item pacf.res.lag The lags at which the pacf is estimated of the model residuals
+ \item confidence.interval.up The upper limit of the confidence interval
+ \item confidence.interval.low The lower limit of the confidence interval}}
 }
 \description{
 This function is included in ts.analysis function and aims to extract the ACF and PACF details 
@@ -50,10 +52,9 @@ of the residuals needed for the graphical purposes in OBEU.
 ts.acf(Athens_draft_ts)
 
 }
+\seealso{
+\code{\link{ts.analysis}}, \code{\link[forecast]{Acf}}, \code{\link[forecast]{Pacf}}
+}
 \author{
 Kleanthis Koupidis
 }
-\seealso{
-\code{\link{ts.analysis}}
-}
-

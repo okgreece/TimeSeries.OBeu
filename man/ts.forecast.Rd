@@ -4,25 +4,27 @@
 \alias{ts.forecast}
 \title{Time series forecast results of OBEU Time Series}
 \usage{
-ts.forecast(ts_modelx,h=1)
+ts.forecast(ts_modelx, h=1, tojson=F)
 }
 \arguments{
 \item{ts_modelx}{The input univariate time series data}
 
 \item{h}{The number of prediction steps}
+
+\item{tojson}{If TRUE the results are returned in json format, default returns a list}
 }
 \value{
 A list with the parameters:
 
 \itemize{ 
 
-\item ts.model: a string indicating the arima orders
+\item ts.model a string indicating the arima orders
 
-\item data_year: The time that time series data were sampled
+\item data_year The time that time series data were sampled
 
-\item data: The time series values
-\item predict_time: The time that defined by the prediction_steps parameter
-\item predict_values: The predicted values that defined by the prediction_steps parameter
+\item data The time series values
+\item predict_time The time that defined by the prediction_steps parameter
+\item predict_values The predicted values that defined by the prediction_steps parameter
 \item up80: The upper limit of the 80\% predicted confidence interval
 \item low80: The lower limit of the 80\% predicted confidence interval
 \item up95: The upper limit of the 95\% predicted confidence interval
@@ -45,10 +47,9 @@ draft<-Athens_draft$model.summary
 ts.forecast(draft)
 
 }
+\seealso{
+\code{\link{ts.analysis}}, \code{\link[forecast]{forecast}}
+}
 \author{
 Kleanthis Koupidis
 }
-\seealso{
-\code{\link{ts.analysis}}, forecast(forecast package)
-}
-

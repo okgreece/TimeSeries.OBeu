@@ -5,9 +5,10 @@
 #' Decomposition of seasonal time series data using stlm from forecast package. 
 #' This function is used internally in ts.analysis.
 #' 
-#' @usage ts.seasonal.decomp(tsdata)
+#' @usage ts.seasonal.decomp(tsdata, tojson=F)
 #' 
 #' @param tsdata The input univariate seasonal time series data
+#' @param tojson If TRUE the results are returned in json format, default returns a list
 #' 
 #' @details 
 #' Decomposition of seasonal time series data through arima models is based on stlm from forecast package
@@ -54,7 +55,7 @@
 #' 
 #' @references add
 #' 
-#' @seealso \code{\link{ts.analysis}}, stlm (forecast package)
+#' @seealso \code{\link{ts.analysis}}, \code{\link[forecast]{stlm}} 
 #' 
 #'
 #' @rdname ts.seasonal.decomp
@@ -67,7 +68,7 @@
 #' @export
 ##############################################################################################################
 
-ts.seasonal.decomp<-function(tsdata){
+ts.seasonal.decomp<-function(tsdata, tojson=F){
 
 tsdata.stl <- forecast::stlm(tsdata, s.window="periodic", robust=FALSE, method="arima",
                              modelfunction=forecast::auto.arima,allow.multiplicative.trend=TRUE)
@@ -125,6 +126,11 @@ model.details<-list(
 					residuals_fitted=residuals_fitted,
 					compare=compare
 					)
+
+if (tojson==T){
+  
+  model.details=jsonlite::toJSON(model.details)
+}
 
 return(model.details)
 

@@ -4,11 +4,12 @@
 #' @description
 #' Univariate time series analysis for short and long time series data using the appropriate model.
 #' 
-#' @usage ts.analysis(tsdata,x.order=NULL,prediction.steps=1)
+#' @usage ts.analysis(tsdata, x.order=NULL, prediction.steps=1, tojson=T)
 #' 
 #' @param tsdata The input univariate time series data
 #' @param x.order An integer vector of length 3 specifying the order of the Arima model
 #' @param prediction.steps The number of prediction steps
+#' @param tojson If TRUE the results are returned in json format, default returns a list
 #' 
 #' @details 
 #' This function automatically tests for stationarity of the input time series data using \code{\link{ts.stationary.test}}
@@ -27,84 +28,83 @@
 #' \itemize{
 #'  \item acf.parameters: 
 #'  \itemize{ 
-#'  \item acf: The estimated acf values of the input time series
-#'  \item acf.lag: The lags at which the acf is estimated
-#'  \item confidence.interval.up: The upper limit of the confidence interval
-#'  \item confidence.interval.low: The lower limit of the confidence interval}
+#'  \item acf The estimated acf values of the input time series
+#'  \item acf.lag The lags at which the acf is estimated
+#'  \item confidence.interval.up The upper limit of the confidence interval
+#'  \item confidence.interval.low The lower limit of the confidence interval}
 #'  
 #'  \item pacf.parameters: 
 #'  \itemize{ 
-#'  \item pacf: The estimated pacf values of the input time series
-#'  \item pacf.lag: The lags at which the pacf is estimated
-#'  \item confidence.interval.up: The upper limit of the confidence interval
-#'  \item confidence.interval.low: The lower limit of the confidence interval}
+#'  \item pacf The estimated pacf values of the input time series
+#'  \item pacf.lag The lags at which the pacf is estimated
+#'  \item confidence.interval.up The upper limit of the confidence interval
+#'  \item confidence.interval.low The lower limit of the confidence interval}
 #'  
 #'  \item acf.residuals.parameters: 
-#'  \itemize{ \item acf.res: The estimated acf values of the model residuals
-#'  \item acf.res.lag: The lags at which the acf is estimated of the model residuals
-#'  \item confidence.interval.up: The upper limit of the confidence interval
-#'  \item confidence.interval.low: The lower limit of the confidence interval}
+#'  \itemize{ \item acf.res The estimated acf values of the model residuals
+#'  \item acf.res.lag The lags at which the acf is estimated of the model residuals
+#'  \item confidence.interval.up The upper limit of the confidence interval
+#'  \item confidence.interval.low The lower limit of the confidence interval}
 #'  
 #'  \item pacf.residuals.parameters: 
 #'  \itemize{ 
-#'  \item pacf.res: The estimated pacf values of the model residuals
-#'  \item pacf.res.lag: The lags at which the pacf is estimated of the model residuals
-#'  \item confidence.interval.up: The upper limit of the confidence interval
-#'  \item confidence.interval.low: The lower limit of the confidence interval}}
+#'  \item pacf.res The estimated pacf values of the model residuals
+#'  \item pacf.res.lag The lags at which the pacf is estimated of the model residuals
+#'  \item confidence.interval.up The upper limit of the confidence interval
+#'  \item confidence.interval.low The lower limit of the confidence interval}}
 #'  
 #' \item param
 #' \itemize{
 #' \item stl.plot: 
 #' \itemize{
-#'  \item trend: The estimated trend component
-#'  \item trend.ci.up: The estimated up limit for trend component (for non seasonal
+#'  \item trend The estimated trend component
+#'  \item trend.ci.up The estimated up limit for trend component (for non seasonal
 #'  time series)
-#'  \item trend.ci.low: The estimated low limit for trend component (for non seasonal
+#'  \item trend.ci.low The estimated low limit for trend component (for non seasonal
 #'  time series)
-#'  \item seasonal: The estimated seasonal component
-#'  \item remainder: The estimated remainder component
-#'  \item time: The time of the series was sampled}
+#'  \item seasonal The estimated seasonal component
+#'  \item remainder The estimated remainder component
+#'  \item time The time of the series was sampled}
 #'
 #' \item stl.general:
 #' \itemize{
-#'  \item stl.degree: The degree of fit
-#'  \item degfr: The effective degrees of freedom for non seasonal time series
-#'  \item degfr.fitted: The fitted degrees of freedom for non seasonal time series
-#'  \item fitted: The model's fitted values }
+#'  \item stl.degree The degree of fit
+#'  \item degfr The effective degrees of freedom for non seasonal time series
+#'  \item degfr.fitted The fitted degrees of freedom for non seasonal time series
+#'  \item fitted The model's fitted values }
 #'  
-#' \item residuals: The residuals of the model (fitted innovations)
+#' \item residuals The residuals of the model (fitted innovations)
 #' 
 #' \item compare: 
 #'  \itemize{
-#'  \item arima.order: The Arima order for seasonal time series
-#'  \item arima.coef: A vector of AR, MA and regression coefficients for seasonal time series
-#'  \item arima.coef.se: The standard error of the coefficients for seasonal time series
-#'  \item covariance.coef: The matrix of the estimated variance of the coefficients for seasonal time series
-#'  \item resid.variance: The residuals variance
-#'  \item not.used.obs: The number of not used observations for the fitting for seasonal time series
-#'  \item used.obs: The used observations for the fitting
-#'  \item loglik: The maximized log-likelihood (of the differenced data), or the approximation to it used
-#'  \item aic: The AIC value corresponding to the log-likelihood
-#'  \item bic: The BIC value corresponding to the log-likelihood
-#'  \item gcv: The generalized cross-validation statistic for non seasonal time series or
-#'  \item aicc: The second-order Akaike Information Criterion corresponding to the log-likelihood
+#'  \item arima.order The Arima order for seasonal time series
+#'  \item arima.coef A vector of AR, MA and regression coefficients for seasonal time series
+#'  \item arima.coef.se The standard error of the coefficients for seasonal time series
+#'  \item covariance.coef The matrix of the estimated variance of the coefficients for seasonal time series
+#'  \item resid.variance The residuals variance
+#'  \item not.used.obs The number of not used observations for the fitting for seasonal time series
+#'  \item used.obs The used observations for the fitting
+#'  \item loglik The maximized log-likelihood (of the differenced data), or the approximation to it used
+#'  \item aic The AIC value corresponding to the log-likelihood
+#'  \item bic The BIC value corresponding to the log-likelihood
+#'  \item gcv The generalized cross-validation statistic for non seasonal time series or
+#'  \item aicc The second-order Akaike Information Criterion corresponding to the log-likelihood
 #'  for seasonal time series}}
 #'
 #' \item forecasts
 #' \itemize{
-#' \item ts.model: a string indicating the arima orders
-#' \item data_year: The time that time series data were sampled
-#' \item data: The time series values
-#' \item predict_time: The time that defined by the prediction_steps parameter
-#' \item predict_values: The predicted values that defined by the prediction_steps parameter
-#' \item up80: The upper limit of the 80\% predicted confidence interval
-#' \item low80: The lower limit of the 80\% predicted confidence interval
-#' \item up95: The upper limit of the 95\% predicted confidence interval
-#' \item low95: The lower limit of the 95\% predicted confidence interval}
+#' \item ts.model a string indicating the arima orders
+#' \item data_year The time that time series data were sampled
+#' \item data The time series values
+#' \item predict_time The time that defined by the prediction_steps parameter
+#' \item predict_values The predicted values that defined by the prediction_steps parameter
+#' \item up80 The upper limit of the 80\% predicted confidence interval
+#' \item low80 The lower limit of the 80\% predicted confidence interval
+#' \item up95 The upper limit of the 95\% predicted confidence interval
+#' \item low95 The lower limit of the 95\% predicted confidence interval}
 #' }
 #' @author Kleanthis Koupidis
 #' 
-#' @references add
 #' 
 #' @seealso \code{\link{ts.analysis}}
 #' 
@@ -113,13 +113,13 @@
 #' @rdname ts.analysis
 #' 
 #' @import forecast
+#' @import jsonlite
 #' @import tseries
 #' @import trend
-#' @import jsonlite
 #'
 #' @export
 ############################################################################
-ts.analysis<-function(tsdata, x.order=NULL, prediction.steps=1){
+ts.analysis<-function(tsdata, x.order=NULL, prediction.steps=1, tojson=T){
   
   # Stop if no time series data provided
   
@@ -247,15 +247,17 @@ ts.analysis<-function(tsdata, x.order=NULL, prediction.steps=1){
   forecasts <- ts.forecast(ts_modelx=ts_model,h=prediction.steps)
   
   ##  Parameter Extraction
-  par <- list(
-            acf.param=acf.param,
-            decomposition=decomposition,
-            model.param=model.param,
-            forecasts=forecasts)
+  parameters <- list(acf.param=acf.param,
+                     decomposition=decomposition,
+                     model.param=model.param,
+                     forecasts=forecasts)
   
   ##  to JSON
   
-  parameters <- jsonlite::toJSON(par)
+  if (tojson==T){
+    
+    parameters=jsonlite::toJSON(parameters)
+  }
   
   ##  Return
   

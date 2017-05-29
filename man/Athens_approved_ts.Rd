@@ -15,4 +15,3 @@ Time series data with the Approved Budget phase expenditure amounts of Municipal
   \item The approved budget phase amounts of this time range
   }
 }
-
