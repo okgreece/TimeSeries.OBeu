@@ -51,7 +51,7 @@
 #' 
 #' @references add
 #' 
-#' @seealso \code{\link{ts.analysis}}, \link[locfit]{locfit}, \link[locfit]{predict.locfit}
+#' @seealso \code{\link{ts.analysis}}, \code{\link[locfit]{locfit}}, \code{\link[locfit]{predict.locfit}}
 #' 
 #' @examples
 #' ts.non.seas.decomp(Athens_draft_ts)

@@ -60,7 +60,7 @@ ts.non.seas.decomp(Athens_draft_ts)
 add
 }
 \seealso{
-\code{\link{ts.analysis}}, \link[locfit]{locfit}, \link[locfit]{predict.locfit}
+\code{\link{ts.analysis}}, \code{\link[locfit]{locfit}}, \code{\link[locfit]{predict.locfit}}
 }
 \author{
 Kleanthis Koupidis

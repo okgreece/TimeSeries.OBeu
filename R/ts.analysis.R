@@ -106,10 +106,12 @@
 #' @author Kleanthis Koupidis
 #' 
 #' 
-#' @seealso \code{\link{ts.analysis}}
+#' @seealso \code{\link{ts.stationary.test}}, \code{\link{ts.acf}}, \code{\link{ts.seasonal.model}}, \code{\link{ts.seasonal.decomp}},
+#' \code{\link{ts.non.seas.model}}, \code{\link{ts.non.seas.decomp}}, \code{\link{ts.forecast}}
 #' 
 #' @examples
 #' ts.analysis(Athens_draft_ts,prediction.steps=3)
+#' 
 #' @rdname ts.analysis
 #' 
 #' @import forecast
@@ -118,7 +120,7 @@
 #' @import trend
 #'
 #' @export
-############################################################################
+
 ts.analysis<-function(tsdata, x.order=NULL, prediction.steps=1, tojson=T){
   
   # Stop if no time series data provided

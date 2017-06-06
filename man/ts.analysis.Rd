@@ -113,9 +113,11 @@ This function also decomposes both seasonal and non seasonal time series through
 }
 \examples{
 ts.analysis(Athens_draft_ts,prediction.steps=3)
+
 }
 \seealso{
-\code{\link{ts.analysis}}
+\code{\link{ts.stationary.test}}, \code{\link{ts.acf}}, \code{\link{ts.seasonal.model}}, \code{\link{ts.seasonal.decomp}},
+\code{\link{ts.non.seas.model}}, \code{\link{ts.non.seas.decomp}}, \code{\link{ts.forecast}}
 }
 \author{
 Kleanthis Koupidis
