@@ -241,4 +241,4 @@ Further Details:
 Github:
 =======
 
--   <https://github.com/okgreece/TimeSeries.OBeu>
+-   <https://github.com/okgreece/TimeSeries.OBeu> <img src="okfgr2.png" align="right" />
