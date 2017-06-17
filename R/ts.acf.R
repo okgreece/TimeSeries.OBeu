@@ -56,7 +56,7 @@
 #' @export
 ###################################################################################
 
-ts.acf<-function(tsdata, model_residuals=NULL, a=0.95, tojson=T){
+ts.acf<-function(tsdata, model_residuals=NULL, a=0.95, tojson=F){
   
   # acf, pacf of ts 
   acff<-forecast::Acf(tsdata,plot=F)
