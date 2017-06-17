@@ -66,13 +66,13 @@ ts.acf<-function(tsdata, model_residuals=NULL, a=0.95, tojson=T){
   
   acf.parameters=list(  
     acf= as.vector(acff$acf),
-    acf.lag= as.vector(acff$lag),
+    acf.lag= c(acff$lag),
     confidence.interval.up=as.vector(climits.up),
     confidence.interval.low=as.vector(climits.low))
   
   pacf.parameters=list( 
     pacf= as.vector(pacff$acf),
-    pacf.lag= as.vector(pacff$lag),
+    pacf.lag= c(pacff$lag),
     confidence.interval.up=as.vector(climits.up),
     confidence.interval.low=as.vector(climits.low)
   )
@@ -92,13 +92,13 @@ ts.acf<-function(tsdata, model_residuals=NULL, a=0.95, tojson=T){
     
     acf.residuals.parameters=list(
       acf.residuals= as.vector(acff.res$acf),
-      acf.residuals.lag= as.vector(acff.res$lag),
+      acf.residuals.lag= c(acff.res$lag),
       confidence.interval.up=as.vector(climits.up),
       confidence.interval.low=as.vector(climits.low))
     
     pacf.residuals.parameters=list(
       pacf.residuals= as.vector(pacff.res$acf),
-      pacf.residuals.lag= as.vector(pacff.res$lag),
+      pacf.residuals.lag= c(pacff.res$lag),
       confidence.interval.up=as.vector(climits.up),
       confidence.interval.low=as.vector(climits.low))
   }
