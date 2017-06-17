@@ -65,16 +65,16 @@ ts.acf<-function(tsdata, model_residuals=NULL, a=0.95, tojson=T){
   climits.low <- stats::qnorm((1 - a)/2)/sqrt(length(tsdata))
   
   acf.parameters=list(  
-    acf= c(acff$acf),
-    acf.lag= c(acff$lag),
-    confidence.interval.up=c(climits.up),
-    confidence.interval.low=c(climits.low))
+    acf= acff$acf,
+    acf.lag= acff$lag,
+    confidence.interval.up=climits.up,
+    confidence.interval.low=climits.low)
   
   pacf.parameters=list( 
-    pacf= as.vector(pacff$acf),
-    pacf.lag= c(pacff$lag),
-    confidence.interval.up=c(climits.up),
-    confidence.interval.low=c(climits.low)
+    pacf= pacff$acf,
+    pacf.lag= pacff$lag,
+    confidence.interval.up=climits.up,
+    confidence.interval.low=climits.low
   )
   
   acf.residuals.parameters=NULL
@@ -91,16 +91,16 @@ ts.acf<-function(tsdata, model_residuals=NULL, a=0.95, tojson=T){
     climits.res.low <- stats::qnorm((1 - a)/2)/sqrt(length(model_residuals))
     
     acf.residuals.parameters=list(
-      acf.residuals= c(acff.res$acf),
-      acf.residuals.lag= c(acff.res$lag),
-      confidence.interval.up=c(climits.up),
-      confidence.interval.low=c(climits.low))
+      acf.residuals= acff.res$acf,
+      acf.residuals.lag= acff.res$lag,
+      confidence.interval.up=climits.up,
+      confidence.interval.low=climits.low)
     
     pacf.residuals.parameters=list(
-      pacf.residuals= c(pacff.res$acf),
-      pacf.residuals.lag= c(pacff.res$lag),
-      confidence.interval.up=c(climits.up),
-      confidence.interval.low=c(climits.low))
+      pacf.residuals= pacff.res$acf,
+      pacf.residuals.lag= pacff.res$lag,
+      confidence.interval.up=climits.up,
+      confidence.interval.low=climits.low)
   }
   parameters<-list(
     acf.parameters=acf.parameters,
