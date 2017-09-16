@@ -110,7 +110,7 @@
 #' \code{\link{ts.non.seas.model}}, \code{\link{ts.non.seas.decomp}}, \code{\link{ts.forecast}}
 #' 
 #' @examples
-#' ts.analysis(Athens_draft_ts, x.order=NULL, prediction.steps=3)
+#' ts.analysis(Athens_draft_ts, prediction.steps=3)
 #' 
 #' @rdname ts.analysis
 #' 
