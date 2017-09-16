@@ -110,7 +110,7 @@
 #' \code{\link{ts.non.seas.model}}, \code{\link{ts.non.seas.decomp}}, \code{\link{ts.forecast}}
 #' 
 #' @examples
-#' ts.analysis(Athens_draft_ts,prediction.steps=3)
+#' ts.analysis(Athens_draft_ts, x.order=NULL, prediction.steps=3)
 #' 
 #' @rdname ts.analysis
 #' 
@@ -243,7 +243,7 @@ ts.analysis<-function(tsdata, x.order=NULL, prediction.steps=1, tojson=T){
     model.param <- model[-1]
 }
   #ACF and PACF extraction before and after model fit
-  acf.param <- ts.acf(tsdata,residuals, a=0.95)
+  acf.param <- ts.acf(tsdata,model_residuals=residuals, a=0.95)
   
   ## Forecasts
   forecasts <- ts.forecast(ts_modelx=ts_model,h=prediction.steps)

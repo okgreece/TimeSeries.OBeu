@@ -1,7 +1,7 @@
 Package: TimeSeries.OBeu
 Type: Package
 Title: Time Series Analysis OpenBudgets.eu
-Version: 1.1.5
+Version: 1.2.2
 Date: 2016-09-18
 Description: Time Series Analysis for OBeu datasets.
 Author: Kleanthis Koupidis

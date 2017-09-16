@@ -73,15 +73,13 @@ ts.stationary.test<-function(tsdata){
     # Phillips Perron test
     if (length(tsdata)>4){
     pptest<-tseries::pp.test(tsdata,alternative = "stationary")
-    }
-    else {
+    }else {
       pptest=NULL
     }
     # Augmented Dickey Fuller (ADF) test
     if (length(tsdata)<7){
     adftest<-tseries::adf.test(tsdata,alternative = "stationary",k=0)
-    }
-    else {
+    }else {
       adftest<-tseries::adf.test(tsdata,alternative = "stationary")} 
     
     # Kwiatkowski-Phillips-Schmidt-Shin (KPSS) test
@@ -99,7 +97,7 @@ ts.stationary.test<-function(tsdata){
     ## Summary of Tests Results
 
 test_hypo<-data.frame("p_value"=c(pptest$p.value,adftest$p.value,kpsstest$p.value,
-                                  mktest$pvalue,cstest$p.value))
+                                  mktest$p.value,cstest$p.value))
 
 rownames(test_hypo)<-c("Phillips Perron test","Augmented Dickey Fuller test",
                        "Kwiatkowski Phillips Schmidt Shin test","Mann Kendall Test","Cox Stuart test")
