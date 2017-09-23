@@ -52,10 +52,9 @@
 #' @seealso \code{\link{ts.analysis}}, \code{\link[forecast]{Arima}}
 #' 
 #' @rdname ts.seasonal.model
-#' @import forecast
-#' @import jsonlite
+#' 
 #' @export
-####################################################################################################################################
+
 
 ts.seasonal.model<-function(tsdata, x.ord=NULL, tojson=F){
   

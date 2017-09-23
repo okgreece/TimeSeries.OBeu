@@ -57,8 +57,6 @@
 #' ts.non.seas.decomp(Athens_draft_ts)
 #' 
 #' @rdname ts.non.seas.decomp
-#' @import locfit
-#' @import jsonlite
 #' 
 #' @export
 ######################################################################################################################################

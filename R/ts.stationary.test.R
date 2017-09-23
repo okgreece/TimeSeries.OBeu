@@ -47,12 +47,8 @@
 #' 
 #' @rdname ts.stationary.test
 #' 
-#' @import forecast
-#' @import tseries
-#' @import trend
-#'
 #' @export
-############################################################################
+
 
 ts.stationary.test<-function(tsdata){
   options(warn=-1)

@@ -59,11 +59,6 @@
 #' 
 #'
 #' @rdname ts.seasonal.decomp
-#' 
-#' @import forecast
-#' @import tseries
-#' @import trend
-#' @import jsonlite
 #'
 #' @export
 ##############################################################################################################

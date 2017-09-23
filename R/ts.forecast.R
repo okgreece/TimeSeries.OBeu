@@ -45,9 +45,6 @@
 #' ts.forecast(draft)
 #' 
 #' @rdname ts.forecast
-#' 
-#' @import forecast
-#' @import jsonlite
 #'
 #' @export
 ############################################################################

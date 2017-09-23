@@ -50,11 +50,7 @@
 #' 
 #' @rdname ts.non.seas.model
 #' 
-#' @import forecast
-#' @import jsonlite
-#' 
 #' @export
-####################################################################################################################################
 
 ts.non.seas.model<-function(tsdata, x.ord=NULL, tojson=F){
 

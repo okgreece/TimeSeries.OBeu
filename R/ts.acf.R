@@ -50,11 +50,7 @@
 #' 
 #' @rdname ts.acf
 #' 
-#' @import forecast
-#' @import jsonlite
-#'
 #' @export
-###################################################################################
 
 ts.acf<-function(tsdata, model_residuals=NULL, a=0.95, tojson=T){
   

@@ -113,11 +113,6 @@
 #' ts.analysis(Athens_draft_ts, prediction.steps=3)
 #' 
 #' @rdname ts.analysis
-#' 
-#' @import forecast
-#' @import jsonlite
-#' @import tseries
-#' @import trend
 #'
 #' @export
 
