@@ -52,7 +52,7 @@
 #' @references add
 #' 
 #' @seealso \code{\link{ts.analysis}}, \code{\link[locfit]{locfit}}, \code{\link[locfit]{predict.locfit}}
-#' 
+#' @import locfit
 #' @examples
 #' ts.non.seas.decomp(Athens_draft_ts)
 #' 
@@ -64,7 +64,7 @@
 ts.non.seas.decomp<-function(tsdata, tojson=F){
 
   ## Decompose
-  tsdata.stl <- locfit::locfit(tsdata~stats::time(tsdata))
+  tsdata.stl <- locfit(tsdata~stats::time(tsdata))
   trend<-stats::fitted(tsdata.stl)
   seasonal <- NULL
   remainder <- tsdata - trend
@@ -82,7 +82,7 @@ ts.non.seas.decomp<-function(tsdata, tojson=F){
   
   degfr.fitted<- tsdata.stl$dp["df2"] 
   
-  stl.degree= unique(locfit::lfknots(tsdata.stl,what="deg"))
+  stl.degree= unique(lfknots(tsdata.stl,what="deg"))
   
   fitted=fitted(tsdata.stl,what="coef")
   
@@ -102,11 +102,11 @@ ts.non.seas.decomp<-function(tsdata, tojson=F){
 
   loglik=tsdata.stl$dp["lk"]
   
-  aic=locfit::aic(tsdata.stl)["aic"]
+  aic = aic(tsdata.stl)["aic"]
   
-  bic=locfit::aic(tsdata.stl,pen=log(length(tsdata) ) )["aic"]
+  bic = aic(tsdata.stl,pen=log(length(tsdata) ) )["aic"]
   
-  gcv<-locfit::gcv(tsdata.stl)["gcv"]
+  gcv = gcv(tsdata.stl)["gcv"]
   
   ##
     stl.plot=list( #stl plot
