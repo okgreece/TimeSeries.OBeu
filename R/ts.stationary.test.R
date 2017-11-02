@@ -57,7 +57,7 @@ ts.stationary.test<-function(tsdata){
     acF<-forecast::Acf(tsdata,plot=F)
     acftest<-ifelse(acF$acf[2:length(acF$lag)]<1.96/sqrt(length(tsdata)) &&
                       acF$acf[2:length(acF$lag)]>-1.96/sqrt(length(tsdata)),
-                    "Stationary","Non-Stationary")
+                    "Stationary","Non Stationary")
     #PACF
     pacF<-forecast::Pacf(tsdata,plot=F)
     pacftest<-ifelse(pacF$acf[2:length(pacF$lag)]<1.96/sqrt(length(tsdata)) &&

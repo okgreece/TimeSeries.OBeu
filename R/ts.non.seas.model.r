@@ -57,17 +57,17 @@ ts.non.seas.model<-function(tsdata, x.ord=NULL, tojson=F){
 #arima obeu
 arima.obeu = function(tsdata,x) {
   tryCatch(forecast::Arima(tsdata,order=c(x,1,1)),
-           warning = function(w) {print(paste("next order", x)); 
+           warning = function(w) {#print(paste("next order", x)); 
              NULL},
-           error = function(e) {print(paste("next order", x)); 
+           error = function(e) {#print(paste("next order", x)); 
              NULL} ) 
 }
 #aic.obeu
 aic.obeu = function(aic,x) {
   tryCatch( c(aic=modelss[[x]]$aic,order=c(x,1,1)),
-           warning = function(w) {print(paste("next order", x)); 
+           warning = function(w) {#print(paste("next order", x)); 
              NULL},
-           error = function(e) {print(paste("next order", x)); 
+           error = function(e) {#print(paste("next order", x)); 
              NULL} ) 
 }
 

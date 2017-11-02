@@ -191,9 +191,9 @@ ts.analysis<-function(tsdata, x.order=NULL, prediction.steps=1, tojson=T){
     }else if(check_stat=="Non Stationary") {
       
       #log transform
-      tsr <- log(tsdata+0.000000001)
+      #tsr <- log(tsdata+0.000000001) #log(tsdata)-> tsr
       #model
-      model <- ts.non.seas.model(tsr,x.ord=x.order)
+      model <- ts.non.seas.model(tsdata,x.ord=x.order)
       }
       
     #model param for >20 and non seasonal
@@ -218,11 +218,11 @@ ts.analysis<-function(tsdata, x.order=NULL, prediction.steps=1, tojson=T){
     }else if(check_stat=="Non Stationary") {
       
       #log transform
-      tsr <- log(tsdata+0.000000001)
+      #tsr <- log(tsdata+0.000000001)
       
       #model
       
-      model <- ts.seasonal.model(tsr,x.ord=x.order)}
+      model <- ts.seasonal.model(tsdata,x.ord=x.order)} #log(tsdata)-> tsr
       
     #model param for >20 and seasonal
     
