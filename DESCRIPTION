@@ -8,7 +8,7 @@ Authors@R: c(
     person("Kleanthis", "Koupidis", , "koupidis@okfn.gr", role = c("aut", "cre")),
     person("Charalampos", "Bratsas", , "charalampos.bratsas@okfn.org", role = "aut")
     )
-Maintainer: Kleanthis Koupidis <koupidis.okfgr@gmail.com>
+Maintainer: Kleanthis Koupidis <koupidis@okfn.gr>
 URL: https://github.com/okgreece/TimeSeries.OBeu
 BugReports: https://github.com/okgreece/TimeSeries.OBeu/issues
 License: GPL-2 | file LICENSE

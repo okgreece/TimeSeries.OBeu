@@ -12,7 +12,6 @@ github_packages:
   - devtools
 r_packages:
  - covr
- - stats
  - rmarkdown
  - knitr
  - devtools
