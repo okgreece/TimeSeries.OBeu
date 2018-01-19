@@ -2,6 +2,11 @@
 ^\.Rproj\.user$
 ^\.travis\.yml$
 ^NEWS\.rmd$
+^NEWS\.md$
 ^README\.Rmd$
 ^obeu_logo\.png$
 ^okfgr2\.png$
+^TimeSeries\.OBeu\.pdf$
+^docs$
+^pkgdown$
+^_pkgdown\.yml$

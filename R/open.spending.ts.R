@@ -26,7 +26,6 @@
 #' @rdname open_spending.ts
 #' 
 #' @export
-#####################################################################################################
 
 open_spending.ts <- function(json_data,time,amount,order=NULL,prediction_steps=1){
   

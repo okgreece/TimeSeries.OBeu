@@ -1,0 +1,314 @@
+---
+title: "Time series in OpenBudget.eu"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+`TimeSeries.OBeu` is used on [OpenBudgets.eu](http://openbudgets.eu/tools/) data mininig tool platform with [OpenCPU integration of R and JavaScript](https://www.opencpu.org/) to estimate and return the needed parameters for visualizations designed for OpenBudgets.eu <http://openbudgets.eu/> time series budget or expenditure data.
+
+The vignette shows the way `TimeSeries.OBeu` (in R and OpenCPU environment) is fitted with datasets of [OpenBudgets.eu](http://openbudgets.eu) according to the [OpenBudgets.eu data model](https://github.com/openbudgets/data-model). Detailed documentation about OpenBudgets.eu data model can be found [here](http://openbudgets.eu/assets/deliverables/D1.4.pdf)
+
+The input and the resulted object are in json format.
+
+First you have to load the library
+```{r load, warning=FALSE, include=TRUE}
+# load TimeSeries.OBeu
+library(TimeSeries.OBeu)
+```
+
+# Time Series analysis on OpenBudgets.eu platform
+
+`open_spending.ts` is designed to estimate *autocorrelation and partial autocorrelation* of input time series data, *autocorrelation and partial autocorrelation* of the model residuals, *trend*, *seasonal* (if exists) and *remainder* components, model parameters such as arima order, arima coefficients etc. and the desired *forecasts* with their corresponding confidence intervals of [OpenBudgets.eu](http://openbudgets.eu/) time series data. 
+
+The input data must be a JSON link according to the [OpenBudgets.eu data model](https://github.com/openbudgets/data-model). The user should specify the amount and time variables, future steps to be predicted (default is 1 step forward) and the arima order (if not specified the most appropriate model will be selected according to AIC value).
+
++--------------------+----------------------------------------------------------------------+
+| Input              | Description                                                          |
++====================+======================================================================+
+| json_data          | The json string, URL or file from Open Spending API                  |
++--------------------+----------------------------------------------------------------------+
+| time               | the time label of the json time series data                          |
++--------------------+----------------------------------------------------------------------+
+| amount             | the amount label of the json time series data                        |
++--------------------+----------------------------------------------------------------------+
+| order              | An integer vector of length 3 specifying the order of the Arima model|
++--------------------+----------------------------------------------------------------------+
+| prediction_steps   | The number of prediction steps                                       |
++--------------------+----------------------------------------------------------------------+
+
+Table: `open_spending.ts` input 
+
+## Stationary test
+
+TimeSeries.OBeu includes function that automatically tests the deterministic and stochastic trend of the input time series data. This function uses ACF and PACF functions from forecast package, Phillips Perron test, Augmented Dickey Fuller (ADF) test, Kwiatkowski Phillips Schmidt Shin (KPSS) test, from tseries package and Mann Kendall test for Monotonic Trend Cox Stuart trend test from trend package.
+
+## Decomposition
+
+Decomposition of seasonal time series data through arima models is based on stlm from forecast package and returns a list with useful parameters for OBEU.
+For non-seasonal time series that there is no seasonal component, local regression and likelihood models (locfit package) are used in order to extract the trend and remaider components.
+
+## Model Fitting
+
+Model fit of time series using arima models of seasonal time series data. The model with the lowest AIC value is selected for forecasts.
+
+## Forecast
+
+Forecasts the model that fits the input data using the auto.arima function(see forecast package). The model selection depends on the results of some diagnostic tests (acf,pacf,pp adf and kpss). For short time series the selected arima model is among various orders of the AR part using the first differences and the first order moving average component, with the lower AIC value.
+
+# Output
+
+Here is a sort description of the outputs of each function:
+
++-----------------------------+---------------------------+-------------------------------------------------------------+
+| Component                   | Output                    | Description                                                 |
++=============================+===========================+=============================================================+
+| acf.parameters              | - acf                     | - ACF values of the input time series                       |
+|                             | - acf.lag                 | - Lags at which the acf is estimated                        |
+|                             | - confidence.interval.up  | - Upper limit of the confidence interval                    |
+|                             | - confidence.interval.low | - Lower limit of the confidence interval                    |
++-----------------------------+---------------------------+-------------------------------------------------------------+
+| pacf.parameters             | - pacf                    | - PACF values of the input time series                      |
+|                             | - pacf.lag                | - Lags at which the pacf is estimated                       |
+|                             | - confidence.interval.up  | - Upper limit of the confidence interval                    |
+|                             | - confidence.interval.low | - Lower limit of the confidence interval                    |
++-----------------------------+---------------------------+-------------------------------------------------------------+
+| acf.residuals.parameters    | - acf.res                 | - ACF values of the model residuals                         |
+|                             | - acf.res.lag             | - Lags at which the acf is estimated of the model residuals |
+|                             | - confidence.interval.up  | - Upper limit of the confidence interval                    |
+|                             | - confidence.interval.low | - Lower limit of the confidence interval                    |
++-----------------------------+---------------------------+-------------------------------------------------------------+
+| pacf.residuals.parameters   | - pacf.res                | - Pacf values of the model residuals                        |
+|                             | - pacf.res.lag            | - Lags at which the pacf is estimated of the model residuals|
+|                             | - confidence.interval.up  | - Upper limit of confidence interval                        |
+|                             | - confidence.interval.low | - Lower limit of confidence interval                        |
++-----------------------------+---------------------------+-------------------------------------------------------------+
+| stl.plot                    | - trend                   | - Trend component                                           |
+|                             | - trend.ci.up             | - Up limit for trend component                              |
+|                             | - trend.ci.low            | - Low limit for trend component                             |
+|                             | - seasonal                | - Seasonal component                                        |
+|                             | - remainder               | - Remainder component                                       |
+|                             | - time                    | - Time of the series was sampled                            |
++-----------------------------+---------------------------+-------------------------------------------------------------+
+| stl.general                 | - stl.degree              | - Degree of fit                                             |
+|                             | - degfr                   | - Effective degrees of freedom                              |
+|                             | - degfr.fitted            | - Fitted degrees of freedom                                 |
+|                             | - fitted                  | - Model's fitted values                                     |
++-----------------------------+---------------------------+-------------------------------------------------------------+
+| residuals                   | - residuals               | - Residuals of the model                                    |
++-----------------------------+---------------------------+-------------------------------------------------------------+
+| compare                     | - arima.order             | - Arima order                                               |
+|                             | - arima.coef              | - AR, MA and regression coefficients                        |
+|                             | - arima.coef.se           | - Standard error of the coefficients                        |
+|                             | - covariance.coef         | - Variance of the coefficients                              |
+|                             | - resid.variance          | - Residuals variance                                        |
+|                             | - not.used.obs            | - Number of not used observations                           |
+|                             | - used.obs                | - Used observations                                         |
+|                             | - loglik                  | - Maximized log-likelihood,                                 |
+|                             | - aic                     | - AIC value                                                 |
+|                             | - bic                     | - BIC value                                                 |
+|                             | - gcv                     | - Generalized cross-validation statistic                    |
+|                             | - aicc                    | - Second-order AIC                                          |
++-----------------------------+---------------------------+-------------------------------------------------------------+
+| forecasts                   | - ts.model                | - A string indicating the arima orders                      |
+|                             | - data_year               | - Time of time series data                                  |
+|                             | - data                    | - Time series values                                        |
+|                             | - predict_time            | - Time of the predicted values                              |
+|                             | - predict_values          | - Predicted values                                          |
+|                             | - up80                    | - Upper 80% confidence limit                                |
+|                             | - low80                   | - Lower 80% confidence limit                                |
+|                             | - up95                    | - Upper 95% confidence limit                                |
+|                             | - low95                   | - Lower 95% confidence limit                                |
++-----------------------------+---------------------------+-------------------------------------------------------------+
+
+Table: `open_spending.ts` return
+
+# Examples
+
+The dataset that is being used is a sample json string from [OpenBudgets.eu platform](http://apps.openbudgets.eu/).
+
+## In R environment
+
+`open_spending.ts` function's input are data as json link and described with [OpenBudgets.eu data model](https://github.com/openbudgets/data-model).
+
+```{r data}
+#example openbudgets.eu time series data
+sample.ts.data = 
+'{"page":0,
+"page_size": 30,
+"total_cell_count": 15,
+"cell": [],
+"status": "ok",
+"cells": [{
+		"global__fiscalPeriod__28951.notation": "2002",
+		"global__amount__0397f.sum": 290501420.64,
+		"global__amount__0397f__CZK.sum": 9210928544.2325,
+		"_count": 4805
+	},
+	{
+		"global__fiscalPeriod__28951.notation": "2003",
+		"global__amount__0397f.sum": 311242291.07,
+		"global__amount__0397f__CZK.sum": 9832143974.9013,
+		"_count": 4988
+	},
+	{
+		"global__fiscalPeriod__28951.notation": "2004",
+		"global__amount__0397f.sum": 5268500701.1,
+		"global__amount__0397f__CZK.sum": 170688885714.24,
+		"_count": 10055
+	},
+	{
+		"global__fiscalPeriod__28951.notation": "2005",
+		"global__amount__0397f.sum": 2542887761.01,
+		"global__amount__0397f__CZK.sum": 77204615312.025,
+		"_count": 2032
+	},
+	{
+		"global__fiscalPeriod__28951.notation": "2006",
+		"global__amount__0397f.sum": 14803951786.68,
+		"global__amount__0397f__CZK.sum": 429758720367.32,
+		"_count": 13632
+	},
+	{
+		"global__fiscalPeriod__28951.notation": "2007",
+		"global__amount__0397f.sum": 16188514346.44,
+		"global__amount__0397f__CZK.sum": 445588857385.76,
+		"_count": 22798
+	},
+	{
+		"global__fiscalPeriod__28951.notation": "2008",
+		"global__amount__0397f.sum": 18231035815.89,
+		"global__amount__0397f__CZK.sum": 480643028250.12,
+		"_count": 24176
+	},
+	{
+		"global__fiscalPeriod__28951.notation": "2009",
+		"global__amount__0397f.sum": 19079541164.68,
+		"global__amount__0397f__CZK.sum": 511808691742.54,
+		"_count": 26250
+	},
+	{
+		"global__fiscalPeriod__28951.notation": "2010",
+		"global__amount__0397f.sum": 22738650575.01,
+		"global__amount__0397f__CZK.sum": 597685430364.14,
+		"_count": 87667
+	},
+	{
+		"global__fiscalPeriod__28951.notation": "2011",
+		"global__amount__0397f.sum": 24961375670.57,
+		"global__amount__0397f__CZK.sum": 626230992823.26,
+		"_count": 134352
+	},
+	{
+		"global__fiscalPeriod__28951.notation": "2012",
+		"global__amount__0397f.sum": 261513607691.41,
+		"global__amount__0397f__CZK.sum": 7030666436872.5,
+		"_count": 147556
+	},
+	{
+		"global__fiscalPeriod__28951.notation": "2013",
+		"global__amount__0397f.sum": 268946402299.09,
+		"global__amount__0397f__CZK.sum": 7226220232913.8,
+		"_count": 150079
+	},
+	{
+		"global__fiscalPeriod__28951.notation": "2014",
+		"global__amount__0397f.sum": 255222816704.9,
+		"global__amount__0397f__CZK.sum": 6907598086283.4,
+		"_count": 176019
+	},
+	{
+		"global__fiscalPeriod__28951.notation": "2015",
+		"global__amount__0397f.sum": 22976062973.62,
+		"global__amount__0397f__CZK.sum": 636276111928.46,
+		"_count": 213777
+	},
+	{
+		"global__fiscalPeriod__28951.notation": "2016",
+		"global__amount__0397f.sum": 12051686541.16,
+		"global__amount__0397f__CZK.sum": 325672725401.77,
+		"_count": 161797
+	}
+],
+"order": [
+	["global__fiscalPeriod__28951.fiscalPeriod", "asc"]
+],
+"aggregates": ["", "_count"],
+"summary": {
+	"global__amount__0397f.sum": 945126777743.27,
+	"global__amount__0397f__CZK.sum": 25485085887878
+},
+"attributes": [""]
+}'
+```
+
+```{r open_spending}
+result = open_spending.ts(
+  json_data =  sample.ts.data, 
+  time ="global__fiscalPeriod__28951.notation",
+  amount = "global__amount__0397f.sum"
+  )
+# Pretty output using prettify of jsonlite library
+jsonlite::prettify(result,indent = 2)
+```
+
+## In OpenCPU environment
+
+### Select library and function
+
+1. Go to: yourserver/ocpu/test
+
+2. Copy and paste the following function to the endpoint 
+```{r, eval=FALSE, include=TRUE}
+../library/TimeSeries.OBeu/R/open_spending.ts
+# library/ {name of the library} /R/ {function}
+```
+
+3. **Select Method**: **`Post`**
+
+### Add parameters 
+
+Click **add parameters** every time you want to add a new parameters and values.
+
+4. Define the input data:
+
+    - **Param Name**: **`json_data`**
+    - **Param Value** (*URL* of json data or json string): **`"http://next.openspending.org/api/3/cubes/21260d070eb5d63a121ea4c400dafbbb:apbn_fungsi_2016/facts?pagesize=20"`** 
+    (or any other json URL with the data)
+
+5. Define the *time* parameter:
+
+    - **Param Name**: **`time`**
+    - **Param Value**: **`"global__fiscalPeriod__28951.notation"`**
+
+
+6. Define the *amount* parameter:
+
+    - **Param Name**: **`amount`**
+    - **Param Value**: **`"global__amount__0397f.sum"`**
+
+
+You add likewise *x.order* parameter to fit a specific arima order, see TimeSeries.OBeu *reference manual* for further details.
+
+7. Ready! Click on **Ajax request**!
+
+## Results
+
+8. copy the **/ocpu/tmp/{this_id_number}/R/.val** (second on the right panel)
+
+9. finally, paste **`yourserver/ocpu/tmp/{this_id_number}/R/.val`** on a new tab.
+
+
+# Further Details
+
++ [HTTP in OpenCPU](https://www.opencpu.org/api.html)
++ [OpenCPU Help](https://www.opencpu.org/help.html)
++ [OpenCPU JavaScript Client](https://www.opencpu.org/jslib.html)
++ [OpenCPU on CRAN](https://cran.r-project.org/package=opencpu)
+
+# Github
++ [OpenCPU package *development version*](https://github.com/opencpu/opencpu)
++ [TimeSeries.OBeu package *development version*](https://github.com/okgreece/TimeSeries.OBeu)
+

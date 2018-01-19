@@ -5,7 +5,7 @@
 #' This function is included in ts.analysis function and aims to extract the ACF and PACF details 
 #' of the input time series data and the ACF, PACF of the residuals after fitting an Arima model. 
 #' 
-#' @usage ts.acf(tsdata, model_residuals, a=0.95, tojson=T)
+#' @usage ts.acf(tsdata, model_residuals, a=0.95, tojson=F)
 #' 
 #' @param tsdata The input univariate time series data
 #' @param model_residuals The model's residuals after fitting a model to the time series
@@ -52,7 +52,7 @@
 #' 
 #' @export
 
-ts.acf<-function(tsdata, model_residuals=NULL, a=0.95, tojson=T){
+ts.acf<-function(tsdata, model_residuals=NULL, a=0.95, tojson=F){
   
   # acf, pacf of ts 
   acff<-forecast::Acf(tsdata,plot=F)

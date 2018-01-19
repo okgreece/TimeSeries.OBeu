@@ -1,0 +1,57 @@
+template:
+  - assets: C:/Users/Kleanthis-Okf/Documents/TimeSeries.OBeu/pkgdown/extra.css
+navbar:
+  title: ""
+  left:
+    - text: "Home"
+      icon:  fa-home
+      href: index.html
+    - text: "Function Reference"
+      icon:   fa-info-circle
+      href: reference/index.html
+    - text: "Vignettes"
+      icon:  fa-book
+      href: articles/index.html
+      menu:
+        - text: "Time series in OpenBudget.eu"
+          href: articles/TimeSeriesOBeu.html
+        - text: "Using TimeSeries.OBeu with OpenCPU"
+          href: articles/TimeSeries.OBeuOpenCPU.html
+    - text: "News"
+      icon: fa-newspaper-o
+      href: news/index.html
+      
+  right:
+    - icon: fa-github
+      href: https://github.com/okgreece/TimeSeries.OBeu
+reference:
+  - title: "Core Functions"
+    contents: 
+      - ts.acf
+      - ts.forecast
+      - ts.non.seas.decomp
+      - ts.non.seas.model
+      - ts.seasonal.decomp
+      - ts.seasonal.model
+      - ts.stationary.test      
+      
+  - title: "Time Series Analysis"
+    contents: 
+      - ts.analysis
+      
+  - title: "Open Budgets"
+    contents: 
+      - open_spending.ts
+      
+  - title: "Data"
+    contents:
+      - Athens_approved_ts
+      - Athens_draft_ts
+      - Athens_executed_ts
+      - Athens_reserved_ts
+      - Athens_revised_ts
+authors:
+  Kleanthis Koupidis:
+    href: https://github.com/kleanthisk10
+  Charalampos Bratsas:
+    href: https://github.com/cbratsas

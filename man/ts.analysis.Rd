@@ -36,7 +36,8 @@ A json string with the parameters:
  \item confidence.interval.low The lower limit of the confidence interval}
  
  \item acf.residuals.parameters: 
- \itemize{ \item acf.res The estimated acf values of the model residuals
+ \itemize{ 
+ \item acf.res The estimated acf values of the model residuals
  \item acf.res.lag The lags at which the acf is estimated of the model residuals
  \item confidence.interval.up The upper limit of the confidence interval
  \item confidence.interval.low The lower limit of the confidence interval}
@@ -53,10 +54,8 @@ A json string with the parameters:
 \item stl.plot: 
 \itemize{
  \item trend The estimated trend component
- \item trend.ci.up The estimated up limit for trend component (for non seasonal
- time series)
- \item trend.ci.low The estimated low limit for trend component (for non seasonal
- time series)
+ \item trend.ci.up The estimated up limit for trend component (for non seasonal time series)
+ \item trend.ci.low The estimated low limit for trend component (for non seasonal time series)
  \item seasonal The estimated seasonal component
  \item remainder The estimated remainder component
  \item time The time of the series was sampled}
@@ -73,16 +72,16 @@ A json string with the parameters:
 \item compare: 
  \itemize{
  \item arima.order The Arima order for seasonal time series
- \item arima.coef A vector of AR, MA and regression coefficients for seasonal time series
- \item arima.coef.se The standard error of the coefficients for seasonal time series
- \item covariance.coef The matrix of the estimated variance of the coefficients for seasonal time series
+ \item arima.coef A vector of AR, MA and regression coefficients
+ \item arima.coef.se The standard error of the coefficients 
+ \item covariance.coef The matrix of the estimated variance of the coefficients 
  \item resid.variance The residuals variance
- \item not.used.obs The number of not used observations for the fitting for seasonal time series
+ \item not.used.obs The number of not used observations for the fitting  
  \item used.obs The used observations for the fitting
  \item loglik The maximized log-likelihood (of the differenced data), or the approximation to it used
  \item aic The AIC value corresponding to the log-likelihood
  \item bic The BIC value corresponding to the log-likelihood
- \item gcv The generalized cross-validation statistic for non seasonal time series or
+ \item gcv The generalized cross-validation statistic   time series
  \item aicc The second-order Akaike Information Criterion corresponding to the log-likelihood
  for seasonal time series}}
 
