@@ -186,7 +186,7 @@ ts.analysis<-function(tsdata, x.order=NULL, prediction.steps=1, tojson=T){
       
       model <- ts.non.seas.model(tsdata,x.ord=x.order)
       
-      # ΝΟΝ Stationary 
+      # non stationary
     }else if(check_stat=="Non Stationary") {
       
       #log transform
@@ -213,7 +213,7 @@ ts.analysis<-function(tsdata, x.order=NULL, prediction.steps=1, tojson=T){
       
       model <- ts.seasonal.model(tsdata,x.ord=x.order)
     
-    # ΝΟΝ Stationary 
+    # non Stationary 
     }else if(check_stat=="Non Stationary") {
       
       #log transform

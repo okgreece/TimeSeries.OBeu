@@ -13,7 +13,13 @@ URL: https://github.com/okgreece/TimeSeries.OBeu
 BugReports: https://github.com/okgreece/TimeSeries.OBeu/issues
 License: GPL-2 | file LICENSE
 LazyData: TRUE
-Imports: forecast, locfit, jsonlite, trend, tseries
+Imports: 
+    forecast, 
+    locfit, 
+    jsonlite, 
+    stats, 
+    trend, 
+    tseries
 RoxygenNote: 6.0.1
 Suggests: knitr,
     rmarkdown
