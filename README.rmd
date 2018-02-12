@@ -16,6 +16,7 @@ output:
 [![Github Issues](http://githubbadges.herokuapp.com/okgreece/TimeSeries.OBeu/issues.svg)](https://github.com/okgreece/TimeSeries.OBeu/issues)
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
 [![minimal R version](https://img.shields.io/badge/R%3E%3D-3.1-6666ff.svg)](https://cran.r-project.org/)
+[![](http://cranlogs.r-pkg.org/badges/grand-total/TimeSeries.OBeu)](http://cran.rstudio.com/web/packages/TimeSeries.OBeu/index.html)
 [![Licence](https://img.shields.io/badge/licence-GPL--2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
 [![DOI](https://zenodo.org/badge/69395698.svg)](https://zenodo.org/badge/latestdoi/69395698)
 
