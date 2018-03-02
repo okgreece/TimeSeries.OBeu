@@ -102,7 +102,7 @@
 #' \item up95 The upper limit of the 95\% predicted confidence interval
 #' \item low95 The lower limit of the 95\% predicted confidence interval}
 #' }
-#' @author Kleanthis Koupidis
+#' @author Kleanthis Koupidis, Charalampos Bratsas
 #' 
 #' 
 #' @seealso \code{\link{ts.stationary.test}}, \code{\link{ts.acf}}, \code{\link{ts.seasonal.model}}, \code{\link{ts.seasonal.decomp}},
@@ -134,14 +134,14 @@ ts.analysis<-function(tsdata, x.order=NULL, prediction.steps=1, tojson=T){
   
   #Stationarity testing
   check_stat=ts.stationary.test(tsdata)
-    
+  
   
   ## If TS is <20 and non seasonal 
   if ( length(tsdata)<=20 && stats::frequency(tsdata)<=2) {
     
     #decomposition
     decomposition <- ts.non.seas.decomp(tsdata)
-
+    
     #model
     model <- ts.non.seas.model(tsdata,x.ord=x.order)
     
@@ -173,10 +173,10 @@ ts.analysis<-function(tsdata, x.order=NULL, prediction.steps=1, tojson=T){
     
     decomposition <- decomposition[-1]
     model.param <- model[-1]
-   
+    
     ## If TS is >20 and non seasonal
     
-    }else if(length(tsdata)>20 && stats::frequency(tsdata)<2) {
+  }else if(length(tsdata)>20 && stats::frequency(tsdata)<2) {
     
     # Decomposition
     decomposition <- ts.non.seas.decomp(tsdata)
@@ -193,15 +193,15 @@ ts.analysis<-function(tsdata, x.order=NULL, prediction.steps=1, tojson=T){
       #tsr <- log(tsdata+0.000000001) #log(tsdata)-> tsr
       #model
       model <- ts.non.seas.model(tsdata,x.ord=x.order)
-      }
-      
+    }
+    
     #model param for >20 and non seasonal
-   
+    
     ts_model <- model$model.summary
     residuals <- model$residuals
     
     model.param <- model[-1]
-     
+    
     ## If TS is >20 and seasonal
   }else if(length(tsdata)>20 && stats::frequency(tsdata)>2) {
     
@@ -212,8 +212,8 @@ ts.analysis<-function(tsdata, x.order=NULL, prediction.steps=1, tojson=T){
     if(check_stat=="Stationary") {
       
       model <- ts.seasonal.model(tsdata,x.ord=x.order)
-    
-    # non Stationary 
+      
+      # non Stationary 
     }else if(check_stat=="Non Stationary") {
       
       #log transform
@@ -222,7 +222,7 @@ ts.analysis<-function(tsdata, x.order=NULL, prediction.steps=1, tojson=T){
       #model
       
       model <- ts.seasonal.model(tsdata,x.ord=x.order)} #log(tsdata)-> tsr
-      
+    
     #model param for >20 and seasonal
     
     if(is.null(x.order)){
@@ -232,10 +232,10 @@ ts.analysis<-function(tsdata, x.order=NULL, prediction.steps=1, tojson=T){
     }else if (is.null(x.order)==F){
       ts_model <- model$model.summary
       residuals <- model$residuals
-      }
+    }
     decomposition <- decomposition[-1]
     model.param <- model[-1]
-}
+  }
   #ACF and PACF extraction before and after model fit
   acf.param <- ts.acf(tsdata,model_residuals=residuals, a=0.95)
   

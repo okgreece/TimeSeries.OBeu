@@ -38,14 +38,14 @@ open_spending.ts <- function(json_data,time,amount,order=NULL,prediction_steps=1
   tim<-c(do.call("cbind",tim))
   
   amounts<- c(do.call("cbind",data[paste(amount)]))
-   
+  
   df<-cbind(tim,amounts)
   
   df<-df[order(df[,"tim"],decreasing=F),]
   
   tsdata <- stats::ts(df[,"amounts"],start=min(df[,"tim"]),end=max(df[,"tim"]))
   tsdata <- stats::na.omit(tsdata)
-
+  
   ts.result <- ts.analysis(tsdata, x.order=order ,prediction_steps)
   
   return(ts.result)  

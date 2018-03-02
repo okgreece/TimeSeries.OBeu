@@ -2,7 +2,7 @@
 title: "Using TimeSeries.OBeu with OpenCPU"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{Using TimeSeries.OBeu with OpenCPU}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

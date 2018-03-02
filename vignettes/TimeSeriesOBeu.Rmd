@@ -1,8 +1,8 @@
 ---
-title: "Time series in OpenBudget.eu"
+title: "Time series in OpenBudgets"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{Time series in OpenBudgets}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

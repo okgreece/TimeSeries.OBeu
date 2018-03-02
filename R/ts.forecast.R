@@ -33,7 +33,7 @@
 #' \item up95: The upper limit of the 95\% predicted confidence interval
 #' \item low95: The lower limit of the 95\% predicted confidence interval}
 #'
-#' @author Kleanthis Koupidis
+#' @author Kleanthis Koupidis, Charalampos Bratsas
 #' 
 #' 
 #' @seealso \code{\link{ts.analysis}}, \code{\link[forecast]{forecast}}
@@ -47,23 +47,22 @@
 #' @rdname ts.forecast
 #'
 #' @export
-############################################################################
 
 ts.forecast<-function(ts_modelx, h=1, tojson=F){
-
+  
   ## Model Forecasting
   forecasts<-forecast::forecast(ts_modelx,h)
   
   forecast.param<-list(
-                       ts.model=forecasts$method,
-                       data_year=stats::time(ts_modelx$x),
-                       data=ts_modelx$x,
-                       predict_time=stats::time(forecasts$mean),
-                       predict_values=forecasts$mean,
-                       up80=forecasts$upper[,"80%"],
-                       low80=forecasts$lower[,"80%"],
-                       up95=forecasts$upper[,"95%"],
-                       low95=forecasts$lower[,"95%"] )
+    ts.model=forecasts$method,
+    data_year=stats::time(ts_modelx$x),
+    data=ts_modelx$x,
+    predict_time=stats::time(forecasts$mean),
+    predict_values=forecasts$mean,
+    up80=forecasts$upper[,"80%"],
+    low80=forecasts$lower[,"80%"],
+    up95=forecasts$upper[,"95%"],
+    low95=forecasts$lower[,"95%"] )
   
   if (tojson==T){
     

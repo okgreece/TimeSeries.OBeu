@@ -60,7 +60,7 @@ and returns a list with useful parameters for OBEU.
 add
 }
 \seealso{
-\code{\link{ts.analysis}}, \code{\link[forecast]{stlm}}
+\code{\link{ts.analysis}}, \code{\link{stlm}}
 }
 \author{
 Kleanthis Koupidis

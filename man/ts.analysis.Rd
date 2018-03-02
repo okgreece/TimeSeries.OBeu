@@ -119,5 +119,5 @@ ts.analysis(Athens_draft_ts, prediction.steps=3)
 \code{\link{ts.non.seas.model}}, \code{\link{ts.non.seas.decomp}}, \code{\link{ts.forecast}}
 }
 \author{
-Kleanthis Koupidis
+Kleanthis Koupidis, Charalampos Bratsas
 }

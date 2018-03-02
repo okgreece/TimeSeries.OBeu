@@ -51,5 +51,5 @@ ts.forecast(draft)
 \code{\link{ts.analysis}}, \code{\link[forecast]{forecast}}
 }
 \author{
-Kleanthis Koupidis
+Kleanthis Koupidis, Charalampos Bratsas
 }

@@ -55,7 +55,7 @@
 #' 
 #' @references add
 #' 
-#' @seealso \code{\link{ts.analysis}}, \code{\link[forecast]{stlm}} 
+#' @seealso \code{\link{ts.analysis}}, \code{\link{stlm}} 
 #' 
 #'
 #' @rdname ts.seasonal.decomp

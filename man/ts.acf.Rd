@@ -53,7 +53,7 @@ ts.acf(Athens_draft_ts)
 
 }
 \seealso{
-\code{\link{ts.analysis}}, \code{\link[forecast]{Acf}}, \code{\link[forecast]{Pacf}}
+\code{\link{ts.analysis}}, \code{\link{Acf}}, \code{\link{Pacf}}
 }
 \author{
 Kleanthis Koupidis
