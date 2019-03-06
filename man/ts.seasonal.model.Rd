@@ -4,7 +4,7 @@
 \alias{ts.seasonal.model}
 \title{Model fit of seasonal time series}
 \usage{
-ts.seasonal.model(tsdata, x.ord=NULL, tojson=F)
+ts.seasonal.model(tsdata, x.ord = NULL, tojson = FALSE)
 }
 \arguments{
 \item{tsdata}{The input univariate seasonal time series data}

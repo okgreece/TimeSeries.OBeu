@@ -4,7 +4,7 @@
 #' @description
 #' Univariate time series analysis for short and long time series data using the appropriate model.
 #' 
-#' @usage ts.analysis(tsdata, x.order=NULL, prediction.steps=1, tojson=T)
+#' @usage ts.analysis(tsdata, x.order = NULL, prediction.steps = 1, tojson = TRUE)
 #' 
 #' @param tsdata The input univariate time series data
 #' @param x.order An integer vector of length 3 specifying the order of the Arima model
@@ -109,25 +109,25 @@
 #' \code{\link{ts.non.seas.model}}, \code{\link{ts.non.seas.decomp}}, \code{\link{ts.forecast}}
 #' 
 #' @examples
-#' ts.analysis(Athens_draft_ts, prediction.steps=3)
+#' ts.analysis(Athens_draft_ts, prediction.steps = 3, tojson = FALSE)
 #' 
 #' @rdname ts.analysis
 #'
 #' @export
+#' 
 
-ts.analysis<-function(tsdata, x.order=NULL, prediction.steps=1, tojson=T){
+ts.analysis <- function(tsdata, x.order = NULL, prediction.steps = 1, tojson = TRUE) {
   
   # Stop if no time series data provided
-  
-  if( length(tsdata)<5 ) {
+  if(length(tsdata) < 5) {
     stop("Invalid time series object.")}
   
   # Stop if no time series data provided
-  
-  if( is.nan(prediction.steps)==T | is.na(prediction.steps)==T |
-      is.character(prediction.steps)==T | is.numeric(as.numeric(as.character(prediction.steps)))==F){
-    stop("Please give an integer input as 'prediction.steps', e.g. prediction.steps= 4.")}
-  
+  if(is.nan(prediction.steps) == TRUE |
+     is.na(prediction.steps) == TRUE |
+     is.character(prediction.steps) == TRUE | 
+     is.numeric(as.numeric(as.character(prediction.steps))) == FALSE) {
+    stop("Please give an integer input as 'prediction.steps', e.g. prediction.steps = 4")}
   
   # Extract the time series name
   #ts_name<-deparse(substitute(tsdata))
@@ -135,38 +135,34 @@ ts.analysis<-function(tsdata, x.order=NULL, prediction.steps=1, tojson=T){
   #Stationarity testing
   check_stat=ts.stationary.test(tsdata)
   
-  
   ## If TS is <20 and non seasonal 
-  if ( length(tsdata)<=20 && stats::frequency(tsdata)<=2) {
+  if (length(tsdata) <= 20 && stats::frequency(tsdata) <= 2) {
     
     #decomposition
     decomposition <- ts.non.seas.decomp(tsdata)
     
     #model
-    model <- ts.non.seas.model(tsdata,x.ord=x.order)
-    
+    model <- ts.non.seas.model(tsdata, x.ord = x.order)
     ts_model <- model$model.summary
     residuals <- model$residuals
-    
     model.param <- model[-1]
     
     ## If TS is <20 and seasonal 
-  }else if ( length(tsdata)<=20 && stats::frequency(tsdata)>2) {
+  } else if (length(tsdata) <= 20 && stats::frequency(tsdata) > 2) {
     
     #decomposition
     decomposition <- ts.seasonal.decomp(tsdata)
     
     #model
-    
-    model <- ts.seasonal.model(tsdata,x.ord=x.order)
+    model <- ts.seasonal.model(tsdata, x.ord = x.order)
     
     #model param for >20 and seasonal
     
-    if(is.null(x.order)){
+    if(is.null(x.order)) {
       ts_model <- decomposition$model.summary
       residuals <- decomposition$residuals_fitted$residuals
       
-    }else if (is.null(x.order)==F){
+    } else if (is.null(x.order) == FALSE) {
       ts_model <- model$model.summary
       residuals <- model$residuals
     }
@@ -175,61 +171,57 @@ ts.analysis<-function(tsdata, x.order=NULL, prediction.steps=1, tojson=T){
     model.param <- model[-1]
     
     ## If TS is >20 and non seasonal
-    
-  }else if(length(tsdata)>20 && stats::frequency(tsdata)<2) {
+  } else if(length(tsdata) > 20 && stats::frequency(tsdata) < 2) {
     
     # Decomposition
     decomposition <- ts.non.seas.decomp(tsdata)
     
     # Stationary 
-    if(check_stat=="Stationary") {
+    if(check_stat == "Stationary") {
       
-      model <- ts.non.seas.model(tsdata,x.ord=x.order)
+      model <- ts.non.seas.model(tsdata,x.ord = x.order)
       
       # non stationary
-    }else if(check_stat=="Non Stationary") {
+    } else if(check_stat == "Non Stationary") {
       
       #log transform
       #tsr <- log(tsdata+0.000000001) #log(tsdata)-> tsr
       #model
-      model <- ts.non.seas.model(tsdata,x.ord=x.order)
+      model <- ts.non.seas.model(tsdata, x.ord = x.order)
     }
     
-    #model param for >20 and non seasonal
+    # model param for >20 and non seasonal
     
     ts_model <- model$model.summary
     residuals <- model$residuals
-    
     model.param <- model[-1]
     
     ## If TS is >20 and seasonal
-  }else if(length(tsdata)>20 && stats::frequency(tsdata)>2) {
+  } else if(length(tsdata) > 20 && stats::frequency(tsdata) > 2) {
     
     #Decomposition
     decomposition <- ts.seasonal.decomp(tsdata)
     
     # Stationary 
-    if(check_stat=="Stationary") {
+    if(check_stat == "Stationary") {
       
       model <- ts.seasonal.model(tsdata,x.ord=x.order)
-      
       # non Stationary 
-    }else if(check_stat=="Non Stationary") {
+    } else if(check_stat == "Non Stationary") {
       
       #log transform
-      #tsr <- log(tsdata+0.000000001)
-      
+      #tsr <- log(tsdata+0.000000001) #log(tsdata)-> tsr
       #model
-      
-      model <- ts.seasonal.model(tsdata,x.ord=x.order)} #log(tsdata)-> tsr
+      model <- ts.seasonal.model(tsdata,x.ord = x.order)
+    }
     
     #model param for >20 and seasonal
     
-    if(is.null(x.order)){
+    if(is.null(x.order)) {
       ts_model <- decomposition$model.summary
       residuals <- decomposition$residuals_fitted$residuals
       
-    }else if (is.null(x.order)==F){
+    } else if (is.null(x.order) == FALSE) {
       ts_model <- model$model.summary
       residuals <- model$residuals
     }
@@ -237,25 +229,22 @@ ts.analysis<-function(tsdata, x.order=NULL, prediction.steps=1, tojson=T){
     model.param <- model[-1]
   }
   #ACF and PACF extraction before and after model fit
-  acf.param <- ts.acf(tsdata,model_residuals=residuals, a=0.95)
+  acf.param <- ts.acf(tsdata, model_residuals = residuals, a = 0.95)
   
   ## Forecasts
-  forecasts <- ts.forecast(ts_modelx=ts_model,h=prediction.steps)
+  forecasts <- ts.forecast(ts_modelx = ts_model, h = prediction.steps)
   
   ##  Parameter Extraction
-  parameters <- list(acf.param=acf.param,
-                     decomposition=decomposition,
-                     model.param=model.param,
-                     forecasts=forecasts)
+  parameters <- list(acf.param = acf.param,
+                     decomposition = decomposition,
+                     model.param = model.param,
+                     forecasts = forecasts)
   
   ##  to JSON
-  
-  if (tojson==T){
-    
-    parameters=jsonlite::toJSON(parameters)
+  if (tojson == TRUE) {
+    parameters <- jsonlite::toJSON(parameters)
   }
   
   ##  Return
-  
   return(parameters)
-} 
+}

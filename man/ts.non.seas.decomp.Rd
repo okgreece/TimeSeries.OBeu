@@ -4,7 +4,7 @@
 \alias{ts.non.seas.decomp}
 \title{Non seasonal decomposition}
 \usage{
-ts.non.seas.decomp(tsdata, tojson=F)
+ts.non.seas.decomp(tsdata, tojson = FALSE)
 }
 \arguments{
 \item{tsdata}{The input univariate non seasonal time series data}
@@ -56,11 +56,9 @@ in order to extract the trend and remaider components.
 ts.non.seas.decomp(Athens_draft_ts)
 
 }
-\references{
-add
-}
 \seealso{
-\code{\link{ts.analysis}}, \code{\link[locfit]{locfit}}, \code{\link[locfit]{predict.locfit}}
+\code{\link{ts.analysis}}, \code{\link[locfit]{locfit}}, 
+\code{\link[locfit]{predict.locfit}}
 }
 \author{
 Kleanthis Koupidis

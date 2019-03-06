@@ -4,7 +4,7 @@
 \alias{ts.seasonal.decomp}
 \title{Decomposition of seasonal time series}
 \usage{
-ts.seasonal.decomp(tsdata, tojson=F)
+ts.seasonal.decomp(tsdata, tojson = FALSE)
 }
 \arguments{
 \item{tsdata}{The input univariate seasonal time series data}
@@ -55,9 +55,6 @@ This function is used internally in ts.analysis.
 \details{
 Decomposition of seasonal time series data through arima models is based on stlm from forecast package
 and returns a list with useful parameters for OBEU.
-}
-\references{
-add
 }
 \seealso{
 \code{\link{ts.analysis}}, \code{\link{stlm}}

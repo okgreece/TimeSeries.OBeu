@@ -5,7 +5,7 @@
 #' Decomposition of seasonal time series data using stlm from forecast package. 
 #' This function is used internally in ts.analysis.
 #' 
-#' @usage ts.seasonal.decomp(tsdata, tojson=F)
+#' @usage ts.seasonal.decomp(tsdata, tojson = FALSE)
 #' 
 #' @param tsdata The input univariate seasonal time series data
 #' @param tojson If TRUE the results are returned in json format, default returns a list
@@ -53,80 +53,72 @@
 #'  
 #' @author Kleanthis Koupidis
 #' 
-#' @references add
-#' 
 #' @seealso \code{\link{ts.analysis}}, \code{\link{stlm}} 
 #' 
-#'
 #' @rdname ts.seasonal.decomp
 #'
 #' @export
-##############################################################################################################
+#' 
 
-ts.seasonal.decomp<-function(tsdata, tojson=F){
-
-tsdata.stl <- forecast::stlm(tsdata, s.window="periodic", robust=FALSE, method="arima",
-                             modelfunction=forecast::auto.arima,allow.multiplicative.trend=TRUE)
-# Components   
-trend <- tsdata.stl$stl$time.series[,"trend"]
-season <- tsdata.stl$stl$time.series[,"seasonal"]
-remainder <-  tsdata.stl$stl$time.series[,"remainder"]
-
-model.summary=tsdata.stl$model
-
-stl.plot=list( #stl plot
-				  trend=trend,
-				  seasonal=season,
-				  remainder=remainder,
-				  time=stats::time(tsdata)
-				  )
-
-
-stl.general=list( #stl general
-                  stl.win=tsdata.stl$stl$win,
-                  stl.degree=tsdata.stl$stl$deg
-                  #lambda=tsdata.stl$lambda,
-                  )
-
-residuals_fitted=list(
-          residuals=tsdata.stl$model$residuals,
-          fitted=tsdata.stl$fitted,
-          time=stats::time(tsdata),
-          line=0)
-
-				  
-
-compare=list(  #Comparison
-                  #model
-                  arima.order=tsdata.stl$model$arma,
-                  arima.coef=tsdata.stl$model$coef,
-                  arima.coef.se=round(sqrt(diag(tsdata.stl$model$var.coef)),digits=4),
-                  
-                  variance.coefs=tsdata.stl$model$var.coef,
-                  
-                  resid.variance=tsdata.stl$model$sigma2,
-                  not.used.obs=tsdata.stl$model$n.cond,
-                  used.obs=tsdata.stl$model$nobs,
-                  
-				          loglik=tsdata.stl$model$loglik,
-                  aic=tsdata.stl$model$aic,
-                  bic=tsdata.stl$model$bic,
-                  aicc=tsdata.stl$model$aicc)
-				  
-
-model.details<-list(
-          model.summary=model.summary,
-          stl.plot=stl.plot,
-					stl.general=stl.general,
-					residuals_fitted=residuals_fitted,
-					compare=compare
-					)
-
-if (tojson==T){
+ts.seasonal.decomp <- function(tsdata, tojson = FALSE) {
   
-  model.details=jsonlite::toJSON(model.details)
-}
-
-return(model.details)
-
+  tsdata.stl <- forecast::stlm(
+    tsdata, 
+    s.window = "periodic", 
+    robust = FALSE, 
+    method = "arima",
+    modelfunction = forecast::auto.arima,
+    allow.multiplicative.trend = TRUE)
+  
+  # Components   
+  trend <- tsdata.stl$stl$time.series[,"trend"]
+  season <- tsdata.stl$stl$time.series[,"seasonal"]
+  remainder <- tsdata.stl$stl$time.series[,"remainder"]
+  
+  model.summary <- tsdata.stl$model
+  
+  stl.plot <- list( #stl plot
+    trend = trend,
+    seasonal = season,
+    remainder = remainder,
+    time = stats::time(tsdata))
+  
+  
+  stl.general <- list( #stl general
+    stl.win = tsdata.stl$stl$win,
+    stl.degree = tsdata.stl$stl$deg) #lambda=tsdata.stl$lambda
+  
+  residuals_fitted <- list(
+    residuals = tsdata.stl$model$residuals,
+    fitted = tsdata.stl$fitted,
+    time = stats::time(tsdata),
+    line = 0)
+  
+  compare <- list(  #Comparison
+    #model
+    arima.order = tsdata.stl$model$arma,
+    arima.coef = tsdata.stl$model$coef,
+    arima.coef.se = round(sqrt(diag(tsdata.stl$model$var.coef)), digits = 4),
+    variance.coefs = tsdata.stl$model$var.coef,
+    resid.variance = tsdata.stl$model$sigma2,
+    not.used.obs = tsdata.stl$model$n.cond,
+    used.obs = tsdata.stl$model$nobs,
+    loglik = tsdata.stl$model$loglik,
+    aic = tsdata.stl$model$aic,
+    bic = tsdata.stl$model$bic,
+    aicc = tsdata.stl$model$aicc)
+  
+  
+  model.details <- list(
+    model.summary = model.summary,
+    stl.plot = stl.plot,
+    stl.general= stl.general,
+    residuals_fitted = residuals_fitted,
+    compare = compare)
+  
+  if (tojson == TRUE) {
+    model.details <- jsonlite::toJSON(model.details)
+  }
+  
+  return(model.details)
 }

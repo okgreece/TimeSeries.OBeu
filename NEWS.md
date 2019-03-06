@@ -1,3 +1,8 @@
+TimeSeries.OBeu 1.2.3
+---------------------
+
+Fix vignettes titles. and format code
+
 TimeSeries.OBeu 1.2.2
 ---------------------
 

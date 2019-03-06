@@ -5,7 +5,7 @@
 #' This function is included in ts.analysis function and aims to extract the ACF and PACF details 
 #' of the input time series data and the ACF, PACF of the residuals after fitting an Arima model. 
 #' 
-#' @usage ts.acf(tsdata, model_residuals, a=0.95, tojson=F)
+#' @usage ts.acf(tsdata, model_residuals, a = 0.95, tojson = FALSE)
 #' 
 #' @param tsdata The input univariate time series data
 #' @param model_residuals The model's residuals after fitting a model to the time series
@@ -52,64 +52,60 @@
 #' 
 #' @export
 
-ts.acf<-function(tsdata, model_residuals=NULL, a=0.95, tojson=F){
+ts.acf <- function(tsdata, model_residuals = NULL, a = 0.95, tojson = FALSE){
   
   # acf, pacf of ts 
-  acff<-forecast::Acf(tsdata,plot=F)
-  pacff<-forecast::Pacf(tsdata,plot=F)
+  acff <- forecast::Acf(tsdata, plot = FALSE)
+  pacff <- forecast::Pacf(tsdata, plot = FALSE)
   climits.up <- stats::qnorm((1 + a)/2)/sqrt(length(tsdata))
   climits.low <- stats::qnorm((1 - a)/2)/sqrt(length(tsdata))
   
-  acf.parameters=list(  
-    acf= c(acff$acf),
-    acf.lag= c(acff$lag),
-    confidence.interval.up=c(climits.up),
-    confidence.interval.low=c(climits.low))
+  acf.parameters <- list(  
+    acf = c(acff$acf),
+    acf.lag = c(acff$lag),
+    confidence.interval.up = c(climits.up),
+    confidence.interval.low = c(climits.low))
   
-  pacf.parameters=list( 
-    pacf= as.vector(pacff$acf),
-    pacf.lag= c(pacff$lag),
-    confidence.interval.up=c(climits.up),
-    confidence.interval.low=c(climits.low)
-  )
+  pacf.parameters <- list( 
+    pacf = as.vector(pacff$acf),
+    pacf.lag = c(pacff$lag),
+    confidence.interval.up = c(climits.up),
+    confidence.interval.low = c(climits.low))
   
-  acf.residuals.parameters=NULL
-  pacf.residuals.parameters=NULL
+  acf.residuals.parameters <- NULL
+  pacf.residuals.parameters <- NULL
   
-  if (!is.null(model_residuals)){
+  if (!is.null(model_residuals)) {
     
-    model_residuals=as.numeric(unlist(model_residuals))
+    model_residuals <- as.numeric(unlist(model_residuals))
     
     # acf, pacf of model's residuals
-    acff.res<-forecast::Acf(model_residuals,plot=F)
-    pacff.res<-forecast::Pacf(model_residuals,plot=F)
+    acff.res <- forecast::Acf(model_residuals, plot = FALSE)
+    pacff.res <- forecast::Pacf(model_residuals, plot = FALSE)
     climits.res.up <- stats::qnorm((1 + a)/2)/sqrt(length(model_residuals))
     climits.res.low <- stats::qnorm((1 - a)/2)/sqrt(length(model_residuals))
     
-    acf.residuals.parameters=list(
-      acf.residuals= c(acff.res$acf),
-      acf.residuals.lag= c(acff.res$lag),
-      confidence.interval.up=c(climits.up),
-      confidence.interval.low=c(climits.low))
+    acf.residuals.parameters <- list(
+      acf.residuals = c(acff.res$acf),
+      acf.residuals.lag = c(acff.res$lag),
+      confidence.interval.up = c(climits.up),
+      confidence.interval.low = c(climits.low))
     
-    pacf.residuals.parameters=list(
-      pacf.residuals= c(pacff.res$acf),
-      pacf.residuals.lag= c(pacff.res$lag),
-      confidence.interval.up=c(climits.up),
-      confidence.interval.low=c(climits.low))
+    pacf.residuals.parameters <- list(
+      pacf.residuals = c(pacff.res$acf),
+      pacf.residuals.lag = c(pacff.res$lag),
+      confidence.interval.up = c(climits.up),
+      confidence.interval.low = c(climits.low))
   }
-  parameters<-list(
-    acf.parameters=acf.parameters,
-    pacf.parameters=pacf.parameters,
-    acf.residuals.parameters=acf.residuals.parameters,
-    pacf.residuals.parameters=pacf.residuals.parameters)
+  parameters <- list(
+    acf.parameters = acf.parameters,
+    pacf.parameters = pacf.parameters,
+    acf.residuals.parameters = acf.residuals.parameters,
+    pacf.residuals.parameters = pacf.residuals.parameters)
   
-  
-  if (tojson==T){
-    
-    parameters=jsonlite::toJSON(parameters)
+  if (tojson == TRUE) {
+    parameters <- jsonlite::toJSON(parameters)
   }
-  
   # return
   return(parameters)
 }

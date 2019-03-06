@@ -4,7 +4,7 @@
 #' @description
 #' Decomposition of time series with no seasonal component using local regression models  
 #'
-#' @usage ts.non.seas.decomp(tsdata, tojson=F)
+#' @usage ts.non.seas.decomp(tsdata, tojson = FALSE)
 #' 
 #' @param tsdata The input univariate non seasonal time series data
 #' @param tojson If TRUE the results are returned in json format, default returns a list
@@ -49,111 +49,90 @@
 #'  
 #' @author Kleanthis Koupidis
 #' 
-#' @references add
-#' 
-#' @seealso \code{\link{ts.analysis}}, \code{\link[locfit]{locfit}}, \code{\link[locfit]{predict.locfit}}
+#' @seealso \code{\link{ts.analysis}}, \code{\link[locfit]{locfit}}, 
+#' \code{\link[locfit]{predict.locfit}}
 #' @import locfit
+#' 
 #' @examples
 #' ts.non.seas.decomp(Athens_draft_ts)
 #' 
 #' @rdname ts.non.seas.decomp
-#' 
 #' @export
-######################################################################################################################################
+#' 
 
-ts.non.seas.decomp<-function(tsdata, tojson=F){
-
+ts.non.seas.decomp <- function(tsdata, tojson = FALSE){
+  
   ## Decompose
-  tsdata.stl <- locfit(tsdata~stats::time(tsdata))
-  trend<-stats::fitted(tsdata.stl)
+  tsdata.stl <- locfit(tsdata ~ stats::time(tsdata))
+  trend <- stats::fitted(tsdata.stl)
   seasonal <- NULL
   remainder <- tsdata - trend
-
+  
   # Trend Confidence Intervals
-
-  trend.ci.up= stats::predict(tsdata.stl, data.frame(x=stats::time(tsdata)))+
-    stats::predict(tsdata.stl, data.frame(x=stats::time(tsdata)), se=TRUE)$se.fit*1.96
   
-  trend.ci.low= stats::predict(tsdata.stl, data.frame(x=stats::time(tsdata)))-
-    stats::predict(tsdata.stl, data.frame(x=stats::time(tsdata)), se=TRUE)$se.fit*1.96
- 
+  trend.ci.up <- stats::predict(tsdata.stl, data.frame(x=stats::time(tsdata))) +
+    stats::predict(tsdata.stl, data.frame(x = stats::time(tsdata)), se = TRUE)$se.fit * 1.96
+  
+  trend.ci.low <- stats::predict(tsdata.stl, data.frame(x=stats::time(tsdata))) -
+    stats::predict(tsdata.stl, data.frame(x = stats::time(tsdata)), se = TRUE)$se.fit * 1.96
+  
   # Fitted
-  degfr<- tsdata.stl$dp["df1"] 
-  
-  degfr.fitted<- tsdata.stl$dp["df2"] 
-  
-  stl.degree= unique(lfknots(tsdata.stl,what="deg"))
-  
-  fitted=fitted(tsdata.stl,what="coef")
+  degfr <- tsdata.stl$dp["df1"] 
+  degfr.fitted <- tsdata.stl$dp["df2"] 
+  stl.degree <- unique(lfknots(tsdata.stl, what = "deg"))
+  fitted <- fitted(tsdata.stl, what = "coef")
   
   # Residuals
-  residuals=residuals(tsdata.stl)
-  
+  residuals <- residuals(tsdata.stl)
   sigma2 <- sum( residuals^2 ) / (length(tsdata)-1)
   
   # Compare
-  influence.function=fitted(tsdata.stl,what="infl")
-  
-  max.local.likelihood=  fitted(tsdata.stl,what="lik")
-  
-  local.residual.deg.freedom=fitted(tsdata.stl,what="rdf")
-  
-  variance.function=fitted(tsdata.stl,what="vari")
-
-  loglik=tsdata.stl$dp["lk"]
-  
-  aic = aic(tsdata.stl)["aic"]
-  
-  bic = aic(tsdata.stl,pen=log(length(tsdata) ) )["aic"]
-  
-  gcv = gcv(tsdata.stl)["gcv"]
+  influence.function <- fitted(tsdata.stl, what = "infl")
+  max.local.likelihood <- fitted(tsdata.stl, what = "lik")
+  local.residual.deg.freedom <- fitted(tsdata.stl, what = "rdf")
+  variance.function <- fitted(tsdata.stl, what = "vari")
+  loglik <- tsdata.stl$dp["lk"]
+  aic <- aic(tsdata.stl)["aic"]
+  bic <- aic(tsdata.stl, pen = log(length(tsdata)))["aic"]
+  gcv <- gcv(tsdata.stl)["gcv"]
   
   ##
-    stl.plot=list( #stl plot
-    trend=trend,
+  stl.plot <- list( #stl plot
+    trend = trend,
     conf.interval.up = trend.ci.up,
     conf.interval.low = trend.ci.low,
-    
-    seasonal=seasonal,
-    remainder=remainder,
-    time=stats::time(tsdata)
-    
-  )
+    seasonal = seasonal,
+    remainder = remainder,
+    time = stats::time(tsdata))
   
-    stl.general=list( #stl general
-    degfr=degfr,
-    degfr.fitted=degfr.fitted,
-    stl.degree=stl.degree
-    )
+  stl.general <- list( #stl general
+    degfr = degfr,
+    degfr.fitted = degfr.fitted,
+    stl.degree = stl.degree)
   
-  residuals_fitted=list(
-    residuals=residuals,
-    fitted=fitted,
-    time=stats::time(tsdata),
-    line=0)
-
-  compare=list(  #Compare
- 
-  resid.variance=sigma2,
-    
-  used.obs=tsdata.stl$eva$xev,
-    
-   loglik=loglik,
-   aic=aic,
-   bic=bic,
-   gcv=gcv
-   )
-
-	model.details = list(stl.plot=stl.plot,
-	                     stl.general=stl.general,
-	                     residuals_fitted=residuals_fitted,
-	                     compare=compare
-	                     )
-	
-	if (tojson==T){
-	  
-	  model.details=jsonlite::toJSON(model.details)
-	}
-	
+  residuals_fitted <- list(
+    residuals = residuals,
+    fitted = fitted,
+    time = stats::time(tsdata),
+    line = 0)
+  
+  compare <- list(  #Compare
+    resid.variance = sigma2,
+    used.obs = tsdata.stl$eva$xev,
+    loglik = loglik,
+    aic = aic,
+    bic = bic,
+    gcv = gcv)
+  
+  model.details <- list(
+    stl.plot = stl.plot,
+    stl.general = stl.general,
+    residuals_fitted = residuals_fitted,
+    compare = compare)
+  
+  if (tojson == TRUE) {
+    model.details <- jsonlite::toJSON(model.details)
+  }
+  
   return(model.details)
 } 

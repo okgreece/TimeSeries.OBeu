@@ -4,7 +4,7 @@
 \alias{ts.analysis}
 \title{Time series analysis results for OBEU Time series}
 \usage{
-ts.analysis(tsdata, x.order=NULL, prediction.steps=1, tojson=T)
+ts.analysis(tsdata, x.order = NULL, prediction.steps = 1, tojson = TRUE)
 }
 \arguments{
 \item{tsdata}{The input univariate time series data}
@@ -111,7 +111,7 @@ This function also decomposes both seasonal and non seasonal time series through
 \code{\link{ts.seasonal.decomp}} and forecasts h steps ahead the user selected(default h=1) using \code{\link{ts.forecast}}.
 }
 \examples{
-ts.analysis(Athens_draft_ts, prediction.steps=3)
+ts.analysis(Athens_draft_ts, prediction.steps = 3, tojson = FALSE)
 
 }
 \seealso{

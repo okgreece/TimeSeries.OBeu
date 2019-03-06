@@ -4,7 +4,7 @@
 #' @description
 #' Model fit of seasonal time series
 #'
-#' @usage ts.seasonal.model(tsdata, x.ord=NULL, tojson=F)
+#' @usage ts.seasonal.model(tsdata, x.ord = NULL, tojson = FALSE)
 #' 
 #' @param tsdata The input univariate seasonal time series data
 #' @param x.ord An integer vector of length 3 specifying the order of the Arima model
@@ -52,56 +52,48 @@
 #' @seealso \code{\link{ts.analysis}}, \code{\link[forecast]{Arima}}
 #' 
 #' @rdname ts.seasonal.model
-#' 
 #' @export
+#' 
 
-
-ts.seasonal.model<-function(tsdata, x.ord=NULL, tojson=F){
+ts.seasonal.model <- function(tsdata, x.ord = NULL, tojson = FALSE) {
   
-  if (is.null(x.ord)|all(x.ord==c(0,0,0)) ){
-    
-    ts_model<-forecast::auto.arima(tsdata)
-    
+  if (is.null(x.ord) |
+      all(x.ord == c(0, 0, 0))) {
+    ts_model <- forecast::auto.arima(tsdata)
   } else {
-    
-    ts_model<-forecast::Arima(tsdata,order=x.ord)
+    ts_model <- forecast::Arima(tsdata,order = x.ord)
   }
   
-  model.summary = ts_model
-  
-  model=list(	# Model
+  model.summary <- ts_model
+  model <- list(	# Model
     arima.order = ts_model$arma,
     arima.coef = ts_model$coef,
-    arima.coef.se = round(sqrt(diag(ts_model$var.coef)),digits=4))
+    arima.coef.se = round(sqrt(diag(ts_model$var.coef)), digits = 4))
   
-  residuals_fitted=list(
-    residuals=ts_model$residuals,
-    fitted=stats::fitted(ts_model),
-    time=stats::time(tsdata),
-    line=0)
+  residuals_fitted <- list(
+    residuals = ts_model$residuals,
+    fitted = stats::fitted(ts_model),
+    time = stats::time(tsdata),
+    line = 0)
   
-  compare=list(
-    
+  compare <- list(
     resid.variance = ts_model$sigma2,
     variance.coef = ts_model$var.coef,
-    
     not.used.obs = ts_model$n.cond,
     used.obs = ts_model$nobs,
-    
     loglik = ts_model$loglik,
     aic = ts_model$aic,
     bic = ts_model$bic,
     aicc = ts_model$aicc)
   
-  model.details<-list(model.summary=model.summary,
-                      model=model,
-                      residuals_fitted=residuals_fitted,
-                      compare=compare
-  )
+  model.details <- list(
+    model.summary = model.summary,
+    model = model,
+    residuals_fitted = residuals_fitted,
+    compare = compare)
   
-  if (tojson==T){
-    
-    model.details=jsonlite::toJSON(model.details)
+  if (tojson == TRUE) {
+    model.details <- jsonlite::toJSON(model.details)
   }
   
   return(model.details)

@@ -46,73 +46,78 @@
 #' ts.stationary.test(Athens_approved_ts)
 #' 
 #' @rdname ts.stationary.test
-#' 
 #' @export
+#' 
 
-
-ts.stationary.test<-function(tsdata){
-  options(warn=-1)
+ts.stationary.test <- function(tsdata) {
   
   #ACF
-  acF<-forecast::Acf(tsdata,plot=F)
-  acftest<-ifelse(acF$acf[2:length(acF$lag)]<1.96/sqrt(length(tsdata)) &&
-                    acF$acf[2:length(acF$lag)]>-1.96/sqrt(length(tsdata)),
-                  "Stationary","Non Stationary")
+  acF <- forecast::Acf(tsdata, plot = FALSE)
+  acftest <- ifelse(all(acF$acf[2:length(acF$lag)] < 1.96/sqrt(length(tsdata))) &&
+                      all(acF$acf[2:length(acF$lag)] > -1.96/sqrt(length(tsdata))),
+                    "Stationary",
+                    "Non Stationary")
   #PACF
-  pacF<-forecast::Pacf(tsdata,plot=F)
-  pacftest<-ifelse(pacF$acf[2:length(pacF$lag)]<1.96/sqrt(length(tsdata)) &&
-                     pacF$acf[2:length(pacF$lag)]>-1.96/sqrt(length(tsdata)),
-                   "Stationary","Non Stationary")
+  pacF <- forecast::Pacf(tsdata, plot = FALSE)
+  pacftest <- ifelse(all(pacF$acf[2:length(pacF$lag)] < 1.96/sqrt(length(tsdata))) &&
+                       all(pacF$acf[2:length(pacF$lag)] > -1.96/sqrt(length(tsdata))),
+                     "Stationary",
+                     "Non Stationary")
   
-  acf_pacf<-c(acftest,pacftest)
+  acf_pacf <- c(acftest, pacftest)
   
   # Phillips Perron test
-  if (length(tsdata)>4){
-    pptest<-tseries::pp.test(tsdata,alternative = "stationary")
-  }else {
-    pptest=NULL
+  if (length(tsdata) > 4) {
+    pptest <- tseries::pp.test(tsdata, alternative = "stationary")
+  } else {
+    pptest <- NULL
   }
   # Augmented Dickey Fuller (ADF) test
-  if (length(tsdata)<7){
-    adftest<-tseries::adf.test(tsdata,alternative = "stationary",k=0)
-  }else {
-    adftest<-tseries::adf.test(tsdata,alternative = "stationary")} 
+  if (length(tsdata) < 7) {
+    adftest <- tseries::adf.test(tsdata, alternative = "stationary", k = 0)
+  } else {
+    adftest <- tseries::adf.test(tsdata, alternative = "stationary")
+  }
   
   # Kwiatkowski-Phillips-Schmidt-Shin (KPSS) test
-  
-  kpsstest<-tseries::kpss.test(tsdata)
+  kpsstest <- tseries::kpss.test(tsdata)
   
   # Mann Kendall Test For Monotonic Trend
-  
-  mktest<-trend::mk.test(tsdata)
+  mktest <- trend::mk.test(tsdata)
   
   # Cox and Stuart trend test
-  
-  cstest<-trend::cs.test(tsdata)
+  cstest <- trend::cs.test(tsdata)
   
   ## Summary of Tests Results
+  test_hypo <- data.frame("p_value" = c(pptest$p.value, 
+                                        adftest$p.value, 
+                                        kpsstest$p.value,
+                                        mktest$p.value,
+                                        cstest$p.value))
   
-  test_hypo<-data.frame("p_value"=c(pptest$p.value,adftest$p.value,kpsstest$p.value,
-                                    mktest$p.value,cstest$p.value))
+  rownames(test_hypo) <- c("Phillips Perron test",
+                           "Augmented Dickey Fuller test",
+                           "Kwiatkowski Phillips Schmidt Shin test",
+                           "Mann Kendall Test",
+                           "Cox Stuart test")
   
-  rownames(test_hypo)<-c("Phillips Perron test","Augmented Dickey Fuller test",
-                         "Kwiatkowski Phillips Schmidt Shin test","Mann Kendall Test","Cox Stuart test")
-  
-  test_hypo$result<-ifelse(test_hypo$p_value>0.05,"Non Stationary","Stationary")
+  test_hypo$result <- ifelse(test_hypo$p_value > 0.05,
+                             "Non Stationary",
+                             "Stationary")
   
   #Fix the Kpss Result
-  test_hypo$result[3]<-ifelse(kpsstest$p.value<0.05,"Non Stationary","Stationary")
-  tests<-test_hypo$result
+  test_hypo$result[3] <- ifelse(kpsstest$p.value < 0.05, 
+                                "Non Stationary", 
+                                "Stationary")
+  tests <- test_hypo$result
   
   #Add acf,pacf results
-  tests[6]<-acf_pacf[1]
-  tests[7]<-acf_pacf[2]
+  tests[6] <- acf_pacf[1]
+  tests[7] <- acf_pacf[2]
   
   # Most test show that the tsdata is (see check_stat result):
-  
-  occurences<-max(table(tests))
-  
-  check_stat<-names(which(table(tests) == occurences))
+  occurences <- max(table(tests))
+  check_stat <- names(which(table(tests) == occurences))
   
   return(check_stat)
 } 

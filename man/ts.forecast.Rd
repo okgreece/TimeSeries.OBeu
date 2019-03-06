@@ -4,7 +4,7 @@
 \alias{ts.forecast}
 \title{Time series forecast results of OBEU Time Series}
 \usage{
-ts.forecast(ts_modelx, h=1, tojson=F)
+ts.forecast(ts_modelx, h = 1, tojson = FALSE)
 }
 \arguments{
 \item{ts_modelx}{The input univariate time series data}
@@ -43,7 +43,7 @@ the first differences and the first order moving average component, with the low
 \examples{
 Athens_draft <- ts.non.seas.model(Athens_draft_ts)
 #Hold the model object of non seasonal modeling
-draft<-Athens_draft$model.summary 
+draft <- Athens_draft$model.summary 
 ts.forecast(draft)
 
 }
