@@ -1,3 +1,8 @@
+TimeSeries.OBeu 1.2.4
+---------------------
+
+move devtools to suggests in DESCRIPTION
+
 TimeSeries.OBeu 1.2.3
 ---------------------
 
@@ -6,7 +11,7 @@ Fix vignettes titles. and format code
 TimeSeries.OBeu 1.2.2
 ---------------------
 
-The user can specify the order of the ARIMA model in "open.spending.ts"
+The user can specify the order of the ARIMA model in “open.spending.ts”
 function. Json output format is now an option Next version will include
 the results of stationarity tests
 
@@ -28,7 +33,7 @@ Data provided by the Babbage API.
 TimeSeries.OBeu 0.0.1
 ---------------------
 
-New alternative in "stationary.test" function depending on the length of
+New alternative in “stationary.test” function depending on the length of
 the data.
 
 TimeSeries.OBeu 0.0.0.9000

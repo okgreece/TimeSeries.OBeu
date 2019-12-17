@@ -1,6 +1,12 @@
 ---
 output: md_document
 ---
+
+## TimeSeries.OBeu 1.2.4
+
+move devtools to suggests in DESCRIPTION
+
+
 ## TimeSeries.OBeu 1.2.3
 
 Fix vignettes titles.

@@ -1,8 +1,8 @@
-## ----load, warning=FALSE, include=TRUE-----------------------------------
+## ----load, warning=FALSE, include=TRUE----------------------------------------
 # load TimeSeries.OBeu
 library(TimeSeries.OBeu)
 
-## ----data----------------------------------------------------------------
+## ----data---------------------------------------------------------------------
 #example openbudgets.eu time series data
 sample.ts.data = 
 '{"page":0,
@@ -112,7 +112,7 @@ sample.ts.data =
 "attributes": [""]
 }'
 
-## ----open_spending-------------------------------------------------------
+## ----open_spending------------------------------------------------------------
 result = open_spending.ts(
   json_data =  sample.ts.data, 
   time ="global__fiscalPeriod__28951.notation",
@@ -121,7 +121,7 @@ result = open_spending.ts(
 # Pretty output using prettify of jsonlite library
 jsonlite::prettify(result,indent = 2)
 
-## ---- eval=FALSE, include=TRUE-------------------------------------------
+## ---- eval=FALSE, include=TRUE------------------------------------------------
 #  ../library/TimeSeries.OBeu/R/open_spending.ts
 #  # library/ {name of the library} /R/ {function}
 
