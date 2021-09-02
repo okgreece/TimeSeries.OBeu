@@ -2,14 +2,32 @@ TimeSeries.OBeu <img src="okfgr2.png" align="right" />
 ================
 Kleanthis Koupidis, Charalampos Bratsas
 
-[![Build Status](https://travis-ci.org/okgreece/TimeSeries.OBeu.svg?branch=master)](https://travis-ci.org/okgreece/TimeSeries.OBeu) [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/TimeSeries.OBeu)](https://cran.r-project.org/package=TimeSeries.OBeu) [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active) [![Pending Pull-Requests](http://githubbadges.herokuapp.com/okgreece/TimeSeries.OBeu/pulls.svg)](https://github.com/okgreece/TimeSeries.OBeu/pulls) [![Github Issues](http://githubbadges.herokuapp.com/okgreece/TimeSeries.OBeu/issues.svg)](https://github.com/okgreece/TimeSeries.OBeu/issues) [![minimal R version](https://img.shields.io/badge/R%3E%3D-3.1-6666ff.svg)](https://cran.r-project.org/) [![](http://cranlogs.r-pkg.org/badges/grand-total/TimeSeries.OBeu)](http://cran.rstudio.com/web/packages/TimeSeries.OBeu/index.html) [![Licence](https://img.shields.io/badge/licence-GPL--2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) [![Rdoc](http://www.rdocumentation.org/badges/version/TimeSeries.OBeu)](http://www.rdocumentation.org/packages/TimeSeries.OBeu) [![DOI](https://zenodo.org/badge/69395698.svg)](https://zenodo.org/badge/latestdoi/69395698)
+[![R-CMD-check](https://github.com/okgreece/TimeSeries.OBeu/workflows/R-CMD-check/badge.svg)](https://github.com/okgreece/TimeSeries.OBeu/actions)
+[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/TimeSeries.OBeu)](https://cran.r-project.org/package=TimeSeries.OBeu)
+[![Project Status: Active – The project has reached a stable, usable
+state and is being actively
+developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
+[![](http://cranlogs.r-pkg.org/badges/grand-total/TimeSeries.OBeu)](http://cran.rstudio.com/web/packages/TimeSeries.OBeu/index.html)
+[![Licence](https://img.shields.io/badge/licence-GPL--2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
+[![DOI](https://zenodo.org/badge/69395698.svg)](https://zenodo.org/badge/latestdoi/69395698)
 
-[TimeSeries.OBeu](https://okgreece.github.io/TimeSeries.OBeu/)
-==============================================================
+\#[TimeSeries.OBeu](https://okgreece.github.io/TimeSeries.OBeu/)
+Εstimate and return the necessary parameters for time series
+visualizations, used in [OpenBudgets.eu](http://openbudgets.eu/). It
+includes functions to test stationarity (with ACF, PACF, Phillips Perron
+test, Augmented Dickey Fuller (ADF) test,
+Kwiatkowski-Phillips-Schmidt-Shin (KPSS) test, Mann Kendall Test For
+Monotonic Trend and Cox and Stuart trend test), decompose, model and
+forecast Budget time series data of municipalities across Europe,
+according to the [OpenBudgets.eu data
+model](https://github.com/openbudgets/data-model).
 
-Εstimate and return the necessary parameters for time series visualizations, used in [OpenBudgets.eu](http://openbudgets.eu/). It includes functions to test stationarity (with ACF, PACF, Phillips Perron test, Augmented Dickey Fuller (ADF) test, Kwiatkowski-Phillips-Schmidt-Shin (KPSS) test, Mann Kendall Test For Monotonic Trend and Cox and Stuart trend test), decompose, model and forecast Budget time series data of municipalities across Europe, according to the [OpenBudgets.eu data model](https://github.com/openbudgets/data-model).
-
-This package can generally be used to extract visualization parameters convert them to JSON format and use them as input in a different graphical interface. Most functions can have general use out of the [OpenBudgets.eu data model](https://github.com/openbudgets/data-model). You can see detailed information [here](https://okgreece.github.io/TimeSeries.OBeu/).
+This package can generally be used to extract visualization parameters
+convert them to JSON format and use them as input in a different
+graphical interface. Most functions can have general use out of the
+[OpenBudgets.eu data model](https://github.com/openbudgets/data-model).
+You can see detailed information
+[here](https://okgreece.github.io/TimeSeries.OBeu/).
 
 ``` r
 # install TimeSeries.OBeu- cran stable version
@@ -25,15 +43,29 @@ Load library `TimeSeries.OBeu` <img src="obeu_logo.png" align="right" />
 library(TimeSeries.OBeu)
 ```
 
-Time Series analysis in a call
-==============================
+\#Time Series analysis in a call
 
-`ts.analysis` is used to estimate *autocorrelation and partial autocorrelation* of input time series data, *autocorrelation and partial autocorrelation* of the model residuals, *trend*, *seasonal* (if exists) and *remainder* components, model parameters such as arima order, arima coefficients etc. and the desired *forecasts* with their corresponding confidence intervals.
+`ts.analysis` is used to estimate *autocorrelation and partial
+autocorrelation* of input time series data, *autocorrelation and partial
+autocorrelation* of the model residuals, *trend*, *seasonal* (if exists)
+and *remainder* components, model parameters such as arima order, arima
+coefficients etc. and the desired *forecasts* with their corresponding
+confidence intervals.
 
-`ts.analysis` returns by default a json object, if `tojson` parameter is `FALSE` returns a list object and the default forecast step is set to 1.
+`ts.analysis` returns by default a json object, if `tojson` parameter is
+`FALSE` returns a list object and the default forecast step is set to 1.
 
 ``` r
 results = ts.analysis(Athens_executed_ts, prediction.steps = 2, tojson=TRUE) # json string format
+```
+
+    ## Registered S3 method overwritten by 'quantmod':
+    ##   method            from
+    ##   as.zoo.data.frame zoo
+
+    ## Warning in tseries::kpss.test(tsdata): p-value greater than printed p-value
+
+``` r
 jsonlite::prettify(results) # use prettify of jsonlite library to add indentation to the returned JSON string
 ```
 
@@ -338,13 +370,13 @@ jsonlite::prettify(results) # use prettify of jsonlite library to add indentatio
     ##                 2012.25
     ##             ],
     ##             "loglik": [
-    ##                 -1.42430632111726e+015
+    ##                 -1.42430632111726e+15
     ##             ],
     ##             "aic": [
-    ##                 2.84861264223453e+015
+    ##                 2.84861264223453e+15
     ##             ],
     ##             "bic": [
-    ##                 2.84861264223453e+015
+    ##                 2.84861264223453e+15
     ##             ],
     ##             "gcv": [
     ##                 789007322850175
@@ -422,7 +454,7 @@ jsonlite::prettify(results) # use prettify of jsonlite library to add indentatio
     ##         },
     ##         "compare": {
     ##             "resid.variance": [
-    ##                 1.96694555616403e+015
+    ##                 1.96694555616403e+15
     ##             ],
     ##             "variance.coef": [
     ##                 [
@@ -521,16 +553,29 @@ jsonlite::prettify(results) # use prettify of jsonlite library to add indentatio
     ## }
     ## 
 
-`ts.analysis` uses internally the functions `ts.stationary.test`,`ts.acf`,`ts.non.seas.decomp`,`ts.seasonal.decomp`, `ts.seasonal.model`, `ts.non.seas.model` and `ts.forecast`. However, these functions can be used independently and depends on the user requirements (see package manual or vignettes).
+`ts.analysis` uses internally the functions
+`ts.stationary.test`,`ts.acf`,`ts.non.seas.decomp`,`ts.seasonal.decomp`,
+`ts.seasonal.model`, `ts.non.seas.model` and `ts.forecast`. However,
+these functions can be used independently and depends on the user
+requirements (see package manual or vignettes).
 
-Time series analysis on OpenBudgets.eu platform
-===============================================
+\#Time series analysis on OpenBudgets.eu platform
 
-`open_spending.ts` is designed to estimate and return the autocorrelation parameters, time series model parameters and the forecast parameters of [OpenBudgets.eu](http://openbudgets.eu/) time series datasets.
+`open_spending.ts` is designed to estimate and return the
+autocorrelation parameters, time series model parameters and the
+forecast parameters of [OpenBudgets.eu](http://openbudgets.eu/) time
+series datasets.
 
-The input data must be a JSON link according to the [OpenBudgets.eu data model](https://github.com/openbudgets/data-model). The user should specify the amount and time variables, future steps to be predicted (default is 1 step forward) and the arima order (if not specified the most appropriate model will be selected according to AIC value).
+The input data must be a JSON link according to the [OpenBudgets.eu data
+model](https://github.com/openbudgets/data-model). The user should
+specify the amount and time variables, future steps to be predicted
+(default is 1 step forward) and the arima order (if not specified the
+most appropriate model will be selected according to AIC value).
 
-`open_spending.ts` estimates and returns the json data (that are described with the [OpenBudgets.eu data model](https://github.com/openbudgets/data-model)), using `ts.analysis` function.
+`open_spending.ts` estimates and returns the json data (that are
+described with the [OpenBudgets.eu data
+model](https://github.com/openbudgets/data-model)), using `ts.analysis`
+function.
 
 ``` r
 #example openbudgets.eu time series data
@@ -647,6 +692,11 @@ result = open_spending.ts(
   time ="global__fiscalPeriod__28951.notation",
   amount = "global__amount__0397f.sum"
   )
+```
+
+    ## Warning in tseries::kpss.test(tsdata): p-value greater than printed p-value
+
+``` r
 # Pretty output using prettify of jsonlite library
 jsonlite::prettify(result,indent = 2)
 ```
@@ -974,7 +1024,7 @@ jsonlite::prettify(result,indent = 2)
     ##     },
     ##     "compare": {
     ##       "resid.variance": [
-    ##         2.4902231028103e+021
+    ##         2.4902231028103e+21
     ##       ],
     ##       "used.obs": [
     ##         2002,
@@ -984,16 +1034,16 @@ jsonlite::prettify(result,indent = 2)
     ##         2012.5
     ##       ],
     ##       "loglik": [
-    ##         -1.74315617196721e+022
+    ##         -1.74315617196721e+22
     ##       ],
     ##       "aic": [
-    ##         3.48631234393441e+022
+    ##         3.48631234393441e+22
     ##       ],
     ##       "bic": [
-    ##         3.48631234393441e+022
+    ##         3.48631234393441e+22
     ##       ],
     ##       "gcv": [
-    ##         5.54416871365202e+021
+    ##         5.54416871365202e+21
     ##       ]
     ##     }
     ##   },
@@ -1077,7 +1127,7 @@ jsonlite::prettify(result,indent = 2)
     ##     },
     ##     "compare": {
     ##       "resid.variance": [
-    ##         7.52601939136356e+021
+    ##         7.52601939136356e+21
     ##       ],
     ##       "variance.coef": [
     ##         [
@@ -1174,4 +1224,4 @@ jsonlite::prettify(result,indent = 2)
     ##     ]
     ##   }
     ## }
-    ##
+    ## 
